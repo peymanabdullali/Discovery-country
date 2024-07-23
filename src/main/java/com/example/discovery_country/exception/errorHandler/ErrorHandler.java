@@ -1,4 +1,4 @@
-package com.example.discovery_country.exception.errorHandler;
+package com.example.discovery_country_app.exception.errorHandler;
 
 
 import com.example.discovery_country.exception.UserNotFoundException;
