@@ -1,4 +1,4 @@
-package com.example.discovery_country_app.exception.error;
+package com.example.discovery_country.exception.error;
 
 import lombok.Builder;
 import lombok.Getter;

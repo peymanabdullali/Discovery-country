@@ -1,4 +1,4 @@
-package com.example.discovery_country_app.service;
+package com.example.discovery_country.service;
 
 public class cc {
 }

@@ -1,8 +1,8 @@
-package com.example.discovery_country_app.exception.errorHandler;
+package com.example.discovery_country.exception.errorHandler;
 
 
-import com.example.discovery_country_app.exception.UserNotFoundException;
-import com.example.discovery_country_app.exception.error.ErrorResponse;
+import com.example.discovery_country.exception.UserNotFoundException;
+import com.example.discovery_country.exception.error.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
