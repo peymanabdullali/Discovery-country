@@ -1,4 +1,4 @@
-package com.example.discovery_country_app.exception;
+package com.example.discovery_country.exception;
 
 public class UserNotFoundException extends RuntimeException{
     public UserNotFoundException(String code, String message){
