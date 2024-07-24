@@ -1,5 +1,6 @@
 package com.example.discovery_country.dao.entity;
 
+import com.example.discovery_country.enums.RoomType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -36,8 +37,5 @@ public class HotelRoomsEntity {
     @OneToMany(mappedBy = "hotelRoom", cascade = CascadeType.ALL)
     List<RoomReservationEntity> roomReservations;
 
-        public enum RoomType{
 
-
-    }
 }

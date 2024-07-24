@@ -1,23 +1,17 @@
-package com.example.discovery_country.dao.entity;
+package com.example.discovery_country.model.dto.request;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 @Data
-@Entity
-@Table(name = "restaurants")
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RestaurantEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class RestaurantRequest {
 
     @Column(nullable = false)
     String name;
@@ -31,15 +25,9 @@ public class RestaurantEntity {
     @Column(nullable = false)
     String contact;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    RegionEntity region;
-
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    ImageEntity image;
-
     String mapUrl;
     String menuUrl;
+    Long regionId;
+    Long imageId;
     Long viewed;
 }
