@@ -13,18 +13,18 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
     Optional<UserEntity> findByEmail(String username);
 
-    @Transactional
-    @Modifying
-    @Query("update UserEntity u set u.password = ?2 where u.email = ?1")
-    void updatePassword(String email, String password);
-
-
-    @Modifying
-    @Transactional
-    @Query("update UserEntity u set u.failedAttempt = ?1 WHERE u.email = ?2")
-    void updateFailedAttempts(int failAttempts, String email);
-
-    @Modifying
-    @Query("UPDATE UserEntity u SET u.accountNonLocked = ?1, u.lockTime = ?2 WHERE u.email = ?3")
-    void updateLockStatus(boolean accountNonLocked, Date lockTime, String email);
+//    @Transactional
+//    @Modifying
+//    @Query("update UserRequest u set u.password = ?2 where u.email = ?1")
+//    void updatePassword(String email, String password);
+//
+//
+//    @Modifying
+//    @Transactional
+//    @Query("update UserRequest u set u.failedAttempt = ?1 WHERE u.email = ?2")
+//    void updateFailedAttempts(int failAttempts, String email);
+//
+//    @Modifying
+//    @Query("UPDATE UserRequest u SET u.accountNonLocked = ?1, u.lockTime = ?2 WHERE u.email = ?3")
+//    void updateLockStatus(boolean accountNonLocked, Date lockTime, String email);
 }

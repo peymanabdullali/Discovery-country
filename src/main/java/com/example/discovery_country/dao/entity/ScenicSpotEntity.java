@@ -32,4 +32,7 @@ public class ScenicSpotEntity {
     @ManyToOne
     @JoinColumn(nullable = false)
     ImageEntity image;
+
+    Long viewed;
+
 }

@@ -31,10 +31,6 @@ public class RestaurantEntity {
     @Column(nullable = false)
     String contact;
 
-    String mapUrl;
-
-    String menuUrl;
-
     @ManyToOne
     @JoinColumn(nullable = false)
     RegionEntity region;
@@ -42,4 +38,8 @@ public class RestaurantEntity {
     @ManyToOne
     @JoinColumn(nullable = false)
     ImageEntity image;
+
+    String mapUrl;
+    String menuUrl;
+    Long viewed;
 }
