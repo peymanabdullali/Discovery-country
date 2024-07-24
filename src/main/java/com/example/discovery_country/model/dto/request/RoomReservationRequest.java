@@ -17,7 +17,6 @@ public class RoomReservationRequest {
     String name;
     LocalDate entryDate;
     LocalDate exitDate;
-    byte totalDay;
     byte numberOfGuests;
     Long homeHotelId;
     Long hotelRoomId;

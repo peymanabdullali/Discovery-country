@@ -22,10 +22,9 @@ public class HotelRoomsRequest {
     byte roomNumber;
     byte roomCount;
     RoomType roomType;
-    boolean available;
     Long homeHotelId;
     List<Long> imageIds;
-    List<Long> roomReservationIds;
+
 
     @NotBlank(message = "can't be blank")
     String amenities;//json b

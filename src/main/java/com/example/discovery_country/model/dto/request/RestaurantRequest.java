@@ -30,5 +30,4 @@ public class RestaurantRequest {
     String menuUrl;
     Long regionId;
     Long imageId;
-    Long viewed;
 }
