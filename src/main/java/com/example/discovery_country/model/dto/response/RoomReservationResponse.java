@@ -18,8 +18,8 @@ public class RoomReservationResponse {
     LocalDate exitDate;
     byte totalDay;
     byte numberOfGuests;
-    Long homeHotelId;
-    Long hotelRoomId;
-    Long userId;
+    HomeHotelResponse homeHotel;
+    HotelRoomsResponse hotelRoom;
+    UserResponse user;
 
 }

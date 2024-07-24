@@ -13,21 +13,17 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RestaurantResponse {
 
-    @Column(nullable = false)
     String name;
 
-    @Column(columnDefinition = "TEXT")
     String description;
 
-    @Column(nullable = false)
     String address;
 
-    @Column(nullable = false)
     String contact;
 
     String mapUrl;
     String menuUrl;
-    Long regionId;
-    Long imageId;
+    RegionResponse region;
+    ImageResponse image;
     Long viewed;
 }

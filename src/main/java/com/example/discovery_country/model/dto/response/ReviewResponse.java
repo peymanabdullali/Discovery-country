@@ -10,14 +10,13 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ReviewResponse {
 
-    @Column(columnDefinition = "TEXT")
     String comment;
     
     float rating;
     String fullName;
     String photoUrl;
-    Long scenicSpotId;
-    Long restaurantId;
-    Long homeHotelId;
-    Long userId;
+    ScenicSpotResponse scenicSpot;
+    RestaurantResponse restaurant;
+    HomeHotelResponse homeHotel;
+    UserResponse users;
 }
