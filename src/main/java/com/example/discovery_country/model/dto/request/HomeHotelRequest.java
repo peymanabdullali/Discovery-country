@@ -1,6 +1,7 @@
 package com.example.discovery_country.model.dto.request;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -24,10 +25,8 @@ public class HomeHotelRequest {
     Long viewed;
     List<Long> hotelRoomIds;
     List<Long> imageIds;
-    List<Long> reviewIds;
-    List<Long> roomReservations;
     Long regionId;
 
-    @Column(columnDefinition = "TEXT")
+    @NotBlank(message = "can't be blank")
     String description;
 }

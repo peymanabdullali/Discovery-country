@@ -1,6 +1,7 @@
 package com.example.discovery_country.model.dto.request;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,16 +14,16 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RestaurantRequest {
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     String name;
 
-    @Column(columnDefinition = "TEXT")
+    @NotBlank(message = "can't be blank")
     String description;
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     String address;
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     String contact;
 
     String mapUrl;

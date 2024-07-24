@@ -15,8 +15,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ZoneResponse {
     
-    @Column(nullable = false)
     String name;
 
-    List<Long> regionIds;
+    List<RegionResponse> regions;
 }

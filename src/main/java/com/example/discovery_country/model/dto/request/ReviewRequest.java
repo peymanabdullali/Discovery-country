@@ -1,6 +1,7 @@
 package com.example.discovery_country.model.dto.request;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 @Data
@@ -10,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ReviewRequest {
 
-    @Column(columnDefinition = "TEXT")
+    @NotBlank(message = "can't be blank")
     String comment;
 
     float rating;

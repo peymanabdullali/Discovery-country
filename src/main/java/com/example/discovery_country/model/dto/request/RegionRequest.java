@@ -2,6 +2,7 @@ package com.example.discovery_country.model.dto.request;
 
 import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,10 +17,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RegionRequest {
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     String name;
 
-    @Column(name = "map_url")
     String mapUrl;
 
     Long zoneId;

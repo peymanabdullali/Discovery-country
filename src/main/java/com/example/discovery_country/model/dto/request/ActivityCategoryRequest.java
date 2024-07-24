@@ -3,6 +3,7 @@ package com.example.discovery_country.model.dto.request;
 import com.example.discovery_country.dao.entity.ActivityEntity;
 import com.example.discovery_country.dao.entity.RegionEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,12 +19,10 @@ public class ActivityCategoryRequest {
 
 
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     String name;
 
-  //  RegionEntity region;
     List<Long>  regionIds;
-    //List<ActivityResponse> activities;
     List<Long>  activityIds;
 
 }

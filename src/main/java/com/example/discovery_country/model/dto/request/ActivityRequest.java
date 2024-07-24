@@ -1,6 +1,7 @@
 package com.example.discovery_country.model.dto.request;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -17,39 +18,39 @@ public class ActivityRequest {
 
 
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     String name;
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     double price;
 
     String mapUrl;
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     double latitude;
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     double longitude;
 
-    @Column(columnDefinition = "TEXT")
+    @NotBlank(message = "can't be blank")
     String description;
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     LocalDateTime startDate;
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     LocalDateTime endDate;
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     LocalDateTime registrationDeadline;
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     String contact;
 
-    @Column(columnDefinition = "TEXT")
+    @NotBlank(message = "can't be blank")
     String requirements;
 
-    @Column(nullable = false)
+    @NotBlank(message = "can't be blank")
     Integer numberOfPeople;
 
     List<Long> imageIds;
