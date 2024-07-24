@@ -17,5 +17,5 @@ public class NotificationResponse {
     String message;//text
     LocalDateTime date;
     boolean seen;
-    Long userId;
+    //UserResponse user;
 }

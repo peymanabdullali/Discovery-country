@@ -16,17 +16,15 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RegionResponse {
     
-    @Column(nullable = false)
     String name;
 
-    @Column(name = "map_url")
     String mapUrl;
 
-    Long zoneId;
-    List<Long> activityCategoryIds;
-    List<Long> restaurantIds;
-    List<Long> homeHotelIds;
-    List<Long> scenicSpotIds;
+    ZoneResponse zoneId;
+    List<ActivityCategoryResponse> activityCategories;
+    List<RestaurantResponse> restaurants;
+    List<HomeHotelResponse> homeHotels;
+    List<ScenicSpotResponse> scenicSpots;
 
 
 }

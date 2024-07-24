@@ -22,11 +22,10 @@ public class HotelRoomsResponse {
     byte roomCount;
     RoomType roomType;
     boolean available;
-    Long homeHotelId;
-    List<Long> imageIds;
-    List<Long> roomReservationIds;
+    HomeHotelResponse homeHotels;
+    List<ImageResponse> images;
+    List<RoomReservationResponse> roomReservations;
 
-    @Column(columnDefinition = "TEXT")
     String amenities;//json b
 
 }

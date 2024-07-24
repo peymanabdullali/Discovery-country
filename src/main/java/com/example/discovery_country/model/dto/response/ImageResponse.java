@@ -17,9 +17,9 @@ public class ImageResponse {
 
     String name;
     String url;
-    Long hotelRoomId;
-    Long homeHotelId;
-    Long activityId;
-    Long scenicSpotId;
-    Long restaurantId;
+    HotelRoomsResponse hotelRoom;
+    HomeHotelResponse homeHotel;
+    ActivityResponse activity;
+    ScenicSpotResponse scenicSpot;
+    RestaurantResponse restaurant;
 }

@@ -22,12 +22,11 @@ public class HomeHotelResponse {
     double price;
     String type;
     Long viewed;
-    List<Long> hotelRoomIds;
-    List<Long> imageIds;
-    List<Long> reviewIds;
-    List<Long> roomReservations;
-    Long regionId;
+    List<HotelRoomsResponse> hotelRooms;
+    List<ImageResponse> images;
+    List<ReviewResponse> reviews;
+    List<RoomReservationResponse> roomReservations;
+    RegionResponse regions;
 
-    @Column(columnDefinition = "TEXT")
     String description;
 }
