@@ -1,11 +1,14 @@
 package com.example.discovery_country.model.dto.response;
 
+import com.example.discovery_country.dao.entity.ImageEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,7 +22,8 @@ public class ScenicSpotResponse {
     String description;
 
     RegionResponse region;
-    ImageResponse image;
+    List<ImageEntity> images;
+
     Long viewed;
 
 }

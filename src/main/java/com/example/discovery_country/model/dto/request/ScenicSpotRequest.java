@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +23,7 @@ public class ScenicSpotRequest {
     String description;
 
     Long regionId;
-    Long imageId;
+    List<Long> imageId;
     Long viewed;
 
 }

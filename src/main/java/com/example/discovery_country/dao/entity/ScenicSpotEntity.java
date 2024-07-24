@@ -29,9 +29,8 @@ public class ScenicSpotEntity {
     @JoinColumn(nullable = false)
     RegionEntity region;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    ImageEntity image;
+    @OneToMany(mappedBy = "scenicSpot", cascade = CascadeType.ALL)
+    List<ImageEntity> images;
 
     Long viewed;
 
