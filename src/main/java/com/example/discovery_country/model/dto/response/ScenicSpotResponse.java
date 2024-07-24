@@ -14,14 +14,12 @@ import lombok.experimental.FieldDefaults;
 public class ScenicSpotResponse {
 
 
-    @Column(nullable = false)
     String name;
 
-    @Column(columnDefinition = "TEXT")
     String description;
 
-    Long regionId;
-    Long imageId;
+    RegionResponse region;
+    ImageResponse image;
     Long viewed;
 
 }
