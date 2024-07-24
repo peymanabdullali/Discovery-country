@@ -26,6 +26,7 @@ public class HomeHotelEntity {
     String mapUrl;
     double price;
     String type;
+    Long viewed;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
     List<HotelRoomsEntity> hotelRooms;
