@@ -1,6 +1,7 @@
 package com.example.discovery_country.exception.errorHandler;
 
 
+import com.example.discovery_country.exception.ActivityCategoryNotFoundException;
 import com.example.discovery_country.exception.UserNotFoundException;
 import com.example.discovery_country.exception.error.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -23,4 +24,17 @@ public class ErrorHandler {
                 .message(exception.getMessage())
                 .build();
     }
+
+    @ExceptionHandler(ActivityCategoryNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handlerActivityCategoryNotFoundException(Exception exception) {
+        log.error("handlerActivityCategoryNotFoundException {}", exception.getMessage());
+
+        return ErrorResponse.builder()
+                .code(HttpStatus.NOT_FOUND.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
+
 }

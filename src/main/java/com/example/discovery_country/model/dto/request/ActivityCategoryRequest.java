@@ -22,7 +22,7 @@ public class ActivityCategoryRequest {
     @NotBlank(message = "can't be blank")
     String name;
 
-    List<Long>  regionIds;
+    Long regionId;
     List<Long>  activityIds;
 
 }
