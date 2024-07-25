@@ -20,5 +20,5 @@ public class ActivityCategoryResponse {
 
     @NotBlank(message = "can't be blank")
     String name;
-    RegionResponse region;
+//    RegionResponse region;
 }

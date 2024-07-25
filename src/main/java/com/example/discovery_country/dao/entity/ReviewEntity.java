@@ -20,6 +20,7 @@ public class ReviewEntity {
     String comment;
     String fullName;
     String photoUrl;
+    boolean status;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn

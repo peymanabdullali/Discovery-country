@@ -42,4 +42,5 @@ public class RestaurantEntity {
     String mapUrl;
     String menuUrl;
     Long viewed;
+    boolean status;
 }

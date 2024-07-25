@@ -7,14 +7,13 @@ import com.example.discovery_country.mapper.ActivityCategoryMapper;
 import com.example.discovery_country.model.dto.request.ActivityCategoryCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityCategoryRequest;
 import com.example.discovery_country.model.dto.response.ActivityCategoryResponse;
-import com.example.discovery_country.specification.ActivityCategorySpecification;
+import com.example.discovery_country.service.specification.ActivityCategorySpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -22,17 +21,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ActivityCategoryService {
     private final ActivityCategoryRepository activityCategoryRepository;
-    private final ActivityCategoryMapper activityCategoryMapper;
+//    private final ActivityCategoryMapper activityCategoryMapper;
 
     public ActivityCategoryResponse create(ActivityCategoryRequest request){
         log.info("ActionLog.createActivityCategory start");
 
-        ActivityCategoryEntity activityCategoryEntity=activityCategoryMapper.mapToEntity(request);
+        ActivityCategoryEntity activityCategoryEntity=ActivityCategoryMapper.INSTANCE.mapToEntity(request);
         ActivityCategoryEntity activityCategory=activityCategoryRepository.save(activityCategoryEntity);
 
         log.info("ActionLog.createActivityCategory end");
 
-        return   activityCategoryMapper.mapToResponse(activityCategory);
+        return   ActivityCategoryMapper.INSTANCE.mapToResponse(activityCategory);
 
     }
 
@@ -44,7 +43,7 @@ public class ActivityCategoryService {
 
         log.info("ActionLog.getActivityCategory end");
 
-        return activityCategories.map(activityCategoryMapper::mapToResponse);
+        return activityCategories.map(ActivityCategoryMapper.INSTANCE::mapToResponse);
 
     }
 
@@ -53,12 +52,12 @@ public class ActivityCategoryService {
         log.info("ActionLog.updateActivityCategory start with id#" + id);
 
         ActivityCategoryEntity categoryEntity=activityCategoryRepository.findById(id).orElseThrow(()->new ActivityCategoryNotFoundException(HttpStatus.NOT_FOUND.name(),"Activity Category not found"));
-        activityCategoryMapper.mapForUpdate(categoryEntity,categoryRequest);
+        ActivityCategoryMapper.INSTANCE.mapForUpdate(categoryEntity,categoryRequest);
         categoryEntity=activityCategoryRepository.save(categoryEntity);
 
         log.info("ActionLog.updateActivityCategory end");
 
-        return activityCategoryMapper.mapToResponse(categoryEntity);
+        return ActivityCategoryMapper.INSTANCE.mapToResponse(categoryEntity);
 
     }
 

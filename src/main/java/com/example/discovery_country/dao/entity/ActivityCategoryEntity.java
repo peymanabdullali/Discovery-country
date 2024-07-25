@@ -7,8 +7,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +22,7 @@ public class ActivityCategoryEntity {
     @Column(nullable = false)
     String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     RegionEntity region;
 

@@ -58,7 +58,7 @@ public class ActivityEntity {
     ImageEntity image;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(nullable = false)
+    @JoinColumn
     ActivityCategoryEntity activityCategory;
 
 }

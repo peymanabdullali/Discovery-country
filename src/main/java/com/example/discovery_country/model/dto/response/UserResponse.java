@@ -3,7 +3,8 @@ package com.example.discovery_country.model.dto.response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@AllArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)

@@ -24,6 +24,8 @@ public class ScenicSpotEntity {
 
     @Column(columnDefinition = "TEXT")
     String description;
+    boolean checkStatus;
+    boolean status;
 
     @ManyToOne
     @JoinColumn(nullable = false)

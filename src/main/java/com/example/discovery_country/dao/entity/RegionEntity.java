@@ -22,10 +22,9 @@ public class RegionEntity {
     @Column(nullable = false)
     String name;
 
-    @Column(name = "map_url")
     String mapUrl;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     ZoneEntity zone;
 

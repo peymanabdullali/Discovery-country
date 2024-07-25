@@ -1,4 +1,4 @@
-package com.example.discovery_country.specification;
+package com.example.discovery_country.service.specification;
 
 import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import com.example.discovery_country.model.dto.request.ActivityCategoryCriteriaRequest;
