@@ -35,9 +35,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web-services")
     implementation("org.springframework.boot:spring-boot-starter-mail")
     runtimeOnly("org.postgresql:postgresql")
-    implementation ("org.mapstruct:mapstruct:1.5.5.Final")
+    implementation  ("org.mapstruct:mapstruct:1.5.5.Final")
+    annotationProcessor  ("org.mapstruct:mapstruct-processor:1.5.5.Final")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
-    implementation("org.springframework.boot:spring-boot-starter-security")
+   // implementation("org.springframework.boot:spring-boot-starter-security")
     implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")
 
 
@@ -52,7 +53,7 @@ dependencies {
     implementation("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
 
-    implementation("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.7.RELEASE")
+  //  implementation("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.7.RELEASE")
 
 }
 

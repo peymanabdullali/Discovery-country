@@ -8,8 +8,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -24,7 +22,8 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserEntity implements UserDetails {
+public class UserEntity  {
+    //implements UserDetails
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -102,47 +101,47 @@ public class UserEntity implements UserDetails {
 //        return List.of(new SimpleGrantedAuthority(role.name()));
 //    }
 
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        if (lockTime == null) {
-            return true;  // Account is not locked if lockTime is null
-        }
-
-        long lockTimeInMillis = lockTime.getTime();
-        long currentTimeInMillis = System.currentTimeMillis();
-        long lockDurationInMillis = 60 * 1000;  // 1 minute
-
-        return lockTimeInMillis + lockDurationInMillis < currentTimeInMillis;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+//
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return null;
+//    }
+//
+//    @Override
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    @Override
+//    public String getUsername() {
+//        return email;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        if (lockTime == null) {
+//            return true;  // Account is not locked if lockTime is null
+//        }
+//
+//        long lockTimeInMillis = lockTime.getTime();
+//        long currentTimeInMillis = System.currentTimeMillis();
+//        long lockDurationInMillis = 60 * 1000;  // 1 minute
+//
+//        return lockTimeInMillis + lockDurationInMillis < currentTimeInMillis;
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return true;
+//    }
 }

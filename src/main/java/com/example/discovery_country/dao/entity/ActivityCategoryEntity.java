@@ -1,16 +1,17 @@
 package com.example.discovery_country.dao.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "activitycategories")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ActivityCategoryEntity {
@@ -23,9 +24,14 @@ public class ActivityCategoryEntity {
     String name;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     RegionEntity region;
 
     @OneToMany(mappedBy = "activityCategory", cascade = CascadeType.ALL)
     List<ActivityEntity> activities;
+
+
+    @Column(nullable = false)
+  //  @Builder.Default
+    Boolean deleted = false;
 }
