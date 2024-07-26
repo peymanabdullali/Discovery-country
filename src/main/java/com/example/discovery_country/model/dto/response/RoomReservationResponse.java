@@ -20,6 +20,6 @@ public class RoomReservationResponse {
     byte numberOfGuests;
     HomeHotelResponse homeHotel;
     HotelRoomsResponse hotelRoom;
-    UserResponse user;
+    //UserResponse user;
 
 }
