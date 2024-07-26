@@ -26,11 +26,11 @@ public class ActivityResponse {
 
     String mapUrl;
 
-    @NotBlank(message = "can't be blank")
-    double latitude;
-
-    @NotBlank(message = "can't be blank")
-    double longitude;
+//    @NotBlank(message = "can't be blank")
+//    double latitude;
+//
+//    @NotBlank(message = "can't be blank")
+//    double longitude;
 
     @NotBlank(message = "can't be blank")
     String description;
@@ -53,7 +53,7 @@ public class ActivityResponse {
     @NotBlank(message = "can't be blank")
     Integer numberOfPeople;
 
-    List<ImageResponse> image;
+    ImageResponse image;
     ActivityCategoryResponse activityCategory;
 
 }

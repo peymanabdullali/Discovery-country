@@ -57,10 +57,11 @@ public class ActivityEntity {
     @JoinColumn(nullable = false)
     ImageEntity image;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     ActivityCategoryEntity activityCategory;
 
+    Boolean deleted;
 }
 
 
