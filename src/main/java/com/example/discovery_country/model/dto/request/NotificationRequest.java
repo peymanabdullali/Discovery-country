@@ -18,4 +18,6 @@ public class NotificationRequest {
     LocalDateTime date;
     boolean seen;
     Long userId;
+
+
 }
