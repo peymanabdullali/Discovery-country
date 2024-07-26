@@ -6,14 +6,16 @@ import com.example.discovery_country.model.dto.response.ActivityCategoryResponse
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-
-
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+
 public interface ActivityCategoryMapper {
 
-    ActivityCategoryEntity mapToEntity(ActivityCategoryRequest request);
+        ActivityCategoryEntity mapToEntity(ActivityCategoryRequest activityCategoryRequest);
 
-    ActivityCategoryResponse mapToResponse(ActivityCategoryEntity entity);
+        ActivityCategoryResponse mapToResponse(ActivityCategoryEntity activityCategoryEntity);
 
-    void mapForUpdate (@MappingTarget ActivityCategoryEntity entity, ActivityCategoryRequest request);
+        void mapForUpdate (@MappingTarget ActivityCategoryEntity entity, ActivityCategoryRequest request);
+
+
+
 }

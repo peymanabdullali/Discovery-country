@@ -1,6 +1,6 @@
 package com.example.discovery_country.controller;
 
-import com.example.discovery_country.model.dto.request.ActivityCategoryCriteriaRequest;
+import com.example.discovery_country.model.dto.criteria.ActivityCategoryCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityCategoryRequest;
 import com.example.discovery_country.model.dto.response.ActivityCategoryResponse;
 import com.example.discovery_country.service.ActivityCategoryService;

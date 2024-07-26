@@ -4,7 +4,7 @@ import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import com.example.discovery_country.dao.repository.ActivityCategoryRepository;
 import com.example.discovery_country.exception.ActivityCategoryNotFoundException;
 import com.example.discovery_country.mapper.ActivityCategoryMapper;
-import com.example.discovery_country.model.dto.request.ActivityCategoryCriteriaRequest;
+import com.example.discovery_country.model.dto.criteria.ActivityCategoryCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityCategoryRequest;
 import com.example.discovery_country.model.dto.response.ActivityCategoryResponse;
 import com.example.discovery_country.specification.ActivityCategorySpecification;
@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Slf4j
