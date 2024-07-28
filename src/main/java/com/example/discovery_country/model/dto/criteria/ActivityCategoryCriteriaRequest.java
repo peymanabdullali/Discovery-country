@@ -1,4 +1,4 @@
-package com.example.discovery_country.model.dto.request;
+package com.example.discovery_country.model.dto.criteria;
 
 import lombok.AccessLevel;
 import lombok.Builder;

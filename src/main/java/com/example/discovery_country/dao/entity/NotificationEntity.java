@@ -23,4 +23,6 @@ public class NotificationEntity {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     UserEntity user;
+
+    Boolean deleted;
 }

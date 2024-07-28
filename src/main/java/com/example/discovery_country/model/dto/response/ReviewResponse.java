@@ -18,5 +18,5 @@ public class ReviewResponse {
     ScenicSpotResponse scenicSpot;
     RestaurantResponse restaurant;
     HomeHotelResponse homeHotel;
-    UserResponse users;
+    //UserResponse users;
 }

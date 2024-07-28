@@ -4,16 +4,17 @@ import com.example.discovery_country.dao.entity.NotificationEntity;
 import com.example.discovery_country.model.dto.request.NotificationRequest;
 import com.example.discovery_country.model.dto.response.NotificationResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import org.mapstruct.factory.Mappers;
-
-import java.util.List;
-
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+
 public interface NotificationMapper {
+        NotificationEntity mapToEntity(NotificationRequest request);
 
-    NotificationEntity mapToEntity(NotificationRequest request);
+        NotificationResponse mapToResponse(NotificationEntity entity);
 
-    NotificationResponse mapToResponse(NotificationEntity entity);
+        void mapForUpdate(@MappingTarget NotificationEntity notificationEntity, NotificationRequest notificationRequest);
 
-}
+    }
+
+

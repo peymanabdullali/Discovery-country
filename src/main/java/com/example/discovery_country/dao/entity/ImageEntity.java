@@ -39,4 +39,7 @@ public class ImageEntity {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     RestaurantEntity restaurant;
+
+    Boolean deleted = false;
+
 }
