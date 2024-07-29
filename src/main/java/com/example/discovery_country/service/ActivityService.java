@@ -7,7 +7,7 @@ import com.example.discovery_country.mapper.ActivityMapper;
 import com.example.discovery_country.model.dto.criteria.ActivityCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityRequest;
 import com.example.discovery_country.model.dto.response.ActivityResponse;
-import com.example.discovery_country.specification.ActivitySpecification;
+import com.example.discovery_country.service.specification.ActivitySpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
