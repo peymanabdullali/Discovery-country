@@ -1,44 +1,46 @@
 package com.example.discovery_country.service;
 
-import com.example.discovery_country.dao.entity.ZoneEntity;
-import com.example.discovery_country.dao.repository.RegionRepository;
+import com.example.discovery_country.dao.entity.ReviewEntity;
 import com.example.discovery_country.dao.repository.ReviewRepository;
-import com.example.discovery_country.dao.repository.ZoneRepository;
 import com.example.discovery_country.mapper.ReviewMapper;
-import com.example.discovery_country.mapper.ZoneMapper;
-import com.example.discovery_country.model.dto.request.CriteriaRequestForName;
-import com.example.discovery_country.model.dto.request.ReviewRequest;
-import com.example.discovery_country.model.dto.request.ZoneRequest;
-import com.example.discovery_country.model.dto.response.ZoneResponse;
-import com.example.discovery_country.service.specification.ZoneSpecification;
+import com.example.discovery_country.model.dto.request.ReviewRequestForHomeHotel;
+import com.example.discovery_country.model.dto.request.ReviewRequestForRestaurant;
+import com.example.discovery_country.model.dto.request.ReviewRequestForScenicSpots;
+import com.example.discovery_country.model.dto.response.ReviewResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
-//    private final ReviewRepository reviewRepository;
-//    private final ReviewMapper reviewMapper;
-//
-//    public ZoneResponse create(ReviewRequest request) {
-//        log.info("ActionLog.createZone start");
-//
-//        ZoneEntity zoneEntity = zoneMapper.mapToEntity(request, regionRepository.findAllById(request.getRegionIds()));
-//        ZoneEntity zone = zoneRepository.save(zoneEntity);
-//        ZoneResponse zoneResponse = zoneMapper.mapToResponse(zone);
-//        log.info("ActionLog.createZone end");
-//        return zoneResponse;
-//
-//    }
+    private final ReviewRepository reviewRepository;
+    private final ReviewMapper reviewMapper;
+
+    public ReviewResponse createRestaurantReview(ReviewRequestForRestaurant request) {
+        log.info("ActionLog.createRestaurantReview start");
+        ReviewEntity reviewEntity = reviewMapper.mapToEntity(request);
+        ReviewResponse reviewResponse = reviewMapper.mapToResponse(reviewRepository.save(reviewEntity));
+        log.info("ActionLog.createRestaurantReview end");
+        return reviewResponse;
+    }
+    public ReviewResponse createScenicSpotReview(ReviewRequestForScenicSpots request) {
+        log.info("ActionLog.createScenicSpotReview start");
+        ReviewEntity reviewEntity = reviewMapper.mapToEntity(request);
+        ReviewResponse reviewResponse = reviewMapper.mapToResponse(reviewRepository.save(reviewEntity));
+        log.info("ActionLog.createScenicSpotReview end");
+        return reviewResponse;
+
+    }    public ReviewResponse createHomeHotelReview(ReviewRequestForHomeHotel request) {
+        log.info("ActionLog.createHomeHotelReview start");
+        ReviewEntity reviewEntity = reviewMapper.mapToEntity(request);
+        ReviewResponse reviewResponse = reviewMapper.mapToResponse(reviewRepository.save(reviewEntity));
+        log.info("ActionLog.createHomeHotelReview end");
+        return reviewResponse;
+
+    }
+
 //
 //    public Page<ZoneResponse> getZones(CriteriaRequestForName criteriaRequest, Pageable pageable) {
 //        log.info("ActionLog.getZone start");

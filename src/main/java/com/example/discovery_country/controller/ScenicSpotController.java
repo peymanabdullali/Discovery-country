@@ -1,13 +1,9 @@
 package com.example.discovery_country.controller;
 
-import com.example.discovery_country.model.dto.request.CriteriaRequestForName;
+import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
-import com.example.discovery_country.model.dto.request.ZoneCriteriaRequest;
-import com.example.discovery_country.model.dto.request.ZoneRequest;
 import com.example.discovery_country.model.dto.response.ScenicSpotResponse;
-import com.example.discovery_country.model.dto.response.ZoneResponse;
 import com.example.discovery_country.service.ScenicSpotService;
-import com.example.discovery_country.service.ZoneService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

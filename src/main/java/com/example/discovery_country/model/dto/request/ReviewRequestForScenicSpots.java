@@ -1,18 +1,22 @@
-package com.example.discovery_country.model.dto.response;
+package com.example.discovery_country.model.dto.request;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ReviewResponse {
+public class ReviewRequestForScenicSpots {
 
+    @NotBlank(message = "can't be blank")
     String comment;
-    
+
     float rating;
     String fullName;
     String photoUrl;
+    Long scenicSpotId;
+    Long userId;
 }

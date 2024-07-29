@@ -1,8 +1,7 @@
 package com.example.discovery_country.controller;
 
-import com.example.discovery_country.dao.entity.ScenicSpotEntity;
+import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.*;
-import com.example.discovery_country.model.dto.response.ActivityCategoryResponse;
 import com.example.discovery_country.model.dto.response.ZoneResponse;
 import com.example.discovery_country.service.ZoneService;
 import lombok.RequiredArgsConstructor;
