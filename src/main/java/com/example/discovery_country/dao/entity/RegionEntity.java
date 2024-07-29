@@ -23,8 +23,12 @@ public class RegionEntity {
     String name;
 
     String mapUrl;
+    @Column(nullable = false)
+    double latitude;
+    @Column(nullable = false)
+    double longitude;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     ZoneEntity zone;
 

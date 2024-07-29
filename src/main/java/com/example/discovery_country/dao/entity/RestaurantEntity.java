@@ -35,10 +35,9 @@ public class RestaurantEntity {
     @JoinColumn(nullable = false)
     RegionEntity region;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    ImageEntity image;
-
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    List<ImageEntity> images;
+    double rating;
     String mapUrl;
     String menuUrl;
     Long viewed;

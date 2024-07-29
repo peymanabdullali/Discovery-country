@@ -17,9 +17,9 @@ public class ImageResponse {
 
     String name;
     String url;
-    HotelRoomsResponse hotelRoom;
-    HomeHotelResponse homeHotel;
-    ActivityResponse activity;
-    ScenicSpotResponse scenicSpot;
-    RestaurantResponse restaurant;
+//    HotelRoomsResponse hotelRoom;
+//    HomeHotelResponse homeHotel;
+//    ActivityResponse activity;
+//    ScenicSpotResponse scenicSpot;
+//    RestaurantResponse restaurant;
 }

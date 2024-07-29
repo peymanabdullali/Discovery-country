@@ -9,11 +9,11 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
 public interface ImageMapper {
 
-    ImageEntity mapToEntity(ImageRequest request);
+//    ImageEntity mapToEntity(ImageRequest request);
 
-    ImageResponse mapToResponse(ImageEntity entity);
+//    ImageResponse mapToResponse(ImageEntity entity);
 
 }

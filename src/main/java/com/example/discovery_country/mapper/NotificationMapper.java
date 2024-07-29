@@ -9,11 +9,11 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
 public interface NotificationMapper {
 
-    NotificationEntity mapToEntity(NotificationRequest request);
-
-    NotificationResponse mapToResponse(NotificationEntity entity);
+//    NotificationEntity mapToEntity(NotificationRequest request);
+//
+//    NotificationResponse mapToResponse(NotificationEntity entity);
 
 }

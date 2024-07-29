@@ -17,16 +17,16 @@ public class HomeHotelResponse {
 
     String name;
     String address;
-    String contact;
-    String mapUrl;
+//    String contact;
+//    String mapUrl;
     double price;
-    String type;
+//    String type;
     Long viewed;
-    List<HotelRoomsResponse> hotelRooms;
+//    List<HotelRoomsResponse> hotelRooms;
     List<ImageResponse> images;
-    List<ReviewResponse> reviews;
-    List<RoomReservationResponse> roomReservations;
-    RegionResponse regions;
+//    List<ReviewResponse> reviews;
+//    List<RoomReservationResponse> roomReservations;
+//    RegionResponse regions;
 
-    String description;
+//    String description;
 }

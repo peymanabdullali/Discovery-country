@@ -7,11 +7,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
 public interface ActivityMapper {
 
     ActivityEntity mapToEntity(ActivityRequest request);
 
-    ActivityResponse mapToResponse(ActivityEntity entity);
+//    ActivityResponse mapToResponse(ActivityEntity entity);
 
 }
