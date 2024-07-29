@@ -51,3 +51,4 @@ public class ActivitySpecification implements Specification<ActivityEntity> {
         return null;
     }
 }
+//qeyd
