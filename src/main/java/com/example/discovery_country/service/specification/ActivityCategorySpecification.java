@@ -1,7 +1,7 @@
 package com.example.discovery_country.service.specification;
 
 import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
-import com.example.discovery_country.model.dto.request.ActivityCategoryCriteriaRequest;
+import com.example.discovery_country.model.dto.criteria.ActivityCategoryCriteriaRequest;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;

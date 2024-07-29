@@ -4,7 +4,7 @@ import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import com.example.discovery_country.dao.repository.ActivityCategoryRepository;
 import com.example.discovery_country.exception.ActivityCategoryNotFoundException;
 import com.example.discovery_country.mapper.ActivityCategoryMapper;
-import com.example.discovery_country.model.dto.request.ActivityCategoryCriteriaRequest;
+import com.example.discovery_country.model.dto.criteria.ActivityCategoryCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityCategoryRequest;
 import com.example.discovery_country.model.dto.response.ActivityCategoryResponse;
 import com.example.discovery_country.service.specification.ActivityCategorySpecification;

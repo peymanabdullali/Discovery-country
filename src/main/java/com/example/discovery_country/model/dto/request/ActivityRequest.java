@@ -53,7 +53,7 @@ public class ActivityRequest {
     @NotBlank(message = "can't be blank")
     Integer numberOfPeople;
 
-    List<Long> imageIds;
+    Long imageId;
     Long activityCategoryId;
 
 }
