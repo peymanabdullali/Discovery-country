@@ -19,6 +19,7 @@ public interface ScenicSpotMapper {
     ScenicSpotEntity mapToEntity(ScenicSpotRequest request,List<ImageEntity> images);
 
     ScenicSpotResponse mapToResponse(ScenicSpotEntity entity);
+    List<ScenicSpotResponse> mapToResponseList(List<ScenicSpotEntity> entities);
     List<ImageResponse> mapScenicSpotResponseList(List<ImageEntity> entities);
 
 

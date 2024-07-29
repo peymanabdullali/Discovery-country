@@ -45,17 +45,15 @@ public class ScenicSpotService {
     }
 
 
-//    public Page<ScenicSpotResponse> getScenicSpots(CriteriaRequestForName criteriaRequest, Pageable pageable) {
-//        log.info("ActionLog.getZone start");
-//
-//        Specification<ScenicSpotEntity> spec = ScenicSpotSpecification.getScenicSpotByCriteria(criteriaRequest);
-//        Page<ScenicSpotEntity> scenicSpotEntities = scenicSpotRepository.findAll(spec, pageable);
-//        List<ScenicSpotResponse> scenicSpotResponse = scenicSpotMapper.mapToResponse(zoneEntities.toList());
-//        log.info("ActionLog.getZone end");
-//
-//        return new PageImpl<>(zoneResponses);
-//
-//    }
+    public Page<ScenicSpotResponse> getScenicSpots(CriteriaRequestForName criteriaRequest, Pageable pageable) {
+        log.info("ActionLog.getScenicSpots start");
+
+        Specification<ScenicSpotEntity> spec = ScenicSpotSpecification.getScenicSpotByCriteria(criteriaRequest);
+        List<ScenicSpotResponse> scenicSpotResponse = scenicSpotMapper.mapToResponseList(scenicSpotRepository.findAll(spec, pageable).toList());
+        log.info("ActionLog.getScenicSpots end");
+        return new PageImpl<>(scenicSpotResponse);
+
+    }
 
     public void updateStatus(Long id) {
         log.info("ActionLog.updateStatus start with id#" + id);

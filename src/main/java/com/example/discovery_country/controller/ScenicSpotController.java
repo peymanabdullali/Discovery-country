@@ -1,5 +1,6 @@
 package com.example.discovery_country.controller;
 
+import com.example.discovery_country.model.dto.request.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
 import com.example.discovery_country.model.dto.request.ZoneCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ZoneRequest;
@@ -32,16 +33,17 @@ public class ScenicSpotController {
     }
 
     //
-//    @GetMapping
-//    public ResponseEntity<Page<ZoneResponse>> getZones(ZoneCriteriaRequest criteriaRequest,
-//                                                       Pageable pageable) {
-//        log.info("Controller.getZones start");
-//        Page<ZoneResponse> zones = service.getZones(criteriaRequest, pageable);
-//
-//        log.info("Controller.getZones end");
-//        return ResponseEntity.ok(zones);
-//    }
-//
+    @GetMapping
+    public ResponseEntity<Page<ScenicSpotResponse>> getScenicSpots(CriteriaRequestForName criteriaRequest,
+                                                                   Pageable pageable) {
+        log.info("Controller.getScenicSpots start");
+        Page<ScenicSpotResponse> scenicSpots = service.getScenicSpots(criteriaRequest, pageable);
+
+        log.info("Controller.getScenicSpots end");
+        return ResponseEntity.ok(scenicSpots);
+    }
+
+    //
 //    @PutMapping("/{id}")
 //    public ResponseEntity<ZoneResponse> updateZone(
 //            @PathVariable Long id,
