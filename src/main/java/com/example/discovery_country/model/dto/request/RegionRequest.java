@@ -19,14 +19,12 @@ public class RegionRequest {
 
     @NotBlank(message = "can't be blank")
     String name;
-
+    double latitude;
+    double longitude;
     String mapUrl;
 
     Long zoneId;
-    List<Long> activityCategoryIds;
-    List<Long> restaurantIds;
-    List<Long> homeHotelIds;
-    List<Long> scenicSpotIds;
+
 
 
 }

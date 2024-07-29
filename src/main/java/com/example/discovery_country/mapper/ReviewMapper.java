@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ReviewMapper {
 
-    ReviewEntity mapToEntity(ReviewRequest request);
-
-    ReviewResponse mapToResponse(ReviewEntity entity);
+//    ReviewEntity mapToEntity(ReviewRequest request);
+//
+//    ReviewResponse mapToResponse(ReviewEntity entity);
 
 }

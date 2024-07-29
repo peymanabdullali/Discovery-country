@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,6 +26,6 @@ public class RestaurantResponse {
     String mapUrl;
     String menuUrl;
     RegionResponse region;
-    ImageResponse image;
+    List<ImageResponse> images;
     Long viewed;
 }

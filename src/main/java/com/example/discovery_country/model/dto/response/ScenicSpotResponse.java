@@ -21,8 +21,8 @@ public class ScenicSpotResponse {
 
     String description;
 
-    RegionResponse region;
-    List<ImageEntity> images;
+//    RegionResponse region;
+    List<ImageResponse> images;
 
     Long viewed;
 

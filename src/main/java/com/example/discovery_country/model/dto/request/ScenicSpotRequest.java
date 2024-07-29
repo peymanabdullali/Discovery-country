@@ -21,9 +21,7 @@ public class ScenicSpotRequest {
 
     @NotBlank(message = "can't be blank")
     String description;
-
     Long regionId;
-    List<Long> imageId;
-    Long viewed;
+    List<Long> imageIds;
 
 }

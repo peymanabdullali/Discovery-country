@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface HotelRoomsMapper {
 
-    HotelRoomsEntity mapToEntity(HotelRoomsRequest request);
-
-    HotelRoomsResponse mapToResponse(HotelRoomsEntity entity);
+//    HotelRoomsEntity mapToEntity(HotelRoomsRequest request);
+//
+//    HotelRoomsResponse mapToResponse(HotelRoomsEntity entity);
 
 }

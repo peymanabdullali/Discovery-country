@@ -1,21 +1,13 @@
 package com.example.discovery_country.model.dto.request;
 
-import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-
 @Data
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@AllArgsConstructor
-@NoArgsConstructor
-public class ImageRequest {
-
-
+public class ZoneCriteriaRequest {
     String name;
-    String url;
-
 }
