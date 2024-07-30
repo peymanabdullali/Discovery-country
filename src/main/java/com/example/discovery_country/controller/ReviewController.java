@@ -3,7 +3,7 @@ package com.example.discovery_country.controller;
 import com.example.discovery_country.model.dto.request.ReviewRequestForHomeHotel;
 import com.example.discovery_country.model.dto.request.ReviewRequestForRestaurant;
 import com.example.discovery_country.model.dto.request.ReviewRequestForScenicSpots;
-import com.example.discovery_country.model.dto.request.CriteriaRequestForName;
+import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ZoneRequest;
 import com.example.discovery_country.model.dto.response.ReviewResponse;
 import com.example.discovery_country.model.dto.response.ZoneResponse;

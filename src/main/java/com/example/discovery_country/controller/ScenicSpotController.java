@@ -1,6 +1,6 @@
 package com.example.discovery_country.controller;
 
-import com.example.discovery_country.model.dto.request.CriteriaRequestForName;
+import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
 import com.example.discovery_country.model.dto.response.ScenicSpotResponse;
 import com.example.discovery_country.service.ScenicSpotService;

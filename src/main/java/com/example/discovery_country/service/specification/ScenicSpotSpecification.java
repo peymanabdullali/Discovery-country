@@ -1,7 +1,7 @@
 package com.example.discovery_country.service.specification;
 
 import com.example.discovery_country.dao.entity.ScenicSpotEntity;
-import com.example.discovery_country.model.dto.request.CriteriaRequestForName;
+import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;

@@ -19,7 +19,7 @@ public interface ReviewMapper {
     @Mapping(target = "user.id",source = "request.userId")
     ReviewEntity mapToEntity(ReviewRequestForHomeHotel request);
 
-    @Mapping(target = "scenicSpots.id",source = "request.scenicSpotId")
+    @Mapping(target = "scenicSpot.id",source = "request.scenicSpotId")
     @Mapping(target = "user.id",source = "request.userId")
     ReviewEntity mapToEntity(ReviewRequestForScenicSpots request);
 
