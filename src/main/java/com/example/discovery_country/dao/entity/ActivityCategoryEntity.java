@@ -22,15 +22,22 @@ public class ActivityCategoryEntity {
     @Column(nullable = false)
     String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    RegionEntity region;
+    @Column(nullable = false)
+    Boolean deleted = false;
 
     @OneToMany(mappedBy = "activityCategory", cascade = CascadeType.ALL)
     List<ActivityEntity> activities;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "region_actCategory",joinColumns = @JoinColumn(name="activity_category_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "region_id", referencedColumnName = "id")
+    )
+    List <RegionEntity> regions;
 
-    @Column(nullable = false)
-  //  @Builder.Default
-    Boolean deleted = false;
+
+
+
+
+
+
 }

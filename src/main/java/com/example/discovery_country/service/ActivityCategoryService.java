@@ -1,7 +1,11 @@
 package com.example.discovery_country.service;
 
 import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
+import com.example.discovery_country.dao.entity.ActivityEntity;
+import com.example.discovery_country.dao.entity.RegionEntity;
 import com.example.discovery_country.dao.repository.ActivityCategoryRepository;
+import com.example.discovery_country.dao.repository.ActivityRepository;
+import com.example.discovery_country.dao.repository.RegionRepository;
 import com.example.discovery_country.exception.ActivityCategoryNotFoundException;
 import com.example.discovery_country.mapper.ActivityCategoryMapper;
 import com.example.discovery_country.model.dto.criteria.ActivityCategoryCriteriaRequest;
@@ -15,23 +19,41 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
+
+import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ActivityCategoryService {
     private final ActivityCategoryRepository activityCategoryRepository;
+    private final RegionRepository regionRepository;
+    private final ActivityRepository activityRepository;
 //    private final ActivityCategoryMapper activityCategoryMapper;
 
-    public ActivityCategoryResponse create(ActivityCategoryRequest request){
+    public ActivityCategoryResponse create(ActivityCategoryRequest request) {
         log.info("ActionLog.createActivityCategory start");
 
-        ActivityCategoryEntity activityCategoryEntity=ActivityCategoryMapper.INSTANCE.mapToEntity(request);
-        ActivityCategoryEntity activityCategory=activityCategoryRepository.save(activityCategoryEntity);
+        if (request.getRegionIds() == null || request.getRegionIds().isEmpty()) {
+            throw new IllegalArgumentException("Region IDs must not be null or empty");
+        }
+
+       List<RegionEntity> regions=regionRepository.findAllById(request.getRegionIds());
+       if (regions.isEmpty()){
+           throw new RuntimeException("regions not founds");
+       }
+
+        ActivityCategoryEntity activityCategoryEntity = ActivityCategoryMapper.INSTANCE.mapToEntity(request);
+
+        activityCategoryEntity.setRegions(regions);
+
+
+        ActivityCategoryEntity activityCategory = activityCategoryRepository.save(activityCategoryEntity);
 
         log.info("ActionLog.createActivityCategory end");
 
-        return   ActivityCategoryMapper.INSTANCE.mapToResponse(activityCategory);
+        return ActivityCategoryMapper.INSTANCE.mapToResponse(activityCategory);
 
     }
 

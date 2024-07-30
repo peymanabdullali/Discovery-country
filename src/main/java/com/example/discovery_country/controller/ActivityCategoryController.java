@@ -68,3 +68,4 @@ public class ActivityCategoryController {
         return ResponseEntity.noContent().build();
     }
 }
+

@@ -1,10 +1,7 @@
 package com.example.discovery_country.dao.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
@@ -13,6 +10,8 @@ import java.util.List;
 @Entity
 @Table(name = "regions")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegionEntity {
 
     @Id
@@ -32,7 +31,7 @@ public class RegionEntity {
     @JoinColumn
     ZoneEntity zone;
 
-    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "regions", cascade = CascadeType.ALL)
     List<ActivityCategoryEntity> activityCategories;
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
@@ -43,6 +42,7 @@ public class RegionEntity {
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     List<ScenicSpotEntity> scenicSpots;
+
 
 
 }
