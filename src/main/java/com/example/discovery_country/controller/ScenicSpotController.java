@@ -2,12 +2,8 @@ package com.example.discovery_country.controller;
 
 import com.example.discovery_country.model.dto.request.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
-import com.example.discovery_country.model.dto.request.ZoneCriteriaRequest;
-import com.example.discovery_country.model.dto.request.ZoneRequest;
 import com.example.discovery_country.model.dto.response.ScenicSpotResponse;
-import com.example.discovery_country.model.dto.response.ZoneResponse;
 import com.example.discovery_country.service.ScenicSpotService;
-import com.example.discovery_country.service.ZoneService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,14 +21,13 @@ public class ScenicSpotController {
 
     @PostMapping
     public ResponseEntity<ScenicSpotResponse> createScenicSpot(@RequestBody ScenicSpotRequest request) {
-        log.info("Controller.createZone start");
+        log.info("Controller.createScenicSpot start");
 
         ScenicSpotResponse scenicSpot = service.createScenicSpot(request);
-        log.info("Controller.createZone end");
+        log.info("Controller.createScenicSpot end");
         return ResponseEntity.status(HttpStatus.CREATED).body(scenicSpot);
     }
 
-    //
     @GetMapping
     public ResponseEntity<Page<ScenicSpotResponse>> getScenicSpots(CriteriaRequestForName criteriaRequest,
                                                                    Pageable pageable) {
@@ -43,33 +38,10 @@ public class ScenicSpotController {
         return ResponseEntity.ok(scenicSpots);
     }
 
-    //
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ZoneResponse> updateZone(
-//            @PathVariable Long id,
-//            @RequestBody ZoneRequest zoneRequest) {
-//        log.info("Controller.updateZone start with id#" + id);
-//
-//        ZoneResponse response = service.update(id, zoneRequest);
-//
-//        log.info("Controller.updateZone end");
-//
-//        return ResponseEntity.ok(response);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public void deleteZone(
-//            @PathVariable Long id) {
-//        log.info("Controller.deleteZone start with id#" + id);
-//        service.delete(id);
-//        log.info("Controller.deleteZone end");
-//    }
     @PatchMapping("/{id}")
-    public void updateStatus(
-            @PathVariable Long id) {
+    public void updateStatus(@PathVariable Long id) {
         log.info("Controller.updateStatus start with id#" + id);
         service.updateStatus(id);
         log.info("Controller.updateStatus end");
     }
-
 }

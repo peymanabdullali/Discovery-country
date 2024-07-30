@@ -1,23 +1,18 @@
 package com.example.discovery_country.service;
 
 import com.example.discovery_country.dao.entity.RegionEntity;
-import com.example.discovery_country.dao.entity.ZoneEntity;
 import com.example.discovery_country.dao.repository.RegionRepository;
-import com.example.discovery_country.dao.repository.ZoneRepository;
 import com.example.discovery_country.mapper.RegionMapper;
-import com.example.discovery_country.mapper.ZoneMapper;
+import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.*;
 import com.example.discovery_country.model.dto.response.RegionResponse;
-import com.example.discovery_country.model.dto.response.ZoneResponse;
 import com.example.discovery_country.service.specification.RegionSpecification;
-import com.example.discovery_country.service.specification.ZoneSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

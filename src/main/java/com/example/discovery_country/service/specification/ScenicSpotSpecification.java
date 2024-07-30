@@ -1,6 +1,5 @@
 package com.example.discovery_country.service.specification;
 
-import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import com.example.discovery_country.dao.entity.ScenicSpotEntity;
 import com.example.discovery_country.model.dto.request.CriteriaRequestForName;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -14,13 +13,14 @@ import java.util.List;
 
 public class ScenicSpotSpecification implements Specification<ScenicSpotEntity> {
 
-    public static Specification<ScenicSpotEntity>getScenicSpotByCriteria(CriteriaRequestForName criteriaRequest){
-        return (root, query, criteriaBuilder) ->{
-            List<Predicate> predicates=new ArrayList<>();
+    public static Specification<ScenicSpotEntity> getScenicSpotByCriteria(CriteriaRequestForName criteriaRequest) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
 
-            if(criteriaRequest.getName()!=null && criteriaRequest.getName().isEmpty()){
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),"%" + criteriaRequest));
+            if (criteriaRequest.getName() != null && !criteriaRequest.getName().isEmpty()) {
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + criteriaRequest.getName().toLowerCase() + "%"));
             }
+
             predicates.add(criteriaBuilder.isFalse(root.get("status")));
             predicates.add(criteriaBuilder.isTrue(root.get("checkStatus")));
 
@@ -30,6 +30,7 @@ public class ScenicSpotSpecification implements Specification<ScenicSpotEntity> 
 
     @Override
     public Predicate toPredicate(Root<ScenicSpotEntity> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+        // Implementation of this method is not required as we're using the static method for specification.
         return null;
     }
 }
