@@ -5,7 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name = "scenic_spots_ratings")
+@Table(name = "reviews")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

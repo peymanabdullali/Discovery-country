@@ -2,7 +2,6 @@ package com.example.discovery_country.service.specification;
 
 import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import com.example.discovery_country.dao.entity.ZoneEntity;
-import com.example.discovery_country.model.dto.request.ActivityCategoryCriteriaRequest;
 import com.example.discovery_country.model.dto.request.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ZoneCriteriaRequest;
 import jakarta.persistence.criteria.CriteriaBuilder;
