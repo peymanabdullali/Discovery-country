@@ -35,7 +35,8 @@ public class ScenicSpotEntity {
 
     @OneToMany(mappedBy = "scenicSpot", cascade = CascadeType.ALL)
     List<ImageEntity> images;
-
+    @OneToMany(mappedBy = "scenicSpot", cascade = CascadeType.ALL)
+    List<ReviewEntity> reviews;
     Long viewed;
 
 }

@@ -24,7 +24,7 @@ public class ReviewEntity {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
-    ScenicSpotEntity scenicSpots;
+    ScenicSpotEntity scenicSpot;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
