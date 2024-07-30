@@ -5,7 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name = "scenic_spots_ratings")
+@Table(name = "reviews")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +24,7 @@ public class    ReviewEntity {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
-    ScenicSpotEntity scenicSpots;
+    ScenicSpotEntity scenicSpot;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn

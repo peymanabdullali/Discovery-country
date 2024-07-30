@@ -34,7 +34,7 @@ public class ActivityEntity {
     double longitude;
     @Column(columnDefinition = "TEXT")
     String description;
-
+    boolean deleted;
     @Column(nullable = false)
     LocalDateTime startDate;
 
