@@ -24,10 +24,8 @@ public class ScenicSpotEntity {
 
     @Column(columnDefinition = "TEXT")
     String description;
-    @Column(columnDefinition = "indicates verification by admin")
-    boolean checkStatus;
-    @Column(columnDefinition = "checks that it has not been deleted")
-    boolean status;
+    Boolean checkStatus;
+    Boolean status;
 
     @ManyToOne
     @JoinColumn(nullable = false)
