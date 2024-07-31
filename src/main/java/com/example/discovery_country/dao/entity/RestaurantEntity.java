@@ -1,10 +1,7 @@
 package com.example.discovery_country.dao.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
@@ -12,6 +9,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "restaurants")
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RestaurantEntity {
 
@@ -42,4 +41,6 @@ public class RestaurantEntity {
     String menuUrl;
     Long viewed;
     boolean status;
+
+
 }

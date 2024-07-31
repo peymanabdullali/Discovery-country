@@ -1,5 +1,6 @@
 package com.example.discovery_country.service.specification;
 
+import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import com.example.discovery_country.dao.entity.ZoneEntity;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -13,12 +14,12 @@ import java.util.List;
 
 public class ZoneSpecification implements Specification<ZoneEntity> {
 
-    public static Specification<ZoneEntity> getZoneByCriteria(CriteriaRequestForName criteriaRequest) {
-        return (root, query, criteriaBuilder) -> {
-            List<Predicate> predicates = new ArrayList<>();
+    public static Specification<ZoneEntity>getZoneByCriteria(CriteriaRequestForName criteriaRequest){
+        return (root, query, criteriaBuilder) ->{
+            List<Predicate> predicates=new ArrayList<>();
 
-            if (criteriaRequest.getName() != null && !criteriaRequest.getName().isEmpty()) {
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + criteriaRequest.getName().toLowerCase() + "%"));
+            if(criteriaRequest.getName()!=null && criteriaRequest.getName().isEmpty()){
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),"%" + criteriaRequest));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
@@ -27,7 +28,6 @@ public class ZoneSpecification implements Specification<ZoneEntity> {
 
     @Override
     public Predicate toPredicate(Root<ZoneEntity> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        // Implementation of this method is not required as we're using the static method for specification.
         return null;
     }
 }

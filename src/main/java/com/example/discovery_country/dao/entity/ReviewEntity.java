@@ -37,4 +37,6 @@ public class    ReviewEntity {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     UserEntity user;
+
+
 }

@@ -1,7 +1,11 @@
 package com.example.discovery_country.service;
 
+import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import com.example.discovery_country.dao.entity.ActivityEntity;
+import com.example.discovery_country.dao.repository.ActivityCategoryRepository;
 import com.example.discovery_country.dao.repository.ActivityRepository;
+import com.example.discovery_country.dao.repository.ImageRepository;
+import com.example.discovery_country.exception.ActivityCategoryNotFoundException;
 import com.example.discovery_country.exception.ActivityNotFoundException;
 import com.example.discovery_country.mapper.ActivityMapper;
 import com.example.discovery_country.model.dto.criteria.ActivityCriteriaRequest;
@@ -22,12 +26,16 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ActivityService {
     public final ActivityRepository activityRepository;
+    public final ActivityCategoryRepository categoryRepository;
+    public final ImageRepository imageRepository;
     public final ActivityMapper activityMapper;
 
     public ActivityResponse create(ActivityRequest request){
         log.info("ActionLog.createActivity start");
 
-        ActivityEntity activityEntity = activityMapper.mapToEntity(request);
+       // ActivityCategoryEntity activityCategory=categoryRepository.findById(request.getActivityCategoryId()).orElseThrow(()->new ActivityCategoryNotFoundException(HttpStatus.NOT_FOUND.name(), "ActivityCategory not found"))
+
+        ActivityEntity activityEntity = activityMapper.mapToEntity(request,imageRepository.findAllById(request.getImageIds()));
         ActivityEntity activity = activityRepository.save(activityEntity);
 
         log.info("ActionLog.createActivity end");

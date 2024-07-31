@@ -38,4 +38,5 @@ public class HotelRoomsEntity {
     List<RoomReservationEntity> roomReservations;
 
 
+
 }
