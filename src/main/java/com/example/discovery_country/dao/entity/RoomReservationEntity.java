@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "room_reservations")
@@ -34,5 +35,6 @@ public class RoomReservationEntity {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     UserEntity user;
+
 
 }

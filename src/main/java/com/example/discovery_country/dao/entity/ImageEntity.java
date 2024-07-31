@@ -1,17 +1,18 @@
 package com.example.discovery_country.dao.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "images")
+@NoArgsConstructor
+@AllArgsConstructor
 public class ImageEntity {
 
     @Id
@@ -20,26 +21,27 @@ public class ImageEntity {
     String name;
     String url;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     HotelRoomsEntity hotelRoom;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     HomeHotelEntity homeHotel;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     ActivityEntity activity;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     ScenicSpotEntity scenicSpot;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     RestaurantEntity restaurant;
 
     Boolean deleted = false;
+
 
 }

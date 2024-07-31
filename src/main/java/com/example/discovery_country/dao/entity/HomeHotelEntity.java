@@ -43,4 +43,6 @@ public class HomeHotelEntity {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     RegionEntity region;
+
+
 }

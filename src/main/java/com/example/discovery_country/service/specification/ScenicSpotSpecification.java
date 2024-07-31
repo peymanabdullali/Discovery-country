@@ -13,14 +13,13 @@ import java.util.List;
 
 public class ScenicSpotSpecification implements Specification<ScenicSpotEntity> {
 
-    public static Specification<ScenicSpotEntity> getScenicSpotByCriteria(CriteriaRequestForName criteriaRequest) {
-        return (root, query, criteriaBuilder) -> {
-            List<Predicate> predicates = new ArrayList<>();
+    public static Specification<ScenicSpotEntity>getScenicSpotByCriteria(CriteriaRequestForName criteriaRequest){
+        return (root, query, criteriaBuilder) ->{
+            List<Predicate> predicates=new ArrayList<>();
 
-            if (criteriaRequest.getName() != null && !criteriaRequest.getName().isEmpty()) {
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + criteriaRequest.getName().toLowerCase() + "%"));
+            if(criteriaRequest.getName()!=null && criteriaRequest.getName().isEmpty()){
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),"%" + criteriaRequest));
             }
-
             predicates.add(criteriaBuilder.isFalse(root.get("status")));
             predicates.add(criteriaBuilder.isTrue(root.get("checkStatus")));
 
@@ -30,7 +29,6 @@ public class ScenicSpotSpecification implements Specification<ScenicSpotEntity> 
 
     @Override
     public Predicate toPredicate(Root<ScenicSpotEntity> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        // Implementation of this method is not required as we're using the static method for specification.
         return null;
     }
 }

@@ -53,8 +53,8 @@ public class ActivityResponse {
     @NotBlank(message = "can't be blank")
     Integer numberOfPeople;
 
-    ImageResponse image;
-    ActivityCategoryResponse activityCategory;
+    List<ImageResponseForActivity> images;
+    ActivityCategoryResponseForActivity activityCategory;
 
 }
 
