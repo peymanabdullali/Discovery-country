@@ -15,7 +15,13 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Slf4j
@@ -35,6 +41,22 @@ public class ScenicSpotService {
 
     }
 
+    public String addPhoto(long id, MultipartFile file) {
+        String uploadDir = "C:\\Users\\pabdu\\Desktop\\photos\\";
+        File uploadDirFile = new File(uploadDir);
+        if (!uploadDirFile.exists()) {
+            boolean check = uploadDirFile.mkdirs();
+        }
+
+        try {
+            file.transferTo(new File(uploadDir + file.getOriginalFilename()));
+            return "File uploaded successfully!";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to upload file!";
+        }
+    }
+
 
     public Page<ScenicSpotResponse> getScenicSpots(CriteriaRequestForName criteriaRequest, Pageable pageable) {
         log.info("ActionLog.getScenicSpots start");
@@ -52,12 +74,6 @@ public class ScenicSpotService {
         log.info("ActionLog.updateStatus end");
 
     }
-//
-//    public void delete(Long id) {
-//        log.info("ActionLog.deleteZone start with id#" + id);
-//        zoneRepository.deleteById(id) ;
-//        log.info("ActionLog.updateZone end");
-//    }
-
-
 }
+
+

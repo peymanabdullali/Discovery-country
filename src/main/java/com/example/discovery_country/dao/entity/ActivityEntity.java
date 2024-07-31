@@ -1,10 +1,8 @@
 package com.example.discovery_country.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
@@ -15,6 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "activities")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@NoArgsConstructor
 public class ActivityEntity {
 
     @Id
@@ -53,15 +53,19 @@ public class ActivityEntity {
     @Column(nullable = false)
     Integer numberOfPeople;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    ImageEntity image;
+//    @ManyToOne
+//    @JoinColumn(nullable = false)
+//    ImageEntity image;
+//
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "activity_id", referencedColumnName = "id")
+//    ActivityCategoryEntity activityCategory;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "activity" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    List<ImageEntity> images;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn
     ActivityCategoryEntity activityCategory;
 
 }
-
-
-
