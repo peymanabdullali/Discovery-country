@@ -63,12 +63,10 @@ public class ActivityEntity {
 
     @OneToMany(mappedBy = "activity" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     List<ImageEntity> images;
-
+  
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+
     @JoinColumn
     ActivityCategoryEntity activityCategory;
 
 }
-
-
-

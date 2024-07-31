@@ -4,13 +4,18 @@ import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
 import com.example.discovery_country.model.dto.response.ScenicSpotResponse;
 import com.example.discovery_country.service.ScenicSpotService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("scenicSpot")
@@ -26,6 +31,13 @@ public class ScenicSpotController {
         ScenicSpotResponse scenicSpot = service.createScenicSpot(request);
         log.info("Controller.createScenicSpot end");
         return ResponseEntity.status(HttpStatus.CREATED).body(scenicSpot);
+    }
+
+    @ApiOperation("Adding photo by Id")
+    @PostMapping(value = "/addPhoto/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String addProductPhoto(@PathVariable Long id, @RequestParam MultipartFile photo) {
+        return service.addPhoto(id,photo);
+
     }
 
     @GetMapping
