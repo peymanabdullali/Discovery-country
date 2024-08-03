@@ -6,6 +6,7 @@ import com.example.discovery_country.mapper.RegionMapper;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.*;
 import com.example.discovery_country.model.dto.response.RegionResponse;
+import com.example.discovery_country.model.dto.response.RegionResponseForFindById;
 import com.example.discovery_country.service.specification.RegionSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,10 +58,18 @@ public class RegionService {
 //        return zoneResponse;
 //    }
 //
-    public void deleteRegion(Long id) {
-        log.info("ActionLog.deleteRegion start with id#" + id);
-        regionRepository.deleteById(id) ;
-        log.info("ActionLog.deleteRegion end");
+public void deleteRegion(Long id) {
+    log.info("ActionLog.deleteRegion start with id#" + id);
+    regionRepository.deleteById(id) ;
+    log.info("ActionLog.deleteRegion end");
+}
+public RegionResponseForFindById findRegionById(Long id) {
+        log.info("ActionLog.findRegion start with id#" + id);
+    RegionEntity regionEntity = regionRepository.
+            findById(id).orElseThrow(() -> new RuntimeException("REGION_NOT_FOUND"));
+    RegionResponseForFindById regionResponseForFindById = regionMapper.mapToResponseForFindById(regionEntity);
+    log.info("ActionLog.findRegion end");
+    return regionResponseForFindById;
     }
 
 

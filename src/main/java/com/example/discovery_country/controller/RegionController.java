@@ -3,6 +3,7 @@ package com.example.discovery_country.controller;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.*;
 import com.example.discovery_country.model.dto.response.RegionResponse;
+import com.example.discovery_country.model.dto.response.RegionResponseForFindById;
 import com.example.discovery_country.service.RegionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,8 @@ public class RegionController {
         log.info("Controller.getZones end");
         return ResponseEntity.ok(regions);
     }
-//
+
+    //
 //    @PutMapping("/{id}")
 //    public ResponseEntity<ZoneResponse> updateZone(
 //            @PathVariable Long id,
@@ -57,6 +59,15 @@ public class RegionController {
         log.info("Controller.deleteRegion start with id#" + id);
         service.deleteRegion(id);
         log.info("Controller.deleteRegion end");
+    }
+
+    @GetMapping("/{id}")
+    public RegionResponseForFindById findRegionById(
+            @PathVariable Long id) {
+        log.info("Controller.findRegion start with id#" + id);
+        RegionResponseForFindById regionById = service.findRegionById(id);
+        log.info("Controller.findRegion end");
+        return regionById;
     }
 
 }
