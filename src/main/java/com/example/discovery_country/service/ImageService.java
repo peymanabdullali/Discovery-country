@@ -6,11 +6,19 @@ import com.example.discovery_country.exception.ImageNotFoundException;
 import com.example.discovery_country.mapper.ImageMapper;
 import com.example.discovery_country.model.dto.request.ImageRequest;
 import com.example.discovery_country.model.dto.response.ImageResponse;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,29 +27,39 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ImageService {
     private final ImageRepository imageRepository;
-    private final ImageMapper imageMapper;
 
-    public ImageResponse createImage(ImageRequest imageRequest) {
-        log.info("ActionLog.imageCreate start");
 
-        ImageEntity imageEntity = imageMapper.mapToEntity(imageRequest);
-        ImageEntity savedImage = imageRepository.save(imageEntity);
+    public String addPhoto(long id, MultipartFile file) {
+        String uploadDir = "C:\\photos\\";
+        File uploadDirFile = new File(uploadDir);
+        if (!uploadDirFile.exists()) {
+            uploadDirFile.mkdirs();
+        }
 
-        log.info("ActionLog.imageCreate end");
-        return imageMapper.mapToResponse(savedImage);
+        try {
+            String fileName = file.getOriginalFilename();
+            File destinationFile = new File(uploadDir + fileName);
+            file.transferTo(destinationFile);
+
+            ImageEntity imageEntity = imageRepository.findById(id).orElseThrow(() ->
+                    new RuntimeException("ImageEntity not found for id: " + id));
+
+            imageEntity.setName(fileName);
+            imageEntity.setUrl(uploadDir + fileName);
+
+            // Save updated ImageEntity with file details
+            imageRepository.save(imageEntity);
+
+            return "File uploaded and saved successfully!";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to upload file!";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Failed to find ImageEntity!";
+        }
     }
 
-    public ImageResponse updateImage(Long id, ImageRequest imageRequest) {
-        log.info("ActionLog.imageUpdate start with id#" + id);
-
-        ImageEntity imageEntity = imageRepository.findById(id)
-                .orElseThrow(() -> new ImageNotFoundException(HttpStatus.NOT_FOUND.name(),"Image not found"));
-        imageMapper.mapForUpdate(imageEntity, imageRequest);
-        ImageEntity updatedImage = imageRepository.save(imageEntity);
-
-        log.info("ActionLog.imageUpdate end");
-        return imageMapper.mapToResponse(updatedImage);
-    }
 
     public void deleteImage(Long id) {
         log.info("ActionLog.imageDelete start with id#" + id);
@@ -51,24 +69,5 @@ public class ImageService {
         log.info("ActionLog.imageDelete end with id#" + id);
     }
 
-    public ImageResponse getImageById(Long id) {
-        log.info("ActionLog.getImage start with id#" + id);
 
-        ImageEntity imageEntity = imageRepository.findById(id)
-                .orElseThrow(() -> new ImageNotFoundException(HttpStatus.NOT_FOUND.name(),"Image not found"));
-        log.info("ActionLog.getImage end with id#" + id);
-
-        return imageMapper.mapToResponse(imageEntity);
-    }
-
-    public List<ImageResponse> getAllImages() {
-        log.info("ActionLog.getAllImages start");
-
-        List<ImageResponse> images = imageRepository.findAll().stream()
-                .map(imageMapper::mapToResponse)
-                .collect(Collectors.toList());
-
-        log.info("ActionLog.getAllImages end");
-        return images;
-    }
 }
