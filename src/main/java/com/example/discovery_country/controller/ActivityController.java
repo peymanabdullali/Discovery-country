@@ -3,6 +3,7 @@ package com.example.discovery_country.controller;
 import com.example.discovery_country.model.dto.criteria.ActivityCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityRequest;
 import com.example.discovery_country.model.dto.response.ActivityResponse;
+import com.example.discovery_country.model.dto.response.ActivityResponseForHomePage;
 import com.example.discovery_country.service.ActivityService;
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +31,17 @@ public class ActivityController {
         Page<ActivityResponse> responses = activityService.getActivities(criteriaRequest, pageable);
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
+    @GetMapping("/{id}/homepage")
+    public ResponseEntity<ActivityResponseForHomePage> getActivityForHomePage(@PathVariable Long id) {
+        ActivityResponseForHomePage response = activityService.getActivityForHomePage(id);
+        return ResponseEntity.ok(response);
+    }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ActivityResponse> getActivity(@PathVariable Long id) {
+        ActivityResponse response = activityService.getActivity(id);
+        return ResponseEntity.ok(response);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<ActivityResponse> updateActivity(@PathVariable Long id, @RequestBody ActivityRequest request) {
@@ -43,11 +54,7 @@ public class ActivityController {
         activityService.softDelete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void>incrementViewCount(@PathVariable Long id){
-        activityService.incrementViewCount(id);
-        return ResponseEntity.ok().build();
-    }
+
 
     @PatchMapping("/{id}")
     public ResponseEntity<Void> updateLikeCount(@PathVariable Long id, @RequestParam boolean increment){

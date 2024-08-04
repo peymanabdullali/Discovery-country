@@ -12,6 +12,7 @@ import com.example.discovery_country.model.dto.criteria.ActivityCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityRequest;
 import com.example.discovery_country.model.dto.response.ActivityResponse;
 
+import com.example.discovery_country.model.dto.response.ActivityResponseForHomePage;
 import com.example.discovery_country.service.specification.ActivitySpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,32 @@ public class ActivityService {
         return activities.map(activityMapper::mapToResponse);
     }
 
+    public ActivityResponseForHomePage getActivityForHomePage(Long id){
+
+        log.info("ActionLog.getActivityForHomePage start with id#" + id);
+
+        ActivityEntity activityEntity = activityRepository.findById(id).orElseThrow(() ->
+                new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
+
+        log.info("ActionLog.getActivityForHomePage start with id#" + id);
+
+        return activityMapper.mapToActivityForHomePage(activityEntity);
+
+    }
+
+    public ActivityResponse getActivity (Long id){
+
+        log.info("ActionLog.getActivity start with id#" + id);
+
+        ActivityEntity activity=activityRepository.findById(id).orElseThrow(() ->
+                new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
+        activity.setViewed(activity.getViewed()+1);
+        activityRepository.save(activity);
+
+        log.info("ActionLog.getActivity end with id#" + id);
+
+        return activityMapper.mapToResponse(activity);
+    }
     public ActivityResponse update(Long id, ActivityRequest activityRequest){
         log.info("ActionLog.updateActivity start with id#" + id);
 
@@ -72,16 +99,6 @@ public class ActivityService {
     }
 
 
-    public void incrementViewCount(Long id){
-        log.info("ActionLog.incrementViewCount start with id#" + id);
-
-        ActivityEntity activity=activityRepository.findById(id).orElseThrow(()->new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(),"Activity not found"));
-        activity.setViewed(activity.getViewed()+1);
-        activityRepository.save(activity);
-
-        log.info("ActionLog.incrementViewCount end with id#" + id);
-
-    }
 
     public void updateLikeCount(Long id ,boolean increment ){
         log.info("ActionLog.updateLikeCount start with id#" + id);
