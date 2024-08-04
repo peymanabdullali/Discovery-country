@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,20 +23,11 @@ public class ImageController {
 
     private final ImageService imageService;
 
-//    @PostMapping
-//    public ResponseEntity<ImageResponse> createImage(@RequestBody ImageRequest imageRequest) {
-//        log.info("ActionLog.createImage start");
-//
-//        ImageResponse imageResponse = imageService.createImage(imageRequest);
-//
-//        log.info("ActionLog.createImage end");
-//
-//        return new ResponseEntity<>(imageResponse, HttpStatus.CREATED);
-//    }
     @ApiOperation("Adding photo by Id")
     @PostMapping(value = "/addPhoto/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String addPhoto(@PathVariable Long id, @RequestParam MultipartFile photo) {
-        return imageService.addPhoto(id,photo);
+    public ResponseEntity<ImageResponse> addPhoto(@PathVariable Long id, @RequestParam MultipartFile photo) {
+       ImageResponse imageResponse=imageService.addPhoto(id,photo);
+       return ResponseEntity.ok(imageResponse);
 
     }
     @DeleteMapping("/{id}")
@@ -48,37 +40,5 @@ public class ImageController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ImageResponse> updateImage(@PathVariable Long id, @RequestBody ImageRequest imageRequest) {
-//        log.info("ActionLog.updateImage start with id#" + id);
-//
-//        ImageResponse imageResponse = imageService.updateImage(id, imageRequest);
-//
-//        log.info("ActionLog.updateImage end with id#" + id);
-//
-//        return new ResponseEntity<>(imageResponse, HttpStatus.OK);
 
-//    }
-
-//    @GetMapping("/{id}")
-//    public ResponseEntity<ImageResponse> getImageById(@PathVariable Long id) {
-//        log.info("ActionLog.getImage start with id#" + id);
-//
-//        ImageResponse imageResponse = imageService.getImageById(id);
-//
-//        log.info("ActionLog.getImage end with id#" + id);
-//
-//        return new ResponseEntity<>(imageResponse, HttpStatus.OK);
-//    }
-//
-//    @GetMapping
-//    public ResponseEntity<List<ImageResponse>> getAllImages() {
-//        log.info("ActionLog.getAllImages start");
-//
-//        List<ImageResponse> images = imageService.getAllImages();
-//
-//        log.info("ActionLog.getAllImages end");
-//
-//        return new ResponseEntity<>(images, HttpStatus.OK);
-//    }
 }

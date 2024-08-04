@@ -15,7 +15,8 @@ import lombok.experimental.FieldDefaults;
 public class ImageResponse {
 
 
-    String name;
+    String text;
+    Long id;
 //    HotelRoomsResponse hotelRoom;
 //    HomeHotelResponse homeHotel;
 //    ActivityResponse activity;

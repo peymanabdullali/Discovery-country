@@ -27,6 +27,9 @@ public class ActivityEntity {
     @Column(nullable = false)
     double price;
 
+    Long viewed;
+    Long favorite;
+
     String mapUrl;
     @Column(nullable = false)
     double latitude;

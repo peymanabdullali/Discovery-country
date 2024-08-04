@@ -29,7 +29,7 @@ public class ImageService {
     private final ImageRepository imageRepository;
 
 
-    public String addPhoto(long id, MultipartFile file) {
+    public ImageResponse addPhoto(long id, MultipartFile file) {
         String uploadDir = "C:\\photos\\";
         File uploadDirFile = new File(uploadDir);
         if (!uploadDirFile.exists()) {
@@ -47,17 +47,25 @@ public class ImageService {
             imageEntity.setName(fileName);
             imageEntity.setUrl(uploadDir + fileName);
 
-            // Save updated ImageEntity with file details
             imageRepository.save(imageEntity);
 
-            return "File uploaded and saved successfully!";
+            ImageResponse imageResponse=new ImageResponse();
+            imageResponse.setId(id);
+            imageResponse.setText("File uploaded and saved successfully!");
+
+            return imageResponse;
         } catch (IOException e) {
             e.printStackTrace();
-            return "Failed to upload file!";
+            ImageResponse errorResponse = new ImageResponse();
+            errorResponse.setId(id);
+            errorResponse.setText("Failed to upload file!");
+            return errorResponse;
         } catch (Exception e) {
             e.printStackTrace();
-            return "Failed to find ImageEntity!";
-        }
+            ImageResponse errorResponse = new ImageResponse();
+            errorResponse.setId(id);
+            errorResponse.setText("Failed to find ImageEntity!");
+            return errorResponse;        }
     }
 
 
