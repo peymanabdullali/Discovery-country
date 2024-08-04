@@ -29,6 +29,7 @@ public class ActivityEntity {
 
     Long viewed;
     Long favorite;
+    Double averageRating;
 
     String mapUrl;
     @Column(nullable = false)
