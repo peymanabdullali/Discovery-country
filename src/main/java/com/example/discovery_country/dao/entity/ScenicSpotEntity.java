@@ -36,5 +36,7 @@ public class ScenicSpotEntity {
     @OneToMany(mappedBy = "scenicSpot", cascade = CascadeType.ALL)
     List<ReviewEntity> reviews;
     Long viewed;
-    Long favorite;
+    Long likeCount;
+    Double averageRating;
+
 }

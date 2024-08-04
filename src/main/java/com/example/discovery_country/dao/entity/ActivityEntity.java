@@ -28,7 +28,7 @@ public class ActivityEntity {
     double price;
 
     Long viewed;
-    Long favorite;
+    Long likeCount;
     Double averageRating;
 
     String mapUrl;

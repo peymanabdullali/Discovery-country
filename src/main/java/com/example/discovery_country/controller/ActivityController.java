@@ -43,4 +43,20 @@ public class ActivityController {
         activityService.softDelete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void>incrementViewCount(@PathVariable Long id){
+        activityService.incrementViewCount(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updateLikeCount(@PathVariable Long id, @RequestParam boolean increment){
+        activityService.updateLikeCount(id,increment);
+        return ResponseEntity.ok().build();
+    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updateAverageRating(@PathVariable Long id, @RequestParam double rating) {
+        activityService.updateAverageRating(id, rating);
+        return ResponseEntity.ok().build();
+    }
 }
