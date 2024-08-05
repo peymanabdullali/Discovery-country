@@ -3,6 +3,7 @@ package com.example.discovery_country.controller;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
 import com.example.discovery_country.model.dto.response.ScenicSpotResponse;
+import com.example.discovery_country.model.dto.response.ScenicSpotResponseForFindById;
 import com.example.discovery_country.service.ScenicSpotService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -33,12 +34,6 @@ public class ScenicSpotController {
         return ResponseEntity.status(HttpStatus.CREATED).body(scenicSpot);
     }
 
-    @ApiOperation("Adding photo by Id")
-    @PostMapping(value = "/addPhoto/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String addProductPhoto(@PathVariable Long id, @RequestParam MultipartFile photo) {
-        return service.addPhoto(id,photo);
-
-    }
 
     @GetMapping
     public ResponseEntity<Page<ScenicSpotResponse>> getScenicSpots(CriteriaRequestForName criteriaRequest,
@@ -55,5 +50,18 @@ public class ScenicSpotController {
         log.info("Controller.updateStatus start with id#" + id);
         service.updateStatus(id);
         log.info("Controller.updateStatus end");
+    }   @DeleteMapping("/{id}")
+    public void softDelete(@PathVariable Long id) {
+        log.info("Controller.softDelete start with id#" + id);
+        service.softDelete(id);
+        log.info("Controller.softDelete end");
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ScenicSpotResponseForFindById> findById(@PathVariable Long id) {
+        log.info("Controller.findScenicSpot start with id#" + id);
+        ScenicSpotResponseForFindById byId = service.findById(id);
+        log.info("Controller.findScenicSpot end");
+        return ResponseEntity.ok(byId);
     }
 }

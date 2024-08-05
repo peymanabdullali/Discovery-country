@@ -17,7 +17,7 @@ public class ScenicSpotSpecification implements Specification<ScenicSpotEntity> 
         return (root, query, criteriaBuilder) ->{
             List<Predicate> predicates=new ArrayList<>();
 
-            if(criteriaRequest.getName()!=null && criteriaRequest.getName().isEmpty()){
+                if(criteriaRequest.getName()!=null && criteriaRequest.getName().isEmpty()){
                 predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),"%" + criteriaRequest));
             }
             predicates.add(criteriaBuilder.isFalse(root.get("status")));
