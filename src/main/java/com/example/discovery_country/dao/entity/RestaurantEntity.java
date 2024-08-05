@@ -40,7 +40,9 @@ public class RestaurantEntity {
     String mapUrl;
     String menuUrl;
     Long viewed;
-    Long favorite;
+    Long likeCount;
+    Double averageRating;
+
     boolean status;
 
 

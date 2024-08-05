@@ -6,6 +6,7 @@ import com.example.discovery_country.dao.entity.ImageEntity;
 import com.example.discovery_country.model.dto.request.ActivityRequest;
 import com.example.discovery_country.model.dto.response.ActivityCategoryResponseForActivity;
 import com.example.discovery_country.model.dto.response.ActivityResponse;
+import com.example.discovery_country.model.dto.response.ActivityResponseForHomePage;
 import com.example.discovery_country.model.dto.response.ImageResponseForActivity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -23,6 +24,6 @@ public interface ActivityMapper {
     List<ImageResponseForActivity> mapToImageResponse(List<ImageEntity> imageEntity);
     ActivityCategoryResponseForActivity mapToActivityCategoryResponse(ActivityCategoryEntity activityCategoryEntity);
 
-
+    ActivityResponseForHomePage mapToActivityForHomePage(ActivityEntity activity);
     void mapForUpdate(@MappingTarget ActivityEntity activityEntity, ActivityRequest activityRequest);
 }
