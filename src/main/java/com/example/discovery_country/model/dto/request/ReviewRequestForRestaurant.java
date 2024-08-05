@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ReviewRequestForRestaurant {
+public class  ReviewRequestForRestaurant {
 
     @NotBlank(message = "can't be blank")
     String comment;

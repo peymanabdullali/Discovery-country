@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class    ReviewEntity {
+public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
