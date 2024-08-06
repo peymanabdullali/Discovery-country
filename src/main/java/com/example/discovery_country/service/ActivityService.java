@@ -1,18 +1,18 @@
 package com.example.discovery_country.service;
 
-import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import com.example.discovery_country.dao.entity.ActivityEntity;
+import com.example.discovery_country.dao.entity.ImageEntity;
 import com.example.discovery_country.dao.repository.ActivityCategoryRepository;
 import com.example.discovery_country.dao.repository.ActivityRepository;
 import com.example.discovery_country.dao.repository.ImageRepository;
-import com.example.discovery_country.exception.ActivityCategoryNotFoundException;
+import com.example.discovery_country.enums.Status;
 import com.example.discovery_country.exception.ActivityNotFoundException;
 import com.example.discovery_country.mapper.ActivityMapper;
 import com.example.discovery_country.model.dto.criteria.ActivityCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityRequest;
 import com.example.discovery_country.model.dto.response.ActivityResponse;
 
-import com.example.discovery_country.model.dto.response.ActivityResponseForHomePage;
+import com.example.discovery_country.model.dto.response.ActivityResponseFindById;
 import com.example.discovery_country.service.specification.ActivitySpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +21,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -53,16 +55,30 @@ public class ActivityService {
         return activities.map(activityMapper::mapToResponse);
     }
 
-    public ActivityResponseForHomePage getActivityForHomePage(Long id){
+    public ActivityResponseFindById activityResponseFindById(Long id){
 
-        log.info("ActionLog.getActivityForHomePage start with id#" + id);
+        log.info("ActionLog.activityResponseFindById start with id#" + id);
 
         ActivityEntity activityEntity = activityRepository.findById(id).orElseThrow(() ->
                 new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
 
-        log.info("ActionLog.getActivityForHomePage start with id#" + id);
+        if(activityEntity.getActivityStatus()== Status.INACTIVE){
+            throw new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity is not active");
 
-        return activityMapper.mapToActivityForHomePage(activityEntity);
+        }
+        List<ImageEntity>  imageEntities=imageRepository.findByActivityId(id);
+        if(imageEntities.isEmpty()){
+            throw new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity is not active");
+        }
+
+        ImageEntity mainImage=imageEntities.stream()
+                        .filter(imageEntity -> imageEntity.getImageStatus()==Status.ACTIVE)
+                        .findFirst()
+                        .orElseThrow(()->new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity is not active"));
+
+        log.info("ActionLog.activityResponseFindById start with id#" + id);
+
+        return activityMapper.mapToActivityResponseFindById(activityEntity,mainImage);
 
     }
 

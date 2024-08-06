@@ -1,6 +1,7 @@
 package com.example.discovery_country.dao.repository;
 
 import com.example.discovery_country.dao.entity.ActivityEntity;
+import com.example.discovery_country.model.dto.response.ImageResponseForActivity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,4 +17,5 @@ public interface ActivityRepository extends JpaRepository<ActivityEntity, Long> 
     @Transactional
     @Query("UPDATE ActivityEntity a SET a.deleted = true WHERE a.id = :id")
     void softDelete(Long id);
+
 }

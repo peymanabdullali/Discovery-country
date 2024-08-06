@@ -1,5 +1,6 @@
 package com.example.discovery_country.dao.entity;
 
+import com.example.discovery_country.enums.Status;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,6 +31,7 @@ public class ActivityEntity {
     Long viewed;
     Long likeCount;
     Double averageRating;
+    Status activityStatus;
 
     String mapUrl;
     @Column(nullable = false)
