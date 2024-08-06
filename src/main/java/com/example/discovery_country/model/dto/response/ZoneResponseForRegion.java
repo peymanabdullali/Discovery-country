@@ -1,22 +1,18 @@
 package com.example.discovery_country.model.dto.response;
 
-import com.example.discovery_country.dao.entity.ImageEntity;
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ScenicSpotResponse {
+public class ZoneResponseForRegion {
 
-    long id;
     String name;
-    ImageResponse image;
-
-
 }

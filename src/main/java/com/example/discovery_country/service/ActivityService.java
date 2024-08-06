@@ -37,11 +37,9 @@ public class ActivityService {
        // ActivityCategoryEntity activityCategory=categoryRepository.findById(request.getActivityCategoryId()).orElseThrow(()->new ActivityCategoryNotFoundException(HttpStatus.NOT_FOUND.name(), "ActivityCategory not found"))
 
         ActivityEntity activityEntity = activityMapper.mapToEntity(request,imageRepository.findAllById(request.getImageIds()));
-        ActivityEntity activity = activityRepository.save(activityEntity);
-
+        ActivityResponse activityResponse = activityMapper.mapToResponse(activityRepository.save(activityEntity));
         log.info("ActionLog.createActivity end");
-
-        return activityMapper.mapToResponse(activity);
+        return activityResponse;
     }
 
     public Page<ActivityResponse> getActivities(ActivityCriteriaRequest criteriaRequest, Pageable pageable){

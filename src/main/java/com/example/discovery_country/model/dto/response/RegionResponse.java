@@ -14,13 +14,12 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RegionResponse {
-
+    long id;
     String name;
     String mapUrl;
-    List<ActivityCategoryResponse> activityCategories;
-    List<RestaurantResponse> restaurants;
-    List<HomeHotelResponse> homeHotels;
-    List<ScenicSpotResponse> scenicSpots;
-
-
+    ZoneResponseForRegion zone;
+//    List<ActivityCategoryResponse> activityCategories;
+//    List<RestaurantResponse> restaurants;
+//    List<HomeHotelResponse> homeHotels;
+//    List<ScenicSpotResponse> scenicSpots;
 }

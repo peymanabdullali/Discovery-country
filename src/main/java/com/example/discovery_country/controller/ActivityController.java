@@ -43,6 +43,7 @@ public class ActivityController {
         return ResponseEntity.ok(response);
     }
 
+
     @PutMapping("/{id}")
     public ResponseEntity<ActivityResponse> updateActivity(@PathVariable Long id, @RequestBody ActivityRequest request) {
         ActivityResponse response = activityService.update(id, request);

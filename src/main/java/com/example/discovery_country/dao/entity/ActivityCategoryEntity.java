@@ -25,7 +25,7 @@ public class ActivityCategoryEntity {
     @Column(nullable = false)
     Boolean deleted = false;
 
-    @OneToMany(mappedBy = "activityCategory", cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "activityCategory", cascade = CascadeType.MERGE)
     List<ActivityEntity> activities;
 
     @ManyToMany(cascade = CascadeType.ALL)

@@ -12,20 +12,27 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface RegionMapper {
-    @Mapping(target = "zone.id",source = "request.zoneId")
+    @Mapping(target = "zone.id", source = "request.zoneId")
     RegionEntity mapToEntity(RegionRequest request);
 
     List<RegionResponse> mapEntityListToResponseList(List<RegionEntity> entities);
 
+    ZoneResponseForRegion mapEntityToResponse(ZoneEntity zone);
+
     List<ActivityCategoryResponse> mapToActivityCategoryResponseList(List<ActivityCategoryEntity> entities);
+
     List<RestaurantResponseForRegion> mapToRestaurantResponseList(List<RestaurantEntity> entities);
+
     List<ImageResponse> mapToImageResponseList(List<ImageEntity> entities);
+
     List<HomeHotelResponse> mapToHomeHotelResponseList(List<HomeHotelEntity> entities);
+
     List<ScenicSpotResponse> mapToScenicSpotResponseList(List<ScenicSpotEntity> entities);
 
-//    default RegionResponse mapToResponse(RegionEntity entity) {
+    //    default RegionResponse mapToResponse(RegionEntity entity) {
 //        return RegionResponse.builder().name(entity.getName()).mapUrl(entity.getMapUrl()).build();
 //    }
-     RegionResponse mapToResponse(RegionEntity entity);
+    RegionResponse mapToResponse(RegionEntity entity);
+    RegionResponseForFindById mapToResponseForFindById(RegionEntity entity);
 
 }

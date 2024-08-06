@@ -1,5 +1,6 @@
 package com.example.discovery_country.service;
 
+import com.example.discovery_country.dao.entity.ReviewEntity;
 import com.example.discovery_country.dao.entity.ScenicSpotEntity;
 import com.example.discovery_country.dao.repository.ImageRepository;
 import com.example.discovery_country.dao.repository.ScenicSpotRepository;
@@ -7,6 +8,7 @@ import com.example.discovery_country.mapper.ScenicSpotMapper;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
 import com.example.discovery_country.model.dto.response.ScenicSpotResponse;
+import com.example.discovery_country.model.dto.response.ScenicSpotResponseForFindById;
 import com.example.discovery_country.service.specification.ScenicSpotSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -41,22 +45,6 @@ public class ScenicSpotService {
 
     }
 
-    public String addPhoto(long id, MultipartFile file) {
-        String uploadDir = "C:\\Users\\pabdu\\Desktop\\photos\\";
-        File uploadDirFile = new File(uploadDir);
-        if (!uploadDirFile.exists()) {
-            boolean check = uploadDirFile.mkdirs();
-        }
-
-        try {
-            file.transferTo(new File(uploadDir + file.getOriginalFilename()));
-            return "File uploaded successfully!";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "Failed to upload file!";
-        }
-    }
-
 
     public Page<ScenicSpotResponse> getScenicSpots(CriteriaRequestForName criteriaRequest, Pageable pageable) {
         log.info("ActionLog.getScenicSpots start");
@@ -65,6 +53,14 @@ public class ScenicSpotService {
         List<ScenicSpotResponse> scenicSpotResponse = scenicSpotMapper.mapToResponseList(scenicSpotRepository.findAll(spec, pageable).toList());
         log.info("ActionLog.getScenicSpots end");
         return new PageImpl<>(scenicSpotResponse);
+    }
+
+    public ScenicSpotResponseForFindById findById(Long id) {
+        log.info("ActionLog.findScenicSpot start with id#" + id);
+        ScenicSpotEntity scenicSpotEntity = scenicSpotRepository.findByIdAndStatusTrueWithApprovedReviews(id).orElseThrow(() -> new RuntimeException("SCENIC_SPOT_NOT_FOUND"));
+        ScenicSpotResponseForFindById scenicSpotResponseForFindById = scenicSpotMapper.mapToResponseForFindById(scenicSpotEntity);
+        log.info("ActionLog.findScenicSpot end");
+        return scenicSpotResponseForFindById;
 
     }
 
@@ -72,7 +68,11 @@ public class ScenicSpotService {
         log.info("ActionLog.updateStatus start with id#" + id);
         scenicSpotRepository.updateStatus(id);
         log.info("ActionLog.updateStatus end");
-
+    }
+    public void softDelete(Long id) {
+        log.info("ActionLog.updateStatus start with id#" + id);
+        scenicSpotRepository.softDelete(id);
+        log.info("ActionLog.updateStatus end");
     }
 }
 

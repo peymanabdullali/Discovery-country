@@ -36,6 +36,9 @@ public class RestaurantEntity {
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     List<ImageEntity> images;
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    List<ReviewEntity> reviews;
     double rating;
     String mapUrl;
     String menuUrl;

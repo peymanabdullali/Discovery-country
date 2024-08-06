@@ -65,7 +65,7 @@ public class ActivityEntity {
 //    @JoinColumn(name = "activity_id", referencedColumnName = "id")
 //    ActivityCategoryEntity activityCategory;
 
-    @OneToMany(mappedBy = "activity" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "activity" ,cascade = CascadeType.ALL)
     List<ImageEntity> images;
   
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
