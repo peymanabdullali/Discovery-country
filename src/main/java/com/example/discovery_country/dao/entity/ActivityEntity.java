@@ -27,6 +27,10 @@ public class ActivityEntity {
     @Column(nullable = false)
     double price;
 
+    Long viewed;
+    Long likeCount;
+    Double averageRating;
+
     String mapUrl;
     @Column(nullable = false)
     double latitude;

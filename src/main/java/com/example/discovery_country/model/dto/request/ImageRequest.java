@@ -16,6 +16,6 @@ public class ImageRequest {
 
 
     String name;
-    String url;
+
 
 }

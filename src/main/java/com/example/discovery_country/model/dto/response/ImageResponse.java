@@ -15,6 +15,7 @@ public class ImageResponse {
     long id;
     String name;
     String url;
+
 //    HotelRoomsResponse hotelRoom;
 //    HomeHotelResponse homeHotel;
 //    ActivityResponse activity;
