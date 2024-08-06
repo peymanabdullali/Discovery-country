@@ -57,7 +57,9 @@ public class ScenicSpotService {
 
     public ScenicSpotResponseForFindById findById(Long id) {
         log.info("ActionLog.findScenicSpot start with id#" + id);
-        ScenicSpotEntity scenicSpotEntity = scenicSpotRepository.findByIdAndStatusTrueWithApprovedReviews(id).orElseThrow(() -> new RuntimeException("SCENIC_SPOT_NOT_FOUND"));
+        ScenicSpotEntity scenicSpotEntity = scenicSpotRepository.findByIdAndCheckStatusTrueAndStatusFalse(id).orElseThrow(() -> new RuntimeException("SCENIC_SPOT_NOT_FOUND"));
+        scenicSpotEntity.setReviews(scenicSpotEntity.getReviews().stream().filter(i -> !i.isStatus()).toList());
+        scenicSpotEntity.setImages(scenicSpotEntity.getImages().stream().filter(i -> !i.getDeleted()).toList());
         ScenicSpotResponseForFindById scenicSpotResponseForFindById = scenicSpotMapper.mapToResponseForFindById(scenicSpotEntity);
         log.info("ActionLog.findScenicSpot end");
         return scenicSpotResponseForFindById;
@@ -69,10 +71,11 @@ public class ScenicSpotService {
         scenicSpotRepository.updateStatus(id);
         log.info("ActionLog.updateStatus end");
     }
+
     public void softDelete(Long id) {
-        log.info("ActionLog.updateStatus start with id#" + id);
+        log.info("ActionLog.softDelete start with id#" + id);
         scenicSpotRepository.softDelete(id);
-        log.info("ActionLog.updateStatus end");
+        log.info("ActionLog.softDelete end");
     }
 }
 

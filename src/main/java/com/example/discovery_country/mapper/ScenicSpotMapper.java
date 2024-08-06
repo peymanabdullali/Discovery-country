@@ -4,14 +4,13 @@ import com.example.discovery_country.dao.entity.ImageEntity;
 import com.example.discovery_country.dao.entity.ReviewEntity;
 import com.example.discovery_country.dao.entity.ScenicSpotEntity;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
-import com.example.discovery_country.model.dto.response.ImageResponse;
-import com.example.discovery_country.model.dto.response.ReviewResponse;
-import com.example.discovery_country.model.dto.response.ScenicSpotResponse;
-import com.example.discovery_country.model.dto.response.ScenicSpotResponseForFindById;
+import com.example.discovery_country.model.dto.response.*;
+import jakarta.mail.search.SearchTerm;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ScenicSpotMapper {
@@ -19,14 +18,16 @@ public interface ScenicSpotMapper {
     ScenicSpotEntity mapToEntity(ScenicSpotRequest request, List<ImageEntity> images);
 
     default ScenicSpotResponse mapToResponse(ScenicSpotEntity entity){
-        return ScenicSpotResponse.builder().
+        ScenicSpotResponse.ScenicSpotResponseBuilder name = ScenicSpotResponse.builder().
                 id(entity.getId()).
-                name(entity.getName()).
-                image(mapToImageResponse(entity.getImages().get(0))).build();
-    }
-    ScenicSpotResponseForFindById mapToResponseForFindById(ScenicSpotEntity entity);
-
+                name(entity.getName());
+        if (!entity.getImages().isEmpty()) {
+            name.image(mapToImageResponse(entity.getImages().stream().findFirst().orElseThrow()));
+        }
+        return name.build();}
     List<ScenicSpotResponse> mapToResponseList(List<ScenicSpotEntity> entities);
+
+    ScenicSpotResponseForFindById mapToResponseForFindById(ScenicSpotEntity entity);
 
     List<ImageResponse> mapScenicSpotResponseList(List<ImageEntity> entities);
     ImageResponse mapToImageResponse(ImageEntity entities);
