@@ -1,5 +1,6 @@
 package com.example.discovery_country.dao.entity;
 
+import com.example.discovery_country.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,6 +21,7 @@ public class ImageEntity {
     Long id;
     String name;
     String url;
+    Status imageStatus;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn

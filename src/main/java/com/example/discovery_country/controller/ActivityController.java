@@ -3,7 +3,7 @@ package com.example.discovery_country.controller;
 import com.example.discovery_country.model.dto.criteria.ActivityCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityRequest;
 import com.example.discovery_country.model.dto.response.ActivityResponse;
-import com.example.discovery_country.model.dto.response.ActivityResponseForHomePage;
+import com.example.discovery_country.model.dto.response.ActivityResponseFindById;
 import com.example.discovery_country.service.ActivityService;
 import lombok.RequiredArgsConstructor;
 
@@ -32,8 +32,8 @@ public class ActivityController {
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
     @GetMapping("/{id}/homepage")
-    public ResponseEntity<ActivityResponseForHomePage> getActivityForHomePage(@PathVariable Long id) {
-        ActivityResponseForHomePage response = activityService.getActivityForHomePage(id);
+    public ResponseEntity<ActivityResponseFindById> getActivityForHomePage(@PathVariable Long id) {
+        ActivityResponseFindById response = activityService.activityResponseFindById(id);
         return ResponseEntity.ok(response);
     }
 
