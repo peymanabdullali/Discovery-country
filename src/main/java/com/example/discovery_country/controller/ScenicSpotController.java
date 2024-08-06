@@ -50,7 +50,9 @@ public class ScenicSpotController {
         log.info("Controller.updateStatus start with id#" + id);
         service.updateStatus(id);
         log.info("Controller.updateStatus end");
-    }   @DeleteMapping("/{id}")
+    }
+
+    @DeleteMapping("/{id}")
     public void softDelete(@PathVariable Long id) {
         log.info("Controller.softDelete start with id#" + id);
         service.softDelete(id);

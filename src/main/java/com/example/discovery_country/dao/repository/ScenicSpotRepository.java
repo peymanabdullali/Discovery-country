@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -26,12 +27,7 @@ public interface ScenicSpotRepository extends JpaRepository<ScenicSpotEntity, Lo
     @Query("UPDATE ScenicSpotEntity a SET a.status = true WHERE a.id = :id")
     void softDelete(Long id);
 
-    @Query("SELECT DISTINCT s FROM ScenicSpotEntity s " +
-            "LEFT JOIN FETCH s.reviews r " +
-            "WHERE s.id = :id " +
-            "AND s.status = false " +
-            "AND s.checkStatus = true " +
-            "AND (r IS NULL OR r.status = false)")
-    Optional<ScenicSpotEntity> findByIdAndStatusTrueWithApprovedReviews(@Param("id") Long id);
+
+    Optional<ScenicSpotEntity> findByIdAndCheckStatusTrueAndStatusFalse(long id);
 
 }

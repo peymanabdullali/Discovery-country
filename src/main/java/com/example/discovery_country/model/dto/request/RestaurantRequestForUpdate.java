@@ -1,6 +1,5 @@
 package com.example.discovery_country.model.dto.request;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RestaurantRequest {
+public class RestaurantRequestForUpdate {
 
     @NotBlank(message = "can't be blank")
     String name;
@@ -28,8 +27,4 @@ public class RestaurantRequest {
     @NotBlank(message = "can't be blank")
     String contact;
 
-    String mapUrl;
-    String menuUrl;
-    Long regionId;
-    List<Long> imageIds;
 }
