@@ -4,6 +4,7 @@ import com.example.discovery_country.dao.entity.ReviewEntity;
 import com.example.discovery_country.dao.entity.ScenicSpotEntity;
 import com.example.discovery_country.dao.repository.ImageRepository;
 import com.example.discovery_country.dao.repository.ScenicSpotRepository;
+import com.example.discovery_country.helper.IncreaseViewCount;
 import com.example.discovery_country.mapper.ScenicSpotMapper;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
@@ -17,16 +18,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
@@ -35,6 +29,7 @@ public class ScenicSpotService {
     private final ScenicSpotRepository scenicSpotRepository;
     private final ImageRepository imageRepository;
     private final ScenicSpotMapper scenicSpotMapper;
+    private final IncreaseViewCount viewCount;
 
     public ScenicSpotResponse createScenicSpot(ScenicSpotRequest request) {
         log.info("ActionLog.createScenicSpot start");
@@ -58,6 +53,7 @@ public class ScenicSpotService {
     public ScenicSpotResponseForFindById findById(Long id) {
         log.info("ActionLog.findScenicSpot start with id#" + id);
         ScenicSpotEntity scenicSpotEntity = scenicSpotRepository.findByIdAndCheckStatusTrueAndStatusFalse(id).orElseThrow(() -> new RuntimeException("SCENIC_SPOT_NOT_FOUND"));
+       viewCount.updateViewCount(scenicSpotEntity);
         scenicSpotEntity.setReviews(scenicSpotEntity.getReviews().stream().filter(i -> !i.isStatus()).toList());
         scenicSpotEntity.setImages(scenicSpotEntity.getImages().stream().filter(i -> !i.getDeleted()).toList());
         ScenicSpotResponseForFindById scenicSpotResponseForFindById = scenicSpotMapper.mapToResponseForFindById(scenicSpotEntity);
