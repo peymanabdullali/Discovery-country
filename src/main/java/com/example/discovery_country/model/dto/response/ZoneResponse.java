@@ -14,8 +14,7 @@ import java.util.List;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ZoneResponse {
-    
+    long id;
     String name;
-
     List<RegionResponseForZone> regions;
 }

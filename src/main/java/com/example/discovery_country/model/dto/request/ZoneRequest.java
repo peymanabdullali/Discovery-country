@@ -19,5 +19,4 @@ public class ZoneRequest {
     @NotBlank(message = "can't be blank")
     String name;
 
-    List<Long> regionIds;
 }
