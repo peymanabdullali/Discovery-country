@@ -17,6 +17,4 @@ public interface ImageRepository extends JpaRepository<ImageEntity, Long> {
     @Transactional
     @Query("UPDATE ImageEntity a SET a.deleted = true WHERE a.id = :id")
     void softDelete(Long id);
-
-    List<ImageEntity> findByActivityId(Long activityId);
 }
