@@ -4,10 +4,7 @@ import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import com.example.discovery_country.dao.entity.ActivityEntity;
 import com.example.discovery_country.dao.entity.ImageEntity;
 import com.example.discovery_country.model.dto.request.ActivityRequest;
-import com.example.discovery_country.model.dto.response.ActivityCategoryResponseForActivity;
-import com.example.discovery_country.model.dto.response.ActivityResponse;
-import com.example.discovery_country.model.dto.response.ActivityResponseFindById;
-import com.example.discovery_country.model.dto.response.ImageResponseForActivity;
+import com.example.discovery_country.model.dto.response.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -15,19 +12,33 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL) // Və ya IGNORE seçin
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
+// Və ya IGNORE seçin
 public interface ActivityMapper {
-    @Mapping(target = "activityCategory.id",source = "activityRequest.activityCategoryId")
-    ActivityEntity mapToEntity(ActivityRequest activityRequest,List<ImageEntity> images);
+    @Mapping(target = "activityCategory.id", source = "activityRequest.activityCategoryId")
+    ActivityEntity mapToEntity(ActivityRequest activityRequest, List<ImageEntity> images);
 
-    ActivityResponse mapToResponse(ActivityEntity activityEntity);
+    default ActivityResponse mapToResponse(ActivityEntity entity) {
+        ActivityResponse.ActivityResponseBuilder name = ActivityResponse.builder().
+                id(entity.getId()).
+                name(entity.getName());
+        if (!entity.getImages().isEmpty()) {
+            name.image(mapImageResponseForActivity(entity.getImages().stream().filter(s -> !s.getDeleted()).findFirst().orElseThrow()));
+        }
+        return name.build();
+
+    }
+
     List<ImageResponseForActivity> mapToImageResponse(List<ImageEntity> imageEntity);
+
     ActivityCategoryResponseForActivity mapToActivityCategoryResponse(ActivityCategoryEntity activityCategoryEntity);
 
     //ActivityResponseFindById mapToActivityResponseFindById(ActivityEntity activity);
-     ActivityResponseFindById mapToActivityResponseFindById(ActivityEntity activityEntity, ImageEntity mainImage);
+    ActivityResponseFindById mapToActivityResponseFindById(ActivityEntity activityEntity);
 
-        void mapForUpdate(@MappingTarget ActivityEntity activityEntity, ActivityRequest activityRequest);
+    ImageResponseForActivity mapImageResponseForActivity(ImageEntity entity);
+
+    void mapForUpdate(@MappingTarget ActivityEntity activityEntity, ActivityRequest activityRequest);
 
 
 }

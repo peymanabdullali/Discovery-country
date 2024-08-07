@@ -57,12 +57,12 @@ public class ActivityController {
     }
 
 
-    @PatchMapping("/{id}")
+    @PatchMapping("like/{id}")
     public ResponseEntity<Void> updateLikeCount(@PathVariable Long id, @RequestParam boolean increment){
         activityService.updateLikeCount(id,increment);
         return ResponseEntity.ok().build();
     }
-    @PatchMapping("/{id}")
+    @PatchMapping("avarageRating/{id}")
     public ResponseEntity<?> updateAverageRating(@PathVariable Long id, @RequestParam double rating) {
         activityService.updateAverageRating(id, rating);
         return ResponseEntity.ok().build();
