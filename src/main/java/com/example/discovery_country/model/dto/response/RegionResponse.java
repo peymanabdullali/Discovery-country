@@ -17,9 +17,5 @@ public class RegionResponse {
     long id;
     String name;
     String mapUrl;
-    ZoneResponseForRegion zone;
-//    List<ActivityCategoryResponse> activityCategories;
-//    List<RestaurantResponse> restaurants;
-//    List<HomeHotelResponse> homeHotels;
-//    List<ScenicSpotResponse> scenicSpots;
+
 }
