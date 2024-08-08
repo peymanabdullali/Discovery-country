@@ -30,7 +30,8 @@ public class ActivityEntity {
 
     long viewed;
     Long likeCount;
-    Double averageRating;
+    Double averageRating = 0.0;
+    Integer ratingCount = 0;
     Status activityStatus;
 
     String mapUrl;

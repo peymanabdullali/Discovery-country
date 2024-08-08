@@ -22,8 +22,6 @@ public class HomeHotelRequest {
     String mapUrl;
     double price;
     String type;
-    Long viewed;
-    List<Long> hotelRoomIds;
     List<Long> imageIds;
     Long regionId;
 

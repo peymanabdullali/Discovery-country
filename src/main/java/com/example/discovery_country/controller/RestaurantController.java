@@ -70,4 +70,16 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurant);
     }
 
+    @PostMapping("/like/{id}")
+    public ResponseEntity<Void> likeRestaurant(@PathVariable Long id, @RequestParam boolean increment) {
+        service.updateLikeCount(id, increment);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/rate/{id}")
+    public ResponseEntity<Void> rateRestaurant(@PathVariable Long id, @RequestParam int stars) {
+        service.rateRestaurant(id, stars);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

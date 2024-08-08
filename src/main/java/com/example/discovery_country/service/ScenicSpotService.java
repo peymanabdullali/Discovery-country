@@ -1,10 +1,13 @@
 package com.example.discovery_country.service;
 
+import com.example.discovery_country.dao.entity.RestaurantEntity;
 import com.example.discovery_country.dao.entity.ReviewEntity;
 import com.example.discovery_country.dao.entity.ScenicSpotEntity;
 import com.example.discovery_country.dao.repository.ImageRepository;
 import com.example.discovery_country.dao.repository.ScenicSpotRepository;
 import com.example.discovery_country.helper.IncreaseViewCount;
+import com.example.discovery_country.helper.RatingHelper;
+import com.example.discovery_country.helper.UpdateLike;
 import com.example.discovery_country.mapper.ScenicSpotMapper;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
@@ -30,6 +33,8 @@ public class ScenicSpotService {
     private final ImageRepository imageRepository;
     private final ScenicSpotMapper scenicSpotMapper;
     private final IncreaseViewCount viewCount;
+    private final RatingHelper ratingHelper;
+    private final UpdateLike updateLike;
 
     public ScenicSpotResponse createScenicSpot(ScenicSpotRequest request) {
         log.info("ActionLog.createScenicSpot start");
@@ -73,6 +78,22 @@ public class ScenicSpotService {
         scenicSpotRepository.softDelete(id);
         log.info("ActionLog.softDelete end");
     }
+
+
+    public void rateScenicSpot(Long id, int stars) {
+        ScenicSpotEntity scenicSpot = scenicSpotRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Scenic Spot not found"));
+
+        ratingHelper.addRating(scenicSpot, stars);
+    }
+
+    public void updateLikeCount(Long id, boolean increment) {
+        ScenicSpotEntity scenicSpot = scenicSpotRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Scenic Spot not found"));
+
+        updateLike.updateLikeCount(scenicSpot, increment);
+    }
+
 }
 
 
