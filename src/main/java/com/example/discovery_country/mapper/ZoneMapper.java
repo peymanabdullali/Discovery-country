@@ -18,7 +18,7 @@ import java.util.List;
 public interface ZoneMapper {
 //    @Mapping(target = "zone.id",source = "request.zoneId")
 
-    ZoneEntity mapToEntity(ZoneRequest request, List<RegionEntity> regions);
+    ZoneEntity mapToEntity(ZoneRequest request);
 
     ZoneResponse mapToResponse(ZoneEntity entity);
     List<RegionResponseForZone> mapToRegionResponseList(List<RegionEntity> entities);
@@ -27,10 +27,6 @@ public interface ZoneMapper {
     void mapForUpdate (@MappingTarget ZoneEntity entity, ZoneRequest request);
 
 
-//    List<ActivityCategoryResponse> mapToActivityCategoryResponseList(List<RegionEntity> entities);
-//    List<RestaurantResponse> mapToRestaurantResponseList(List<RegionEntity> entities);
-//    List<HomeHotelResponse> mapToHomeHotelResponseList(List<RegionEntity> entities);
-//    List<ScenicSpotResponse> mapToScenicSpotResponseList(List<RegionEntity> entities);
 
 
 }

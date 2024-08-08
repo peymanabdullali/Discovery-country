@@ -1,6 +1,8 @@
 package com.example.discovery_country.dao.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -25,7 +27,7 @@ public class ScenicSpotEntity {
     @Column(columnDefinition = "TEXT")
     String description;
     Boolean checkStatus;
-    Boolean status;
+    boolean status;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -35,7 +37,7 @@ public class ScenicSpotEntity {
     List<ImageEntity> images;
     @OneToMany(mappedBy = "scenicSpot", cascade = CascadeType.ALL)
     List<ReviewEntity> reviews;
-    Long viewed;
+    long viewed;
     Long likeCount;
     Double averageRating;
 

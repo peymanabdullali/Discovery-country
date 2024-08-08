@@ -24,13 +24,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ZoneService {
     private final ZoneRepository zoneRepository;
-    private final RegionRepository regionRepository;
     private final ZoneMapper zoneMapper;
 
     public ZoneResponse create(ZoneRequest request) {
         log.info("ActionLog.createZone start");
 
-        ZoneEntity zoneEntity = zoneMapper.mapToEntity(request, regionRepository.findAllById(request.getRegionIds()));
+        ZoneEntity zoneEntity = zoneMapper.mapToEntity(request);
         ZoneEntity zone = zoneRepository.save(zoneEntity);
         ZoneResponse zoneResponse = zoneMapper.mapToResponse(zone);
         log.info("ActionLog.createZone end");

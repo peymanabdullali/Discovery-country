@@ -28,7 +28,7 @@ public class ActivityEntity {
     @Column(nullable = false)
     double price;
 
-    Long viewed;
+    long viewed;
     Long likeCount;
     Double averageRating;
     Status activityStatus;
@@ -40,7 +40,7 @@ public class ActivityEntity {
     double longitude;
     @Column(columnDefinition = "TEXT")
     String description;
-    boolean deleted;
+    boolean deleted=false;
     @Column(nullable = false)
     LocalDateTime startDate;
 

@@ -5,6 +5,7 @@ import com.example.discovery_country.dao.entity.RestaurantEntity;
 import com.example.discovery_country.dao.entity.ScenicSpotEntity;
 import com.example.discovery_country.dao.repository.ImageRepository;
 import com.example.discovery_country.dao.repository.RestaurantRepository;
+import com.example.discovery_country.helper.IncreaseViewCount;
 import com.example.discovery_country.mapper.RestaurantMapper;
 import com.example.discovery_country.model.dto.criteria.RestaurantCriteriaRequest;
 import com.example.discovery_country.model.dto.request.RestaurantRequest;
@@ -31,6 +32,7 @@ public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final ImageRepository imageRepository;
     private final RestaurantMapper restaurantMapper;
+    private final IncreaseViewCount viewCount;
 
     public RestaurantResponse createRestaurant(RestaurantRequest request) {
         log.info("ActionLog.createRestaurant start");
@@ -53,6 +55,8 @@ public class RestaurantService {
         log.info("ActionLog.findRestaurantById start with id#" + id);
         RestaurantEntity restaurant = restaurantRepository.
                 findByIdAndStatusFalse(id).orElseThrow(() -> new RuntimeException("RESTAURANT_NOT_FOuND"));
+        viewCount.updateViewCount(restaurant);
+
         restaurant.setReviews(restaurant.getReviews().stream().filter(i -> !i.isStatus()).toList());
         restaurant.setImages(restaurant.getImages().stream().filter(i -> !i.getDeleted()).toList());
 

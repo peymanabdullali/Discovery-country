@@ -15,47 +15,12 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ActivityResponse {
-
-
-
+    long id;
     @NotBlank(message = "can't be blank")
     String name;
-
     @NotBlank(message = "can't be blank")
     double price;
-
-    String mapUrl;
-
-//    @NotBlank(message = "can't be blank")
-//    double latitude;
-//
-//    @NotBlank(message = "can't be blank")
-//    double longitude;
-
-    @NotBlank(message = "can't be blank")
-    String description;
-
-    @NotBlank(message = "can't be blank")
-    LocalDateTime startDate;
-
-    @NotBlank(message = "can't be blank")
-    LocalDateTime endDate;
-
-    @NotBlank(message = "can't be blank")
-    LocalDateTime registrationDeadline;
-
-    @NotBlank(message = "can't be blank")
-    String contact;
-
-    @NotBlank(message = "can't be blank")
-    String requirements;
-
-    @NotBlank(message = "can't be blank")
-    Integer numberOfPeople;
-
-    List<ImageResponseForActivity> images;
-    ActivityCategoryResponseForActivity activityCategory;
-
+    ImageResponseForActivity image;
 }
 
 
