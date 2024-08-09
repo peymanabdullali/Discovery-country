@@ -5,7 +5,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "room_reservations")
@@ -23,14 +22,14 @@ public class RoomReservationEntity {
     LocalDate exitDate;
     byte totalDay;
     byte numberOfGuests;
+    boolean status;
+//    @ManyToOne(cascade = CascadeType.MERGE)
+//    @JoinColumn
+//    HomeHotelEntity homeHotel;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
-    HomeHotelEntity homeHotel;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn
-    HotelRoomsEntity hotelRoom;
+    RoomsEntity room;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn

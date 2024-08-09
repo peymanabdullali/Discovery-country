@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -25,7 +23,7 @@ public class ImageEntity {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
-    HotelRoomsEntity hotelRoom;
+    RoomsEntity room;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
