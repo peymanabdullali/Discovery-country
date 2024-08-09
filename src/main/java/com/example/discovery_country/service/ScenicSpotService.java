@@ -60,7 +60,7 @@ public class ScenicSpotService {
         ScenicSpotEntity scenicSpotEntity = scenicSpotRepository.findByIdAndCheckStatusTrueAndStatusFalse(id).orElseThrow(() -> new RuntimeException("SCENIC_SPOT_NOT_FOUND"));
        viewCount.updateViewCount(scenicSpotEntity);
         scenicSpotEntity.setReviews(scenicSpotEntity.getReviews().stream().filter(i -> !i.isStatus()).toList());
-        scenicSpotEntity.setImages(scenicSpotEntity.getImages().stream().filter(i -> !i.getDeleted()).toList());
+        scenicSpotEntity.setImages(scenicSpotEntity.getImages().stream().filter(i -> !i.isDeleted()).toList());
         ScenicSpotResponseForFindById scenicSpotResponseForFindById = scenicSpotMapper.mapToResponseForFindById(scenicSpotEntity);
         log.info("ActionLog.findScenicSpot end");
         return scenicSpotResponseForFindById;

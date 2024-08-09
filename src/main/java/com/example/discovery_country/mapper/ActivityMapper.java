@@ -23,7 +23,7 @@ public interface ActivityMapper {
                 id(entity.getId()).
                 name(entity.getName());
         if (!entity.getImages().isEmpty()) {
-            name.image(mapImageResponseForActivity(entity.getImages().stream().filter(s -> !s.getDeleted()).findFirst().orElseThrow()));
+            name.image(mapImageResponseForActivity(entity.getImages().stream().filter(s -> !s.isDeleted()).findFirst().orElseThrow()));
         }
         return name.build();
 

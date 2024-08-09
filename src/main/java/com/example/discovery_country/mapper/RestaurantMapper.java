@@ -24,7 +24,7 @@ public interface RestaurantMapper {
                 id(entity.getId()).
                 name(entity.getName());
         if (!entity.getImages().isEmpty()) {
-            name.image(mapToImageResponse(entity.getImages().stream().findFirst().orElseThrow()));
+            name.image(mapToImageResponse(entity.getImages().stream().filter(s->!s.isDeleted()).findFirst().orElseThrow()));
         }
         return name.build();
     }
