@@ -1,9 +1,11 @@
     package com.example.discovery_country.helper;
 
     import com.example.discovery_country.dao.entity.ActivityEntity;
+    import com.example.discovery_country.dao.entity.HomeHotelEntity;
     import com.example.discovery_country.dao.entity.RestaurantEntity;
     import com.example.discovery_country.dao.entity.ScenicSpotEntity;
     import com.example.discovery_country.dao.repository.ActivityRepository;
+    import com.example.discovery_country.dao.repository.HomeHotelRepository;
     import com.example.discovery_country.dao.repository.RestaurantRepository;
     import com.example.discovery_country.dao.repository.ScenicSpotRepository;
     import lombok.RequiredArgsConstructor;
@@ -15,7 +17,7 @@
         private final RestaurantRepository restaurantRepository;
         private final ScenicSpotRepository scenicSpotRepository;
         private final ActivityRepository activityRepository;
-    //    private final HomeHotelRepository homeHotelRepository;
+        private final HomeHotelRepository homeHotelRepository;
 
         public <T> void updateViewCount(T entity) {
             if (entity instanceof ScenicSpotEntity) {
@@ -28,6 +30,10 @@
             } else if (entity instanceof ActivityEntity) {
                 ((ActivityEntity) entity).setViewed(((ActivityEntity) entity).getViewed() + 1);
                 activityRepository.save((ActivityEntity) entity);
+            }
+            else if (entity instanceof HomeHotelEntity) {
+                ((HomeHotelEntity) entity).setViewed(((HomeHotelEntity) entity).getViewed() + 1);
+                homeHotelRepository.save((HomeHotelEntity) entity);
             }
 
 

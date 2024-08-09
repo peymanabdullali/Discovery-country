@@ -8,6 +8,8 @@ import com.example.discovery_country.dao.repository.ImageRepository;
 import com.example.discovery_country.enums.Status;
 import com.example.discovery_country.exception.ActivityNotFoundException;
 import com.example.discovery_country.helper.IncreaseViewCount;
+import com.example.discovery_country.helper.RatingHelper;
+import com.example.discovery_country.helper.UpdateLike;
 import com.example.discovery_country.mapper.ActivityMapper;
 import com.example.discovery_country.model.dto.criteria.ActivityCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityRequest;
@@ -34,6 +36,8 @@ public class ActivityService {
     public final ImageRepository imageRepository;
     private final ActivityMapper activityMapper;
     private final IncreaseViewCount viewCount;
+    private final RatingHelper ratingHelper;
+    private final UpdateLike updateLike;
 
     public ActivityResponse create(ActivityRequest request) {
         log.info("ActionLog.createActivity start");
@@ -108,28 +112,42 @@ public class ActivityService {
     }
 
 
+//    public void updateLikeCount(Long id, boolean increment) {
+//        log.info("ActionLog.updateLikeCount start with id#" + id);
+//
+//        ActivityEntity activity = activityRepository.findById(id).orElseThrow(() -> new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
+//        activity.setLikeCount(increment ? activity.getLikeCount() + 1 : activity.getLikeCount() - 1);
+//        activityRepository.save(activity);
+//
+//        log.info("ActionLog.updateLikeCount end with id#" + id);
+//    }
+//
+//    public void updateAverageRating(Long id, double rating) {
+//        log.info("ActionLog.updateAverageRating start with id#" + id);
+//
+//        ActivityEntity activity = activityRepository.findById(id).orElseThrow(() -> new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
+//        double currentRating = activity.getAverageRating() == null ? 0 : activity.getAverageRating();
+//        Long currentView = activity.getViewed();
+//        double newAverageRating = (currentRating * currentView + rating) / (currentView + 1);
+//        activity.setAverageRating(newAverageRating);
+//        activity.setViewed(currentView + 1);
+//        activityRepository.save(activity);
+//
+//        log.info("ActionLog.updateAverageRating end with id#" + id);
+//    }
+
+
     public void updateLikeCount(Long id, boolean increment) {
-        log.info("ActionLog.updateLikeCount start with id#" + id);
+        ActivityEntity activity = activityRepository.findById(id).orElseThrow(() ->
+                new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
 
-        ActivityEntity activity = activityRepository.findById(id).orElseThrow(() -> new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
-        activity.setLikeCount(increment ? activity.getLikeCount() + 1 : activity.getLikeCount() - 1);
-        activityRepository.save(activity);
-
-        log.info("ActionLog.updateLikeCount end with id#" + id);
+        updateLike.updateLikeCount(activity, increment);
     }
+    public void updateAverageRating(Long id, int stars) {
+    ActivityEntity activity = activityRepository.findById(id).orElseThrow(() ->
+            new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
 
-    public void updateAverageRating(Long id, double rating) {
-        log.info("ActionLog.updateAverageRating start with id#" + id);
+    ratingHelper.addRating(activity, stars);
+}
 
-        ActivityEntity activity = activityRepository.findById(id).orElseThrow(() -> new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
-        double currentRating = activity.getAverageRating() == null ? 0 : activity.getAverageRating();
-        Long currentView = activity.getViewed();
-        double newAverageRating = (currentRating * currentView + rating) / (currentView + 1);
-        activity.setAverageRating(newAverageRating);
-        activity.setViewed(currentView + 1);
-        activityRepository.save(activity);
-
-        log.info("ActionLog.updateAverageRating end with id#" + id);
-
-    }
 }

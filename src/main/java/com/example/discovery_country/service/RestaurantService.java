@@ -1,11 +1,15 @@
 package com.example.discovery_country.service;
 
+import com.example.discovery_country.dao.entity.HomeHotelEntity;
 import com.example.discovery_country.dao.entity.RegionEntity;
 import com.example.discovery_country.dao.entity.RestaurantEntity;
 import com.example.discovery_country.dao.entity.ScenicSpotEntity;
 import com.example.discovery_country.dao.repository.ImageRepository;
 import com.example.discovery_country.dao.repository.RestaurantRepository;
+import com.example.discovery_country.exception.HomeHotelNotFoundException;
 import com.example.discovery_country.helper.IncreaseViewCount;
+import com.example.discovery_country.helper.RatingHelper;
+import com.example.discovery_country.helper.UpdateLike;
 import com.example.discovery_country.mapper.RestaurantMapper;
 import com.example.discovery_country.model.dto.criteria.RestaurantCriteriaRequest;
 import com.example.discovery_country.model.dto.request.RestaurantRequest;
@@ -20,6 +24,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +38,8 @@ public class RestaurantService {
     private final ImageRepository imageRepository;
     private final RestaurantMapper restaurantMapper;
     private final IncreaseViewCount viewCount;
-
+    private final RatingHelper ratingHelper;
+    private final UpdateLike updateLike;
     public RestaurantResponse createRestaurant(RestaurantRequest request) {
         log.info("ActionLog.createRestaurant start");
         RestaurantEntity restaurantEntity = restaurantMapper.mapToEntity(request, imageRepository.findAllById(request.getImageIds()));
@@ -80,4 +86,17 @@ public class RestaurantService {
         log.info("ActionLog.updateRestaurant end");
     }
 
+    public void rateRestaurant(Long id, int stars) {
+        RestaurantEntity restaurant = restaurantRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Restaurant not found"));
+
+        ratingHelper.addRating(restaurant, stars);
+    }
+
+    public void updateLikeCount(Long id, boolean increment) {
+        RestaurantEntity restaurant = restaurantRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Activity not found"));
+
+        updateLike.updateLikeCount(restaurant, increment);
+    }
 }

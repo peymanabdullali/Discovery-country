@@ -66,4 +66,17 @@ public class ScenicSpotController {
         log.info("Controller.findScenicSpot end");
         return ResponseEntity.ok(byId);
     }
+
+    @PostMapping("/like/{id}")
+    public ResponseEntity<Void> likeScenicSpot(@PathVariable Long id, @RequestParam boolean increment) {
+        service.updateLikeCount(id, increment);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/rate/{id}")
+    public ResponseEntity<Void> rateScenicSpot(@PathVariable Long id, @RequestParam int stars) {
+        service.rateScenicSpot(id, stars);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

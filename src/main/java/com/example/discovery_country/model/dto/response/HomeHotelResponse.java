@@ -15,6 +15,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HomeHotelResponse {
 
+    Long id;
     String name;
     String address;
 //    String contact;
@@ -23,7 +24,7 @@ public class HomeHotelResponse {
 //    String type;
     Long viewed;
 //    List<HotelRoomsResponse> hotelRooms;
-    List<ImageResponse> images;
+    ImageResponseForHomeHotel image;
 //    List<ReviewResponse> reviews;
 //    List<RoomReservationResponse> roomReservations;
 //    RegionResponse regions;

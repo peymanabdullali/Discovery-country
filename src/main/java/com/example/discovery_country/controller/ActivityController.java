@@ -63,8 +63,8 @@ public class ActivityController {
         return ResponseEntity.ok().build();
     }
     @PatchMapping("avarageRating/{id}")
-    public ResponseEntity<?> updateAverageRating(@PathVariable Long id, @RequestParam double rating) {
-        activityService.updateAverageRating(id, rating);
+    public ResponseEntity<?> updateAverageRating(@PathVariable Long id, @RequestParam int stars) {
+        activityService.updateAverageRating(id, stars);
         return ResponseEntity.ok().build();
     }
 }

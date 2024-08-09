@@ -68,4 +68,16 @@ public class ErrorHandler {
                 .message(exception.getMessage())
                 .build();
     }
+
+    @ExceptionHandler(HomeHotelNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handlerHomeHotelNotFoundException(Exception exception) {
+        log.error("handlerHomeHotelNotFoundException {}", exception.getMessage());
+
+        return ErrorResponse.builder()
+                .code(HttpStatus.NOT_FOUND.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
 }

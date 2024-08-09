@@ -28,14 +28,16 @@ public class HomeHotelEntity {
     String type;
     Long viewed;
     Long likeCount;
-    Double averageRating;
+    Double averageRating = 0.0;
+    Integer ratingCount = 0;
+    boolean deleted=false;
 
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
     List<HotelRoomsEntity> hotelRooms;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-    List<ImageEntity> imageEntities;
+    List<ImageEntity> images;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
     List<ReviewEntity> reviews;

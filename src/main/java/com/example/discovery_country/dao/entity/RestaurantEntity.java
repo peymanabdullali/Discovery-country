@@ -44,7 +44,8 @@ public class RestaurantEntity {
     String menuUrl;
     long viewed;
     Long likeCount;
-    Double averageRating;
+    Double averageRating = 0.0;
+    Integer ratingCount = 0;
 
     boolean status;
 
