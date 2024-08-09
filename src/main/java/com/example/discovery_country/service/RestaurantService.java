@@ -64,7 +64,7 @@ public class RestaurantService {
         viewCount.updateViewCount(restaurant);
 
         restaurant.setReviews(restaurant.getReviews().stream().filter(i -> !i.isStatus()).toList());
-        restaurant.setImages(restaurant.getImages().stream().filter(i -> !i.getDeleted()).toList());
+        restaurant.setImages(restaurant.getImages().stream().filter(i -> !i.isDeleted()).toList());
 
         RestaurantResponseForFindById restaurantResponseForFindById = restaurantMapper.mapToResponseForFindById(restaurant);
         log.info("ActionLog.findRestaurantById end");

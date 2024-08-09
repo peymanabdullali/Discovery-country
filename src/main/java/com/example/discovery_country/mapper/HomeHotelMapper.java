@@ -26,7 +26,7 @@ public interface HomeHotelMapper {
                 id(entity.getId()).
                 name(entity.getName());
         if (!entity.getImages().isEmpty()) {
-            name.image(mapImageResponseForHomeHotel(entity.getImages().stream().filter(s -> !s.getDeleted()).findFirst().orElseThrow()));
+            name.image(mapImageResponseForHomeHotel(entity.getImages().stream().filter(s -> !s.isDeleted()).findFirst().orElseThrow()));
         }
         return name.build();
 

@@ -41,7 +41,7 @@ public class ImageEntity {
     @JoinColumn
     RestaurantEntity restaurant;
 
-    Boolean deleted = false;
+    boolean deleted = false;
 
 
 }
