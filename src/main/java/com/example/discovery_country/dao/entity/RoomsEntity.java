@@ -8,22 +8,23 @@ import lombok.experimental.FieldDefaults;
 import java.util.List;
 
 @Entity
-@Table(name = "hotel_rooms")
+@Table(name = "rooms")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class HotelRoomsEntity {
+public class RoomsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
     double price;
     @Column(columnDefinition = "TEXT")
-    String amenities;//json b
+    String amenities;
     byte roomNumber;
     byte roomCount;
+    @Enumerated(EnumType.STRING)
     RoomType roomType;
     boolean available;
 
@@ -31,10 +32,10 @@ public class HotelRoomsEntity {
     @JoinColumn
     HomeHotelEntity homeHotel;
 
-    @OneToMany(mappedBy = "hotelRoom", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     List<ImageEntity> imageEntities;
 
-    @OneToMany(mappedBy = "hotelRoom", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     List<RoomReservationEntity> roomReservations;
 
 

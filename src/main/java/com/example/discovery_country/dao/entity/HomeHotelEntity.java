@@ -24,7 +24,6 @@ public class HomeHotelEntity {
     String address;
     String contact;
     String mapUrl;
-    double price;
     String type;
     Long viewed;
     Long likeCount;
@@ -34,16 +33,16 @@ public class HomeHotelEntity {
 
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-    List<HotelRoomsEntity> hotelRooms;
+    List<RoomsEntity> rooms;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
     List<ImageEntity> images;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
     List<ReviewEntity> reviews;
-
-    @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-    List<RoomReservationEntity> roomReservations;
+//
+//    @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
+//    List<RoomReservationEntity> roomReservations;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
