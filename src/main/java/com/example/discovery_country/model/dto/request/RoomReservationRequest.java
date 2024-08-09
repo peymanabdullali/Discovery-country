@@ -18,8 +18,7 @@ public class RoomReservationRequest {
     LocalDate entryDate;
     LocalDate exitDate;
     byte numberOfGuests;
-    Long homeHotelId;
-    Long hotelRoomId;
+    Long roomId;
     Long userId;
 
 }
