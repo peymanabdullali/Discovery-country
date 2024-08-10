@@ -80,4 +80,15 @@ public class ErrorHandler {
                 .build();
     }
 
+
+    @ExceptionHandler(RoomNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handlerRoomNotFoundException(Exception exception) {
+        log.error("handlerRoomNotFoundException {}", exception.getMessage());
+
+        return ErrorResponse.builder()
+                .code(HttpStatus.NOT_FOUND.name())
+                .message(exception.getMessage())
+                .build();
+    }
 }

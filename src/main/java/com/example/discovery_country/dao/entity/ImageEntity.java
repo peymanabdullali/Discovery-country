@@ -23,7 +23,7 @@ public class ImageEntity {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
-    RoomsEntity room;
+    RoomEntity room;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn

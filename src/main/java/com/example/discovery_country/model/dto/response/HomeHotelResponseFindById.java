@@ -32,7 +32,7 @@ public class HomeHotelResponseFindById {
     Integer ratingCount ;
 
 
-    List<RoomsEntity> hotelRooms;
+    List<RoomEntity> hotelRooms;
 
     List<ImageEntity> images;
 

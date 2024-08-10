@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RoomsEntity {
+public class RoomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -26,14 +26,14 @@ public class RoomsEntity {
     byte roomCount;
     @Enumerated(EnumType.STRING)
     RoomType roomType;
-    boolean available;
-
+    boolean available=true;
+    boolean deleted=false;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     HomeHotelEntity homeHotel;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    List<ImageEntity> imageEntities;
+    List<ImageEntity> images;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     List<RoomReservationEntity> roomReservations;
