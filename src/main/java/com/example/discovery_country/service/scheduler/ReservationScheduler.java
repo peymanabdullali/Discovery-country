@@ -15,7 +15,7 @@ public class ReservationScheduler {
 @Scheduled(cron = "*/10 * * * * *")
 public void updateRoomAvailability(){
     System.out.println("salam");
-        roomRepository.updateAllRoomsAvailability();
-        reservationRepository.updateRoomReservationStatus();
-    }
+    roomRepository.updateAvailableRooms();
+    reservationRepository.updateRoomReservationStatus();
+}
 }

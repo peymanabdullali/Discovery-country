@@ -15,8 +15,9 @@ public class RoomReservationResponse {
 
     String name;
     LocalDate entryDate;
-    LocalDate exitDate;
     byte totalDay;
+    double totalAmount;
+    LocalDate exitDate;
     byte numberOfGuests;
 
 }
