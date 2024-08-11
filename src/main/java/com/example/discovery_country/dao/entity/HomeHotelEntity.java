@@ -33,7 +33,7 @@ public class HomeHotelEntity {
 
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-    List<RoomsEntity> rooms;
+    List<RoomEntity> rooms;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
     List<ImageEntity> images;

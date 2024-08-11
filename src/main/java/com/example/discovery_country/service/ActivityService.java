@@ -32,7 +32,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ActivityService {
     public final ActivityRepository activityRepository;
-    public final ActivityCategoryRepository categoryRepository;
     public final ImageRepository imageRepository;
     private final ActivityMapper activityMapper;
     private final IncreaseViewCount viewCount;
