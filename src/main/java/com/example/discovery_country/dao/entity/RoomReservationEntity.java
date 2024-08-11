@@ -21,6 +21,7 @@ public class RoomReservationEntity {
     LocalDate entryDate;
     LocalDate exitDate;
     byte totalDay;
+    double totalAmount;
     byte numberOfGuests;
     boolean status;
 //    @ManyToOne(cascade = CascadeType.MERGE)
