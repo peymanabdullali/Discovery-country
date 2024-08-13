@@ -17,8 +17,8 @@ public class ActivitySpecification implements Specification<ActivityEntity> {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates=new ArrayList<>();
 
-            if(activityCriteriaRequest.getName()!=null && activityCriteriaRequest.getName().isEmpty()){
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),"%"+ activityCriteriaRequest));
+            if(activityCriteriaRequest.getName()!=null && !activityCriteriaRequest.getName().isEmpty()){
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),"%"+ activityCriteriaRequest.getName().toLowerCase() + "%"));
             }
 
             if (activityCriteriaRequest.getStartDate() != null) {

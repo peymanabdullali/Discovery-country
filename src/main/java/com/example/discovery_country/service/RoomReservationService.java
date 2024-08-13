@@ -1,7 +1,8 @@
 package com.example.discovery_country.service;
 
+import com.example.discovery_country.dao.entity.RoomEntity;
 import com.example.discovery_country.dao.entity.RoomReservationEntity;
-import com.example.discovery_country.dao.entity.RoomsEntity;
+
 import com.example.discovery_country.dao.repository.RoomRepository;
 import com.example.discovery_country.dao.repository.RoomReservationRepository;
 import com.example.discovery_country.mapper.RoomReservationMapper;
@@ -57,7 +58,7 @@ public class RoomReservationService {
 
 
     public void calculateAndSetTotalDayAndAmount(RoomReservationEntity entity, long id) {
-        RoomsEntity roomsEntity = roomRepository.findById(id).orElseThrow(()->new RuntimeException("ROOM_NOT_FOUND"));
+        RoomEntity roomsEntity = roomRepository.findById(id).orElseThrow(()->new RuntimeException("ROOM_NOT_FOUND"));
         double price = roomsEntity.getPrice();
         byte totalDay = (byte) ChronoUnit.DAYS.between(entity.getEntryDate(), entity.getExitDate());
         entity.setTotalAmount(price * totalDay);

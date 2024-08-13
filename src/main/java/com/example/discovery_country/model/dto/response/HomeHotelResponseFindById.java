@@ -26,10 +26,10 @@ public class HomeHotelResponseFindById {
     String mapUrl;
     double price;
     String type;
-    Long viewed;
-    Long likeCount;
+    long viewed;
+    long likeCount;
     Double averageRating ;
-    Integer ratingCount ;
+    long ratingCount ;
 
 
     List<RoomEntity> hotelRooms;

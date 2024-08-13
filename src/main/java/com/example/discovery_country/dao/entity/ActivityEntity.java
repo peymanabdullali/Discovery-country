@@ -29,7 +29,7 @@ public class ActivityEntity {
     double price;
 
     long viewed;
-    Long likeCount;
+    long likeCount=0;
     Double averageRating = 0.0;
     Integer ratingCount = 0;
     Status activityStatus;
