@@ -17,8 +17,8 @@ public class RegionSpecification implements Specification<RegionEntity> {
         return (root, query, criteriaBuilder) ->{
             List<Predicate> predicates=new ArrayList<>();
 
-            if(criteriaRequest.getName()!=null && criteriaRequest.getName().isEmpty()){
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),"%" + criteriaRequest));
+            if(criteriaRequest.getName()!=null && !criteriaRequest.getName().isEmpty()){
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),"%" + criteriaRequest.getName().toLowerCase() + "%"));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

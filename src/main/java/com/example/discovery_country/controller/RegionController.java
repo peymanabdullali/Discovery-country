@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("region")
+@RequestMapping("/regions")
 @Slf4j
 @RequiredArgsConstructor
 public class RegionController {
