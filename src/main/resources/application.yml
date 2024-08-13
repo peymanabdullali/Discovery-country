@@ -11,6 +11,6 @@ spring:
     database: postgresql
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
   liquibase:
     change-log: liquibase/change-log-master.yaml

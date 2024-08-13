@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: your_name
+      author: ${AUTHOR}
       changes:
         - createTable:
             tableName: activitycategories
@@ -27,7 +27,7 @@ databaseChangeLog:
                     nullable: false
   - changeSet:
       id: 2
-      author: your_name
+      author: ${AUTHOR}
       changes:
         - createTable:
             tableName: activities
@@ -57,25 +57,25 @@ databaseChangeLog:
                   type: BIGINT
 
               - column:
-                  name: likeCount
+                  name: like_count
                   type: BIGINT
 
               - column:
-                  name: averageRating
+                  name: average_rating
                   type: DOUBLE
                   defaultValueNumeric: 0.0
 
               - column:
-                  name: ratingCount
+                  name: rating_count
                   type: INTEGER
                   defaultValueNumeric: 0
 
               - column:
-                  name: activityStatus
+                  name: activity_status
                   type: VARCHAR(255)
 
               - column:
-                  name: mapUrl
+                  name: map_url
                   type: VARCHAR(255)
 
               - column:
@@ -100,19 +100,19 @@ databaseChangeLog:
                   defaultValueBoolean: false
 
               - column:
-                  name: startDate
+                  name: start_date
                   type: TIMESTAMP
                   constraints:
                     nullable: false
 
               - column:
-                  name: endDate
+                  name: end_date
                   type: TIMESTAMP
                   constraints:
                     nullable: false
 
               - column:
-                  name: registrationDeadline
+                  name: registration_deadline
                   type: TIMESTAMP
                   constraints:
                     nullable: false
@@ -128,7 +128,7 @@ databaseChangeLog:
                   type: TEXT
 
               - column:
-                  name: numberOfPeople
+                  name: number_of_people
                   type: INTEGER
                   constraints:
                     nullable: false
@@ -140,7 +140,7 @@ databaseChangeLog:
                     nullable: false
   - changeSet:
       id: 3
-      author: your_name
+      author: ${AUTHOR}
       changes:
         - createTable:
             tableName: homehotels
@@ -170,7 +170,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
 
               - column:
-                  name: mapUrl
+                  name: map_url
                   type: VARCHAR(255)
 
               - column:
@@ -182,16 +182,16 @@ databaseChangeLog:
                   type: BIGINT
 
               - column:
-                  name: likeCount
+                  name: like_count
                   type: BIGINT
 
               - column:
-                  name: averageRating
+                  name: average_rating
                   type: DOUBLE
                   defaultValueNumeric: 0.0
 
               - column:
-                  name: ratingCount
+                  name: rating_count
                   type: INTEGER
                   defaultValueNumeric: 0
 
@@ -207,7 +207,7 @@ databaseChangeLog:
                     nullable: false
   - changeSet:
       id: 4
-      author: your_name
+      author: ${AUTHOR}
       changes:
         - createTable:
             tableName: images
@@ -229,7 +229,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
 
               - column:
-                  name: imageStatus
+                  name: image_status
                   type: VARCHAR(255)
 
               - column:
@@ -258,7 +258,7 @@ databaseChangeLog:
                   defaultValueBoolean: false
   - changeSet:
       id: 5
-      author: your_name
+      author: ${AUTHOR}
       changes:
         - createTable:
             tableName: notifications
@@ -290,441 +290,3 @@ databaseChangeLog:
               - column:
                   name: deleted
                   type: BOOLEAN
-  - changeSet:
-      id: 6
-      author: your_name
-      changes:
-        - createTable:
-            tableName: regions
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-
-              - column:
-                  name: name
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: mapUrl
-                  type: VARCHAR(255)
-
-              - column:
-                  name: latitude
-                  type: DOUBLE
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: longitude
-                  type: DOUBLE
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: zone_id
-                  type: BIGINT
-  - changeSet:
-      id: 7
-      author: your_name
-      changes:
-        - createTable:
-            tableName: restaurants
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-
-              - column:
-                  name: name
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: description
-                  type: TEXT
-
-              - column:
-                  name: address
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: contact
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: region_id
-                  type: BIGINT
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: rating
-                  type: DOUBLE
-
-              - column:
-                  name: mapUrl
-                  type: VARCHAR(255)
-
-              - column:
-                  name: menuUrl
-                  type: VARCHAR(255)
-
-              - column:
-                  name: viewed
-                  type: BIGINT
-
-              - column:
-                  name: likeCount
-                  type: BIGINT
-
-              - column:
-                  name: averageRating
-                  type: DOUBLE
-                  defaultValueNumeric: 0.0
-
-              - column:
-                  name: ratingCount
-                  type: INTEGER
-                  defaultValueNumeric: 0
-
-              - column:
-                  name: status
-                  type: BOOLEAN
-  - changeSet:
-      id: 8
-      author: your_name
-      changes:
-        - createTable:
-            tableName: reviews
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-
-              - column:
-                  name: rating
-                  type: FLOAT
-
-              - column:
-                  name: comment
-                  type: TEXT
-
-              - column:
-                  name: fullName
-                  type: VARCHAR(255)
-
-              - column:
-                  name: photoUrl
-                  type: VARCHAR(255)
-
-              - column:
-                  name: status
-                  type: BOOLEAN
-
-              - column:
-                  name: scenicSpot_id
-                  type: BIGINT
-
-              - column:
-                  name: restaurant_id
-                  type: BIGINT
-
-              - column:
-                  name: homeHotel_id
-                  type: BIGINT
-
-              - column:
-                  name: user_id
-                  type: BIGINT
-  - changeSet:
-      id: 9
-      author: your_name
-      changes:
-        - createTable:
-            tableName: roles
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-
-              - column:
-                  name: name
-                  type: VARCHAR(255)
-  - changeSet:
-      id: 10
-      author: your_name
-      changes:
-        - createTable:
-            tableName: room_reservations
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-
-              - column:
-                  name: name
-                  type: VARCHAR(255)
-
-              - column:
-                  name: entryDate
-                  type: DATE
-
-              - column:
-                  name: exitDate
-                  type: DATE
-
-              - column:
-                  name: totalDay
-                  type: TINYINT
-
-              - column:
-                  name: totalAmount
-                  type: DOUBLE
-
-              - column:
-                  name: numberOfGuests
-                  type: TINYINT
-
-              - column:
-                  name: status
-                  type: BOOLEAN
-
-              - column:
-                  name: room_id
-                  type: BIGINT
-
-              - column:
-                  name: user_id
-                  type: BIGINT
-  - changeSet:
-      id: 11
-      author: your_name
-      changes:
-        - createTable:
-            tableName: rooms
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-
-              - column:
-                  name: name
-                  type: VARCHAR(255)
-
-              - column:
-                  name: price
-                  type: DOUBLE
-
-              - column:
-                  name: amenities
-                  type: TEXT
-
-              - column:
-                  name: roomNumber
-                  type: TINYINT
-
-              - column:
-                  name: roomCount
-                  type: TINYINT
-
-              - column:
-                  name: roomType
-                  type: VARCHAR(50)
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: available
-                  type: BOOLEAN
-
-              - column:
-                  name: homeHotel_id
-                  type: BIGINT
-  - changeSet:
-      id: 12
-      author: your_name
-      changes:
-        - createTable:
-            tableName: scenicspots
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-
-              - column:
-                  name: name
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: description
-                  type: TEXT
-
-              - column:
-                  name: checkStatus
-                  type: BOOLEAN
-
-              - column:
-                  name: status
-                  type: BOOLEAN
-
-              - column:
-                  name: region_id
-                  type: BIGINT
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: viewed
-                  type: BIGINT
-
-              - column:
-                  name: likeCount
-                  type: BIGINT
-
-              - column:
-                  name: averageRating
-                  type: DOUBLE
-                  defaultValue: 0.0
-
-              - column:
-                  name: ratingCount
-                  type: INTEGER
-                  defaultValue: 0
-  - changeSet:
-      id: 13
-      author: your_name
-      changes:
-        - createTable:
-            tableName: users
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-
-              - column:
-                  name: name
-                  type: VARCHAR(255)
-
-              - column:
-                  name: username
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-                    unique: true
-
-              - column:
-                  name: email
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-                    unique: true
-
-              - column:
-                  name: password
-                  type: VARCHAR(255)
-
-              - column:
-                  name: phone_number
-                  type: VARCHAR(15)
-
-              - column:
-                  name: surname
-                  type: VARCHAR(255)
-
-              - column:
-                  name: enabled
-                  type: BOOLEAN
-
-              - column:
-                  name: account_non_locked
-                  type: BOOLEAN
-
-              - column:
-                  name: failed_attempt
-                  type: INT
-
-              - column:
-                  name: lock_time
-                  type: TIMESTAMP
-
-              - column:
-                  name: created_date
-                  type: TIMESTAMP
-                  defaultValueComputed: CURRENT_TIMESTAMP
-
-              - column:
-                  name: updated_date
-                  type: TIMESTAMP
-                  defaultValueComputed: CURRENT_TIMESTAMP
-                  constraints:
-                    nullable: false
-
-              - column:
-                  name: email_verified
-                  type: BOOLEAN
-
-              - column:
-                  name: verification_token
-                  type: VARCHAR(255)
-  - changeSet:
-      id: 14
-      author: your_name
-      changes:
-        - createTable:
-            tableName: zones
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-
-              - column:
-                  name: name
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
