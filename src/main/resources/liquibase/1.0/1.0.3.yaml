@@ -1,0 +1,204 @@
+databaseChangeLog:
+  - changeSet:
+      id: 15
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: region_actCategory
+            columns:
+              - column:
+                  name: activity_category_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+
+              - column:
+                  name: region_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+
+        - addForeignKeyConstraint:
+            baseTableName: region_actCategory
+            baseColumnNames: activity_category_id
+            constraintName: fk_activity_category
+            referencedTableName: activitycategories
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: region_actCategory
+            baseColumnNames: region_id
+            constraintName: fk_region
+            referencedTableName: regions
+            referencedColumnNames: id
+
+
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: activities
+            baseColumnNames: activity_category_id
+            constraintName: fk_activity_category
+            referencedTableName: activitycategories
+            referencedColumnNames: id
+
+
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: homehotels
+            baseColumnNames: region_id
+            constraintName: fk_homehotel_region
+            referencedTableName: regions
+            referencedColumnNames: id
+
+
+
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: images
+            baseColumnNames: room_id
+            constraintName: fk_image_room
+            referencedTableName: rooms
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: images
+            baseColumnNames: homeHotel_id
+            constraintName: fk_image_homehotel
+            referencedTableName: homehotels
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: images
+            baseColumnNames: activity_id
+            constraintName: fk_image_activity
+            referencedTableName: activities
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: images
+            baseColumnNames: scenicSpot_id
+            constraintName: fk_image_scenicspot
+            referencedTableName: scenicspots
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: images
+            baseColumnNames: restaurant_id
+            constraintName: fk_image_restaurant
+            referencedTableName: restaurants
+            referencedColumnNames: id
+
+
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: notifications
+            baseColumnNames: user_id
+            constraintName: fk_notification_user
+            referencedTableName: users
+            referencedColumnNames: id
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: regions
+            baseColumnNames: zone_id
+            constraintName: fk_region_zone
+            referencedTableName: zones
+            referencedColumnNames: id
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: restaurants
+            baseColumnNames: region_id
+            constraintName: fk_restaurant_region
+            referencedTableName: regions
+            referencedColumnNames: id
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: reviews
+            baseColumnNames: scenicSpot_id
+            constraintName: fk_review_scenicspot
+            referencedTableName: scenicspots
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: reviews
+            baseColumnNames: restaurant_id
+            constraintName: fk_review_restaurant
+            referencedTableName: restaurants
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: reviews
+            baseColumnNames: homeHotel_id
+            constraintName: fk_review_homehotel
+            referencedTableName: homehotels
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: reviews
+            baseColumnNames: user_id
+            constraintName: fk_review_user
+            referencedTableName: users
+            referencedColumnNames: id
+
+
+
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: room_reservations
+            baseColumnNames: room_id
+            constraintName: fk_roomreservation_room
+            referencedTableName: rooms
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: room_reservations
+            baseColumnNames: user_id
+            constraintName: fk_roomreservation_user
+            referencedTableName: users
+            referencedColumnNames: id
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: rooms
+            baseColumnNames: homeHotel_id
+            constraintName: fk_room_homehotel
+            referencedTableName: homehotels
+            referencedColumnNames: id
+
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: scenicspots
+            baseColumnNames: region_id
+            constraintName: fk_scenicspot_region
+            referencedTableName: regions
+            referencedColumnNames: id

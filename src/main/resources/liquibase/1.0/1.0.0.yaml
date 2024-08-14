@@ -1,0 +1,292 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: activitycategories
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: deleted
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: activities
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: price
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: viewed
+                  type: BIGINT
+
+              - column:
+                  name: like_count
+                  type: BIGINT
+
+              - column:
+                  name: average_rating
+                  type: DOUBLE
+                  defaultValueNumeric: 0.0
+
+              - column:
+                  name: rating_count
+                  type: INTEGER
+                  defaultValueNumeric: 0
+
+              - column:
+                  name: activity_status
+                  type: VARCHAR(255)
+
+              - column:
+                  name: map_url
+                  type: VARCHAR(255)
+
+              - column:
+                  name: latitude
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: longitude
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: TEXT
+
+              - column:
+                  name: deleted
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+
+              - column:
+                  name: start_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: end_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: registration_deadline
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: contact
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: requirements
+                  type: TEXT
+
+              - column:
+                  name: number_of_people
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: activity_category_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 3
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: homehotels
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+
+              - column:
+                  name: description
+                  type: TEXT
+
+              - column:
+                  name: address
+                  type: VARCHAR(255)
+
+              - column:
+                  name: contact
+                  type: VARCHAR(255)
+
+              - column:
+                  name: map_url
+                  type: VARCHAR(255)
+
+              - column:
+                  name: type
+                  type: VARCHAR(255)
+
+              - column:
+                  name: viewed
+                  type: BIGINT
+
+              - column:
+                  name: like_count
+                  type: BIGINT
+
+              - column:
+                  name: average_rating
+                  type: DOUBLE
+                  defaultValueNumeric: 0.0
+
+              - column:
+                  name: rating_count
+                  type: INTEGER
+                  defaultValueNumeric: 0
+
+              - column:
+                  name: deleted
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+
+              - column:
+                  name: region_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 4
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: images
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+
+              - column:
+                  name: url
+                  type: VARCHAR(255)
+
+              - column:
+                  name: image_status
+                  type: VARCHAR(255)
+
+              - column:
+                  name: room_id
+                  type: BIGINT
+
+              - column:
+                  name: homeHotel_id
+                  type: BIGINT
+
+              - column:
+                  name: activity_id
+                  type: BIGINT
+
+              - column:
+                  name: scenicSpot_id
+                  type: BIGINT
+
+              - column:
+                  name: restaurant_id
+                  type: BIGINT
+
+              - column:
+                  name: deleted
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+  - changeSet:
+      id: 5
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: notifications
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: message
+                  type: VARCHAR(255)
+
+              - column:
+                  name: date
+                  type: TIMESTAMP
+
+              - column:
+                  name: seen
+                  type: BOOLEAN
+
+              - column:
+                  name: user_id
+                  type: BIGINT
+
+              - column:
+                  name: deleted
+                  type: BOOLEAN
