@@ -30,7 +30,6 @@ public class ActivityCategoryService {
     private final ActivityCategoryRepository activityCategoryRepository;
     private final RegionRepository regionRepository;
     private final ActivityRepository activityRepository;
-//    private final ActivityCategoryMapper activityCategoryMapper;
 
     public ActivityCategoryResponse create(ActivityCategoryRequest request) {
         log.info("ActionLog.createActivityCategory start");
