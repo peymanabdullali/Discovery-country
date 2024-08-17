@@ -25,9 +25,8 @@ public class RoomSpecification implements Specification<RoomEntity> {
             if (roomCriteriaRequest.getRoomCount() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("roomCount"), roomCriteriaRequest.getRoomCount()));
             }
-
-            if (roomCriteriaRequest.getRoomType() != null && !roomCriteriaRequest.getRoomType().isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("roomType"), roomCriteriaRequest.getRoomType()));
+            if (roomCriteriaRequest.getRoomType() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("type"), roomCriteriaRequest.getRoomType()));
             }
 
             if (roomCriteriaRequest.getMinPrice() != null && roomCriteriaRequest.getMaxPrice() != null) {
