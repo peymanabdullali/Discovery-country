@@ -26,7 +26,7 @@ public class ScenicSpotEntity {
 
     @Column(columnDefinition = "TEXT")
     String description;
-    Boolean checkStatus;
+    boolean checkStatus;
     boolean status;
 
     @ManyToOne
@@ -38,7 +38,7 @@ public class ScenicSpotEntity {
     @OneToMany(mappedBy = "scenicSpot", cascade = CascadeType.ALL)
     List<ReviewEntity> reviews;
     long viewed;
-    Long likeCount;
-    Double averageRating = 0.0;
-    Integer ratingCount = 0;
+    long likeCount;
+    double averageRating;
+    int ratingCount;
 }
