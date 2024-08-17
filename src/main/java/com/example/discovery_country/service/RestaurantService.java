@@ -89,7 +89,6 @@ public class RestaurantService {
     public void rateRestaurant(Long id, int stars) {
         RestaurantEntity restaurant = restaurantRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Restaurant not found"));
-
         ratingHelper.addRating(restaurant, stars);
     }
 
