@@ -26,8 +26,8 @@ public class RoomEntity {
     byte roomCount;
     @Enumerated(EnumType.STRING)
     RoomType roomType;
-    boolean available=true;
-    boolean deleted=false;
+    boolean available;
+    boolean deleted;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     HomeHotelEntity homeHotel;
