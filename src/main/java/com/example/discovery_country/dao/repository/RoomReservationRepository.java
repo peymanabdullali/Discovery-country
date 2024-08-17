@@ -17,8 +17,8 @@ public interface RoomReservationRepository extends JpaRepository<RoomReservation
         PagingAndSortingRepository<RoomReservationEntity, Long>, JpaSpecificationExecutor<RoomReservationEntity> {
     @Transactional
     @Modifying
-    @Query("UPDATE RoomReservationEntity  SET status = true " +
-            "WHERE exitDate <= CURRENT_DATE AND status = false ")
+    @Query("UPDATE RoomReservationEntity  SET status = false " +
+            "WHERE exitDate <= CURRENT_DATE AND status = true ")
     void updateRoomReservationStatus();
     Optional<RoomReservationEntity> findRoomReservationEntitiesByUserIdAndStatusTrue(long id);
     Optional<RoomReservationEntity> findRoomReservationEntitiesByUserIdAndStatusFalse(long id);
