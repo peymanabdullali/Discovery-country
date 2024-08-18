@@ -33,6 +33,7 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation ("org.springframework.boot:spring-boot-starter-validation")
+    //implementation("org.liquibase:liquibase-core")
 
     implementation("org.springframework.boot:spring-boot-starter-web-services")
     implementation("org.springframework.boot:spring-boot-starter-mail")
@@ -47,19 +48,25 @@ dependencies {
 
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
-    // implementation("org.springframework.boot:spring-boot-starter-security")
+
     implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")
-
-    implementation("io.swagger:swagger-annotations:1.6.4")
-
-
     implementation("com.h2database:h2")
-
-
 
     implementation ("io.jsonwebtoken:jjwt-api:0.11.5")
     runtimeOnly ("io.jsonwebtoken:jjwt-impl:0.11.5")
     runtimeOnly ("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
+
+
+   // implementation("org.liquibase:liquibase-core:4.24.0")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("io.swagger:swagger-annotations:1.6.4")
+
+
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+    implementation("org.springframework.security:spring-security-oauth2-core")
+    implementation("org.springframework.security:spring-security-oauth2-jose")
+
 
 
   //  implementation("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.7.RELEASE")

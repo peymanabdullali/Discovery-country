@@ -37,8 +37,8 @@ public class ScenicSpotEntity {
     List<ImageEntity> images;
     @OneToMany(mappedBy = "scenicSpot", cascade = CascadeType.ALL)
     List<ReviewEntity> reviews;
-    long viewed;
-    Long likeCount;
+    long viewed=0;
+    long likeCount=0;
     Double averageRating = 0.0;
-    Integer ratingCount = 0;
+    long ratingCount = 0;
 }

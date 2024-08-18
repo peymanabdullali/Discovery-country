@@ -25,10 +25,10 @@ public class HomeHotelEntity {
     String contact;
     String mapUrl;
     String type;
-    Long viewed;
-    Long likeCount;
+    long viewed;
+    long likeCount;
     Double averageRating = 0.0;
-    Integer ratingCount = 0;
+    long ratingCount = 0;
     boolean deleted=false;
 
 
