@@ -11,16 +11,16 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ReviewMapper {
-    @Mapping(target = "restaurant.id",source = "request.restaurantId")
-    @Mapping(target = "user.id",source = "request.userId")
+//    @Mapping(target = "restaurant.id",source = "request.restaurantId")
+//    @Mapping(target = "user.id",source = "request.userId")
     ReviewEntity mapToEntity(ReviewRequestForRestaurant request);
 
-    @Mapping(target = "homeHotel.id",source = "request.homeHotelId")
-    @Mapping(target = "user.id",source = "request.userId")
+//    @Mapping(target = "homeHotel.id",source = "request.homeHotelId")
+//    @Mapping(target = "user.id",source = "request.userId")
     ReviewEntity mapToEntity(ReviewRequestForHomeHotel request);
 
-    @Mapping(target = "scenicSpot.id",source = "request.scenicSpotId")
-    @Mapping(target = "user.id",source = "request.userId")
+//    @Mapping(target = "scenicSpot.id",source = "request.scenicSpotId")
+//    @Mapping(target = "user.id",source = "request.userId")
     ReviewEntity mapToEntity(ReviewRequestForScenicSpots request);
 
     ReviewResponse mapToResponse(ReviewEntity entity);

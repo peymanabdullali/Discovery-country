@@ -13,16 +13,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ErrorHandler {
 
-    @ExceptionHandler(UserNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handlerUserNotFoundException(Exception exception) {
-        log.error("handlerUserNotFoundException {}", exception.getMessage());
-
-        return ErrorResponse.builder()
-                .code(HttpStatus.NOT_FOUND.name())
-                .message(exception.getMessage())
-                .build();
-    }
 
     @ExceptionHandler(ActivityCategoryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -91,4 +81,83 @@ public class ErrorHandler {
                 .message(exception.getMessage())
                 .build();
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handlerUserNotFoundException(Exception exception) {
+        log.error("handlerUserNotFoundException {}", exception.getMessage());
+
+        return ErrorResponse.builder()
+                .code(HttpStatus.NOT_FOUND.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(PasswordInvalidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handlerPasswordInvalidException(Exception exception) {
+        log.error("handlerPasswordInvalidException {}", exception.getMessage());
+
+        return ErrorResponse.builder()
+                .code(HttpStatus.BAD_REQUEST.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
+
+    @ExceptionHandler(UserEmailExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handlerUserEmailExistsException(Exception exception) {
+        log.error("handlerUserEmailExistsException {}", exception.getMessage());
+
+        return ErrorResponse.builder()
+                .code(HttpStatus.BAD_REQUEST.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
+
+    @ExceptionHandler(CustomLockedException.class)
+    @ResponseStatus(HttpStatus.LOCKED)
+    public ErrorResponse handleLockedException(CustomLockedException exception) {
+        log.error("handleLockedException {}", exception.getMessage());
+
+        return ErrorResponse.builder()
+                .code(HttpStatus.LOCKED.name())
+                .message(exception.getMessage())
+                .build();
+    }
+    @ExceptionHandler(RefreshTokenNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handlerRefreshTokenNotFoundException(Exception exception) {
+        log.error("handlerRefreshTokenNotFoundException {}", exception.getMessage());
+
+        return ErrorResponse.builder()
+                .code(HttpStatus.NOT_FOUND.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(RefreshTokenExpiredException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse handlerRefreshTokenExpiredException(Exception exception) {
+        log.error("handlerRefreshTokenExpiredException {}", exception.getMessage());
+
+        return ErrorResponse.builder()
+                .code(HttpStatus.UNAUTHORIZED.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(InvalidOtpException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handlerInvalidOtpException(Exception exception) {
+        log.error("handlerInvalidOtpException {}", exception.getMessage());
+
+        return ErrorResponse.builder()
+                .code(HttpStatus.BAD_REQUEST.name())
+                .message(exception.getMessage())
+                .build();
+    }
+
 }

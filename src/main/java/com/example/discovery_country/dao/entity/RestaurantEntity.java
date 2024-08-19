@@ -42,6 +42,9 @@ public class RestaurantEntity {
     double rating;
     String mapUrl;
     String menuUrl;
+
+    
+
     long viewed;
     long likeCount;
     double averageRating;

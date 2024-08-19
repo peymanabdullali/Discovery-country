@@ -1,16 +1,46 @@
-server:
-  port: 8080
-
 spring:
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/discovery_country
+    username: postgres
+    password:
+
 
   jpa:
     database: postgresql
     show-sql: true
     hibernate:
       ddl-auto: update
+
+  mail:
+    host: smtp.gmail.com
+    username:
+    password:
+    default-encoding: UTF-8
+    protocol: smtp
+    port: 587
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId:
+            clientSecret:
+            scope:
+              - openid
+              - profile
+              - email
+
+
+
+=======
 #  liquibase:
 #    change-log: liquibase/change-log-master.yaml
