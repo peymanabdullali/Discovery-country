@@ -28,17 +28,14 @@ public class HomeHotelResponseFindById {
     String type;
     long viewed;
     long likeCount;
-    Double averageRating ;
-    long ratingCount ;
+    Double averageRating;
+    long ratingCount;
 
 
-    List<RoomEntity> hotelRooms;
+    List<RoomResponseForHomeHotel> rooms;
 
-    List<ImageEntity> images;
+    List<ImageResponseForHomeHotel> images;
 
-    List<ReviewEntity> reviews;
+    List<ReviewResponse> reviews;
 
-    List<RoomReservationEntity> roomReservations;
-
-    RegionEntity region;
 }

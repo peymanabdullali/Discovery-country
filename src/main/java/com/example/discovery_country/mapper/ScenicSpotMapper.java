@@ -21,9 +21,8 @@ public interface ScenicSpotMapper {
         ScenicSpotResponse.ScenicSpotResponseBuilder name = ScenicSpotResponse.builder().
                 id(entity.getId()).
                 name(entity.getName());
-        if (!entity.getImages().isEmpty()) {
             name.image(mapToImageResponse(entity.getImages().stream().filter(s->!s.isDeleted()).findFirst().orElseThrow()));
-        }
+
         return name.build();}
     List<ScenicSpotResponse> mapToResponseList(List<ScenicSpotEntity> entities);
 
@@ -34,13 +33,13 @@ public interface ScenicSpotMapper {
     ReviewResponse mapToReviewResponse(ReviewEntity entities);
 
 
-    @AfterMapping
-    default void linkImages(@MappingTarget ScenicSpotEntity scenicSpot, List<ImageEntity> images) {
-        for (ImageEntity image : images) {
-            image.setScenicSpot(scenicSpot);
+        @AfterMapping
+        default void linkImages(@MappingTarget ScenicSpotEntity scenicSpot, List<ImageEntity> images) {
+            for (ImageEntity image : images) {
+                image.setScenicSpot(scenicSpot);
+            }
+            scenicSpot.setImages(images);
         }
-        scenicSpot.setImages(images);
-    }
 
 
 }

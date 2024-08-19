@@ -217,7 +217,7 @@ databaseChangeLog:
                   type: BIGINT
 
               - column:
-                  name: homeHotel_id
+                  name: home_hotel_id
                   type: BIGINT
 
               - column:
@@ -225,7 +225,7 @@ databaseChangeLog:
                   type: BIGINT
 
               - column:
-                  name: scenicSpot_id
+                  name: scenic_spot_id
                   type: BIGINT
 
               - column:
@@ -235,7 +235,6 @@ databaseChangeLog:
               - column:
                   name: deleted
                   type: BOOLEAN
-                  defaultValueBoolean: false
   - changeSet:
       id: 5
       author: ${AUTHOR}

@@ -95,7 +95,7 @@ databaseChangeLog:
                   type: BOOLEAN
 
               - column:
-                  name: homeHotel_id
+                  name: home_hotel_id
                   type: BIGINT
   - changeSet:
       id: 12

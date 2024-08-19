@@ -1,5 +1,6 @@
 package com.example.discovery_country.model.dto.request;
 
+import com.example.discovery_country.enums.HomeHotelType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -21,7 +22,7 @@ public class HomeHotelRequest {
     String contact;
     String mapUrl;
     double price;
-    String type;
+    HomeHotelType type;
     List<Long> imageIds;
     Long regionId;
 

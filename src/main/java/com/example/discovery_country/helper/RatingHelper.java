@@ -20,24 +20,21 @@ public class RatingHelper {
     private final ActivityRepository activityRepository;
     private final HomeHotelRepository homeHotelRepository;
     public <T> void addRating(T entity, int stars) {
-        if (entity instanceof ActivityEntity) {
-            ActivityEntity activity = (ActivityEntity) entity;
+        if (entity instanceof ActivityEntity activity) {
             int newRatingCount = activity.getRatingCount() + 1;
             double newAverageRating = (activity.getAverageRating() * activity.getRatingCount() + stars) / newRatingCount;
             activity.setRatingCount(newRatingCount);
             activity.setAverageRating(newAverageRating);
              activityRepository.save(activity);
 
-        } else if (entity instanceof RestaurantEntity) {
-            RestaurantEntity restaurant = (RestaurantEntity) entity;
+        } else if (entity instanceof RestaurantEntity restaurant) {
             int newRatingCount = restaurant.getRatingCount() + 1;
             double newAverageRating = (restaurant.getAverageRating() * restaurant.getRatingCount() + stars) / newRatingCount;
             restaurant.setRatingCount(newRatingCount);
             restaurant.setAverageRating(newAverageRating);
             restaurantRepository.save(restaurant);
 
-        } else if (entity instanceof HomeHotelEntity) {
-            HomeHotelEntity homeHotel = (HomeHotelEntity) entity;
+        } else if (entity instanceof HomeHotelEntity homeHotel) {
             int newRatingCount = homeHotel.getRatingCount() + 1;
             double newAverageRating = (homeHotel.getAverageRating() * homeHotel.getRatingCount() + stars) / newRatingCount;
             homeHotel.setRatingCount(newRatingCount);

@@ -31,7 +31,7 @@ public class RoomReservationService {
 
         RoomReservationEntity roomReservationEntity = roomReservationMapper.mapToEntity(request);
         calculateAndSetTotalDayAndAmount(roomReservationEntity, request.getRoomId());
-        roomRepository.updateAvailableTrueById(request.getRoomId());
+        roomRepository.updateAvailableFalseById(request.getRoomId());
         roomReservationRepository.save(roomReservationEntity);
         RoomReservationResponse roomReservationResponse = roomReservationMapper.mapToResponse(roomReservationEntity);
         log.info("ActionLog.createReservation end");
@@ -42,7 +42,7 @@ public class RoomReservationService {
     public RoomReservationResponse getReservationByUserId(long id) {
         log.info("ActionLog.getReservationByUserId start with id: " + id);
         RoomReservationEntity roomReservationEntity = roomReservationRepository.
-                findRoomReservationEntitiesByUserIdAndStatusFalse(id).orElseThrow(() -> new RuntimeException("ROOM_RESERVATION_NOT_FOUND"));
+                findRoomReservationEntitiesByUserIdAndStatusTrue(id).orElseThrow(() -> new RuntimeException("ROOM_RESERVATION_NOT_FOUND"));
         RoomReservationResponse roomReservationResponse = roomReservationMapper.mapToResponse(roomReservationEntity);
         log.info("ActionLog.getReservationByUserId end");
         return roomReservationResponse;
@@ -50,7 +50,7 @@ public class RoomReservationService {
     public RoomReservationResponse getReservationHistoryByUserId(long id) {
         log.info("ActionLog.getReservationByUserId start with id: " + id);
         RoomReservationEntity roomReservationEntity = roomReservationRepository.
-                findRoomReservationEntitiesByUserIdAndStatusTrue(id).orElseThrow(() -> new RuntimeException("ROOM_RESERVATION_NOT_FOUND"));
+                findRoomReservationEntitiesByUserIdAndStatusFalse(id).orElseThrow(() -> new RuntimeException("ROOM_RESERVATION_NOT_FOUND"));
         RoomReservationResponse roomReservationResponse = roomReservationMapper.mapToResponse(roomReservationEntity);
         log.info("ActionLog.getReservationByUserId end");
         return roomReservationResponse;

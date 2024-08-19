@@ -15,15 +15,15 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long>,
         PagingAndSortingRepository<RoomEntity, Long>, JpaSpecificationExecutor<RoomEntity> {
     @Transactional
     @Modifying
-    @Query("UPDATE RoomEntity r SET r.available = false " +
-            "WHERE r.available = true AND EXISTS (" +
+    @Query("UPDATE RoomEntity r SET r.available = true " +
+            "WHERE r.available = false AND EXISTS (" +
             "SELECT rr FROM RoomReservationEntity rr " +
-            "WHERE rr.room.id = r.id AND rr.exitDate <= CURRENT_DATE AND rr.status = false)")
+            "WHERE rr.room.id = r.id AND rr.exitDate <= CURRENT_DATE AND rr.status = true)")
     void updateAvailableRooms();
 
     @Modifying
-    @Query("UPDATE RoomEntity r SET r.available = true WHERE r.id = :id")
-    void updateAvailableTrueById(@Param("id") long id);
+    @Query("UPDATE RoomEntity r SET r.available = false WHERE r.id = :id")
+    void updateAvailableFalseById(@Param("id") long id);
 
     @Modifying
     @org.springframework.transaction.annotation.Transactional

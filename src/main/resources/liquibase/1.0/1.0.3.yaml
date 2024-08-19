@@ -4,7 +4,7 @@ databaseChangeLog:
       author: ${AUTHOR}
       changes:
         - createTable:
-            tableName: region_actCategory
+            tableName: region_act_category
             columns:
               - column:
                   name: activity_category_id
@@ -21,14 +21,14 @@ databaseChangeLog:
 
 
         - addForeignKeyConstraint:
-            baseTableName: region_actCategory
+            baseTableName: region_act_category
             baseColumnNames: activity_category_id
             constraintName: fk_activity_category
             referencedTableName: activitycategories
             referencedColumnNames: id
 
         - addForeignKeyConstraint:
-            baseTableName: region_actCategory
+            baseTableName: region_act_category
             baseColumnNames: region_id
             constraintName: fk_region
             referencedTableName: regions
@@ -73,7 +73,7 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableName: images
-            baseColumnNames: homeHotel_id
+            baseColumnNames: home_hotel_id
             constraintName: fk_image_homehotel
             referencedTableName: homehotels
             referencedColumnNames: id
@@ -87,7 +87,7 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableName: images
-            baseColumnNames: scenicSpot_id
+            baseColumnNames: scenic_spot_id
             constraintName: fk_image_scenicspot
             referencedTableName: scenicspots
             referencedColumnNames: id
@@ -136,7 +136,7 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableName: reviews
-            baseColumnNames: scenicSpot_id
+            baseColumnNames: scenic_spot_id
             constraintName: fk_review_scenicspot
             referencedTableName: scenicspots
             referencedColumnNames: id
@@ -150,7 +150,7 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableName: reviews
-            baseColumnNames: homeHotel_id
+            baseColumnNames: home_hotel_id
             constraintName: fk_review_homehotel
             referencedTableName: homehotels
             referencedColumnNames: id
@@ -187,7 +187,7 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableName: rooms
-            baseColumnNames: homeHotel_id
+            baseColumnNames: home_hotel_id
             constraintName: fk_room_homehotel
             referencedTableName: homehotels
             referencedColumnNames: id

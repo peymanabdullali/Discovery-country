@@ -1,13 +1,21 @@
 package com.example.discovery_country.controller;
 
+import com.example.discovery_country.model.dto.criteria.HomeHotelCriteriaRequest;
+import com.example.discovery_country.model.dto.criteria.RestaurantCriteriaRequest;
 import com.example.discovery_country.service.HomeHotelService;
 import com.example.discovery_country.model.dto.request.HomeHotelRequest;
 import com.example.discovery_country.model.dto.response.HomeHotelResponse;
 import com.example.discovery_country.model.dto.response.HomeHotelResponseFindById;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/home-hotels")
@@ -28,11 +36,13 @@ public class HomeHotelController {
         return new ResponseEntity<>(homeHotelResponseFindById, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<HomeHotelResponse> getHomeHotel(@PathVariable Long id) {
-        HomeHotelResponse homeHotelResponse = homeHotelService.getHomeHotel(id);
-        return new ResponseEntity<>(homeHotelResponse, HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<Page<HomeHotelResponse>> getHomeHotels(HomeHotelCriteriaRequest criteriaRequest,
+                                                                 @PageableDefault(sort = "name") Pageable pageable) {
+        List<HomeHotelResponse> homeHotels = homeHotelService.getHomeHotels(pageable, criteriaRequest);
+        return ResponseEntity.ok(new PageImpl<>(homeHotels));
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<HomeHotelResponse> updateHomeHotel(

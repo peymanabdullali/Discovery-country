@@ -6,10 +6,7 @@ import com.example.discovery_country.dao.entity.ImageEntity;
 import com.example.discovery_country.model.dto.request.RoomRequest;
 import com.example.discovery_country.model.dto.request.RoomResponseFindById;
 import com.example.discovery_country.model.dto.response.*;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -17,7 +14,10 @@ import java.util.List;
 public interface RoomMapper {
     @Mapping(target = "homeHotel.id", source = "roomRequest.homeHotelId")
     RoomEntity mapToEntity(RoomRequest roomRequest, List<ImageEntity> images);
-
+    @AfterMapping
+    default void setAvailable(@MappingTarget RoomEntity roomEntity) {
+      roomEntity.setAvailable(true);
+    }
     default RoomResponse mapToResponse(RoomEntity entity) {
         RoomResponse.RoomResponseBuilder name = RoomResponse.builder().
                 id(entity.getId()).
