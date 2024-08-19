@@ -29,7 +29,7 @@ public class ActivityCategoryEntity {
     List<ActivityEntity> activities;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "region_actCategory",joinColumns = @JoinColumn(name="activity_category_id", referencedColumnName = "id"),
+    @JoinTable(name = "region_act_category",joinColumns = @JoinColumn(name="activity_category_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "region_id", referencedColumnName = "id")
     )
     List <RegionEntity> regions;

@@ -42,10 +42,13 @@ public class RestaurantEntity {
     double rating;
     String mapUrl;
     String menuUrl;
-    long viewed=0;
-    long likeCount=0;
-    Double averageRating = 0.0;
-    long ratingCount = 0;
+
+    
+
+    long viewed;
+    long likeCount;
+    double averageRating;
+    int ratingCount;
 
     boolean status;
 

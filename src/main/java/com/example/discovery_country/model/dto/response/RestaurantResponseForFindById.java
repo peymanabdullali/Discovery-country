@@ -30,7 +30,8 @@ public class RestaurantResponseForFindById {
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     List<ReviewEntity> reviews;
-    double rating;
+
+    double averageRating;
     String mapUrl;
     String menuUrl;
     Long viewed;

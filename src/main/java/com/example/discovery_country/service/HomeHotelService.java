@@ -14,11 +14,18 @@ import com.example.discovery_country.helper.IncreaseViewCount;
 import com.example.discovery_country.helper.RatingHelper;
 import com.example.discovery_country.helper.UpdateLike;
 import com.example.discovery_country.mapper.HomeHotelMapper;
+import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
+import com.example.discovery_country.model.dto.criteria.HomeHotelCriteriaRequest;
 import com.example.discovery_country.model.dto.request.HomeHotelRequest;
 import com.example.discovery_country.model.dto.response.HomeHotelResponse;
 import com.example.discovery_country.model.dto.response.HomeHotelResponseFindById;
+import com.example.discovery_country.service.specification.HomeHotelSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -37,12 +44,12 @@ public class HomeHotelService {
     private final RatingHelper ratingHelper;
     private final UpdateLike updateLike;
 
-    public HomeHotelResponse create(HomeHotelRequest homeHotelRequest){
+    public HomeHotelResponse create(HomeHotelRequest homeHotelRequest) {
 
         log.info("ActionLog.createHomeHotel start");
 
-        HomeHotelEntity homeHotelEntity=homeHotelMapper.mapToEntity(homeHotelRequest, imageRepository.findAllById(homeHotelRequest.getImageIds()));
-        HomeHotelResponse homeHotelResponse=homeHotelMapper.mapToResponse(homeHotelRepository.save(homeHotelEntity));
+        HomeHotelEntity homeHotelEntity = homeHotelMapper.mapToEntity(homeHotelRequest, imageRepository.findAllById(homeHotelRequest.getImageIds()));
+        HomeHotelResponse homeHotelResponse = homeHotelMapper.mapToResponse(homeHotelRepository.save(homeHotelEntity));
 
         log.info("ActionLog.createHomeHotel end");
 
@@ -58,25 +65,26 @@ public class HomeHotelService {
         HomeHotelEntity homeHotelEntity = homeHotelRepository.findById(id).orElseThrow(() ->
                 new HomeHotelNotFoundException(HttpStatus.NOT_FOUND.name(), "Home Hotel not found"));
         viewCount.updateViewCount(homeHotelEntity);
+        homeHotelEntity.setReviews(homeHotelEntity.getReviews().stream().filter(i -> !i.isStatus()).toList());
+        homeHotelEntity.setImages(homeHotelEntity.getImages().stream().filter(i -> !i.isDeleted()).toList());
+        homeHotelEntity.setRooms(homeHotelEntity.getRooms().stream().filter(i -> i.isAvailable() && !i.isDeleted()).toList());
 
         log.info("ActionLog.homeHotelResponseFindById end");
 
         return homeHotelMapper.mapToHomeHotelResponseFindById(homeHotelEntity);
     }
 
-    public HomeHotelResponse getHomeHotel(Long id) {
+    public List<HomeHotelResponse> getHomeHotels(Pageable page, HomeHotelCriteriaRequest criteria) {
 
-        log.info("ActionLog.getHomeHotel start with id#" + id);
-
-        HomeHotelEntity homeHotel = homeHotelRepository.findById(id).orElseThrow(() ->
-                new HomeHotelNotFoundException(HttpStatus.NOT_FOUND.name(), "Home Hotel not found"));
-        homeHotel.setViewed(homeHotel.getViewed() + 1);
-        homeHotelRepository.save(homeHotel);
-
-        log.info("ActionLog.getHomeHotel end with id#" + id);
-
-        return homeHotelMapper.mapToResponse(homeHotel);
+        log.info("ActionLog.getHomes start");
+        Specification<HomeHotelEntity> spec = HomeHotelSpecification.homeByCriteria(criteria);
+        List<HomeHotelEntity> list = homeHotelRepository.findAll(spec, page).toList();
+        List<HomeHotelResponse> homeHotelResponses = homeHotelMapper.
+                mapToResponseList(list);
+        log.info("ActionLog.getHomes end");
+        return homeHotelResponses;
     }
+
     public HomeHotelResponse updateHomeHotel(Long id, HomeHotelRequest homeHotelRequest) {
         log.info("ActionLog.updateHomeHotel start with id#" + id);
 
@@ -89,6 +97,7 @@ public class HomeHotelService {
 
         return homeHotelMapper.mapToResponse(homeHotelEntity);
     }
+
     public void softDelete(Long id) {
         log.info("ActionLog.softDelete start with id#" + id);
         homeHotelRepository.softDelete(id);

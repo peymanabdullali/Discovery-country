@@ -59,7 +59,7 @@ public class RoomService {
 
         RoomEntity roomEntity = roomRepository.findById(id).orElseThrow(() ->
                 new RoomNotFoundException(HttpStatus.NOT_FOUND.name(), "Room not found"));
-
+        roomEntity.setImages(roomEntity.getImages().stream().filter(i -> !i.isDeleted()).toList());
         log.info("ActionLog.roomResponseFindById end");
 
         return roomMapper.mapToRoomResponseFindById(roomEntity);

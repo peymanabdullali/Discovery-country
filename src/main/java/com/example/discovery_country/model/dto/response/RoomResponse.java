@@ -19,14 +19,9 @@ public class RoomResponse {
     Long id;
     String name;
     double price;
-    @Column(columnDefinition = "TEXT")
-    String amenities;
-    byte roomNumber;
-    byte roomCount;
-    @Enumerated(EnumType.STRING)
     RoomType roomType;
-    boolean available;
-    HomeHotelResponseForRoom homeHotel;
     ImageResponseForRoom image;
+
+
 
 }

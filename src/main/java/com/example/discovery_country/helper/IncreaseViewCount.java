@@ -24,7 +24,7 @@
                 ((ScenicSpotEntity) entity).setViewed(((ScenicSpotEntity) entity).getViewed() + 1);
                 scenicSpotRepository.save((ScenicSpotEntity) entity);
 
-            } else if (entity instanceof RestaurantRepository) {
+            } else if (entity instanceof RestaurantEntity) {
                 ((RestaurantEntity) entity).setViewed(((RestaurantEntity) entity).getViewed() + 1);
                 restaurantRepository.save((RestaurantEntity) entity);
             } else if (entity instanceof ActivityEntity) {

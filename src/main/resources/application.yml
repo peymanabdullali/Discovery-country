@@ -4,6 +4,7 @@ spring:
     username: postgres
     password:
 
+
   jpa:
     database: postgresql
     show-sql: true
@@ -40,3 +41,6 @@ spring:
 
 
 
+=======
+#  liquibase:
+#    change-log: liquibase/change-log-master.yaml

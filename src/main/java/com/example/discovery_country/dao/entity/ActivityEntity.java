@@ -29,9 +29,11 @@ public class ActivityEntity {
     double price;
 
     long viewed;
-    long likeCount=0;
-    Double averageRating = 0.0;
-    Integer ratingCount = 0;
+    long likeCount;
+    double averageRating;
+    int ratingCount;
+
+//    @Enumerated(EnumType.STRING)
     Status activityStatus;
 
     String mapUrl;

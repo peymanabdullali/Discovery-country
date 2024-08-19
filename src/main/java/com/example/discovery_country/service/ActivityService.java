@@ -67,6 +67,7 @@ public class ActivityService {
         ActivityEntity activityEntity = activityRepository.findById(id).orElseThrow(() ->
                 new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
         viewCount.updateViewCount(activityEntity);
+        activityEntity.setImages(activityEntity.getImages().stream().filter(i -> !i.isDeleted()).toList());
 
         if (activityEntity.getActivityStatus() == Status.INACTIVE) {
             throw new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity is not active");

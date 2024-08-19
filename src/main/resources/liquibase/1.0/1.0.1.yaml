@@ -1,0 +1,185 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: regions
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: map_url
+                  type: VARCHAR(255)
+
+              - column:
+                  name: latitude
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: longitude
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: zone_id
+                  type: BIGINT
+  - changeSet:
+      id: 7
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: restaurants
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: description
+                  type: TEXT
+
+              - column:
+                  name: address
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: contact
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: region_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: rating
+                  type: DOUBLE
+
+              - column:
+                  name: map_url
+                  type: VARCHAR(255)
+
+              - column:
+                  name: menu_url
+                  type: VARCHAR(255)
+
+              - column:
+                  name: viewed
+                  type: BIGINT
+
+              - column:
+                  name: like_count
+                  type: BIGINT
+
+              - column:
+                  name: average_rating
+                  type: DOUBLE
+                  defaultValueNumeric: 0.0
+
+              - column:
+                  name: rating_count
+                  type: INTEGER
+                  defaultValueNumeric: 0
+
+              - column:
+                  name: status
+                  type: BOOLEAN
+  - changeSet:
+      id: 8
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: reviews
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: rating
+                  type: FLOAT
+
+              - column:
+                  name: comment
+                  type: TEXT
+
+              - column:
+                  name: full_name
+                  type: VARCHAR(255)
+
+              - column:
+                  name: photo_url
+                  type: VARCHAR(255)
+
+              - column:
+                  name: status
+                  type: BOOLEAN
+
+              - column:
+                  name: scenic_spot_id
+                  type: BIGINT
+
+              - column:
+                  name: restaurant_id
+                  type: BIGINT
+
+              - column:
+                  name: home_hotel_id
+                  type: BIGINT
+
+              - column:
+                  name: user_id
+                  type: BIGINT
+  - changeSet:
+      id: 9
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: VARCHAR(255)
