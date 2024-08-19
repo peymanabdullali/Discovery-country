@@ -38,7 +38,6 @@ public class ForgotPasswordService {
     }
 
 
-    // send mail for email verification
 
     public ResponseEntity<String> verifyEmail( String email) {
         User user = userRepository.findByEmail(email)
@@ -54,7 +53,6 @@ public class ForgotPasswordService {
         ForgotPassword fp = forgotPasswordRepository.findByUser(user);
 
         if (fp != null) {
-            // Mövcud kaydı yeniləmek
 
             fp.setOtp(otp);
             fp.setExpirationTime(new Date(System.currentTimeMillis() + 3 * 60 * 1000));

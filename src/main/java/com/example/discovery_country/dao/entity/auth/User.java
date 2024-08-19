@@ -135,7 +135,7 @@ public class User implements UserDetails {
     @Override
     public boolean isAccountNonLocked() {
         if (lockTime == null) {
-            return true;  // Account is not locked if lockTime is null
+            return true;
         }
 
         long lockTimeInMillis = lockTime.getTime();
