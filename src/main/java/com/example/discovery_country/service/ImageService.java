@@ -27,9 +27,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ImageService {
     private final ImageRepository imageRepository;
+    private final ImageMapper mapper;
 
 
-    public ImageResponse addPhoto(long id, MultipartFile file) {
+    public ImageResponse addPhoto(MultipartFile file) {
         String uploadDir = "C:\\photos\\";
         File uploadDirFile = new File(uploadDir);
         if (!uploadDirFile.exists()) {
@@ -41,31 +42,17 @@ public class ImageService {
             File destinationFile = new File(uploadDir + fileName);
             file.transferTo(destinationFile);
 
-            ImageEntity imageEntity = imageRepository.findById(id).orElseThrow(() ->
-                    new RuntimeException("ImageEntity not found for id: " + id));
+            ImageEntity imageEntity = new ImageEntity();
 
             imageEntity.setName(fileName);
             imageEntity.setUrl(uploadDir + fileName);
 
-            imageRepository.save(imageEntity);
-
-            ImageResponse imageResponse=new ImageResponse();
-            imageResponse.setId(id);
-            imageResponse.setText("File uploaded and saved successfully!");
-
-            return imageResponse;
+            ImageEntity save = imageRepository.save(imageEntity);
+            return mapper.mapToResponse(save);
         } catch (IOException e) {
             e.printStackTrace();
-            ImageResponse errorResponse = new ImageResponse();
-            errorResponse.setId(id);
-            errorResponse.setText("Failed to upload file!");
-            return errorResponse;
-        } catch (Exception e) {
-            e.printStackTrace();
-            ImageResponse errorResponse = new ImageResponse();
-            errorResponse.setId(id);
-            errorResponse.setText("Failed to find ImageEntity!");
-            return errorResponse;        }
+        }
+        return null;
     }
 
 

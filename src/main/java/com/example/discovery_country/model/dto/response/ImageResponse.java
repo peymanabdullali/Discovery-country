@@ -13,13 +13,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ImageResponse {
-
-
-    String text;
     Long id;
-//    HotelRoomsResponse hotelRoom;
-//    HomeHotelResponse homeHotel;
-//    ActivityResponse activity;
-//    ScenicSpotResponse scenicSpot;
-//    RestaurantResponse restaurant;
+    String url;
+    String name;
+
 }
