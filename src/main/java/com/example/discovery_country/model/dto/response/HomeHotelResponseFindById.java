@@ -34,7 +34,7 @@ public class HomeHotelResponseFindById {
 
     List<RoomResponseForHomeHotel> rooms;
 
-    List<ImageResponseForHomeHotel> images;
+    List<ImageResponseForRelations> images;
 
     List<ReviewResponse> reviews;
 

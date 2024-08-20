@@ -7,7 +7,6 @@ import com.example.discovery_country.dao.entity.RegionEntity;
 import com.example.discovery_country.dao.repository.HomeHotelRepository;
 import com.example.discovery_country.dao.repository.ImageRepository;
 import com.example.discovery_country.dao.repository.RegionRepository;
-import com.example.discovery_country.enums.Status;
 import com.example.discovery_country.exception.ActivityNotFoundException;
 import com.example.discovery_country.exception.HomeHotelNotFoundException;
 import com.example.discovery_country.helper.IncreaseViewCount;
@@ -62,12 +61,12 @@ public class HomeHotelService {
 
         log.info("ActionLog.homeHotelResponseFindById start with id#" + id);
 
-        HomeHotelEntity homeHotelEntity = homeHotelRepository.findById(id).orElseThrow(() ->
+        HomeHotelEntity homeHotelEntity = homeHotelRepository.findOne(HomeHotelSpecification.findByIdWithFilters(id)).orElseThrow(() ->
                 new HomeHotelNotFoundException(HttpStatus.NOT_FOUND.name(), "Home Hotel not found"));
         viewCount.updateViewCount(homeHotelEntity);
-        homeHotelEntity.setReviews(homeHotelEntity.getReviews().stream().filter(i -> !i.isStatus()).toList());
-        homeHotelEntity.setImages(homeHotelEntity.getImages().stream().filter(i -> !i.isDeleted()).toList());
-        homeHotelEntity.setRooms(homeHotelEntity.getRooms().stream().filter(i -> i.isAvailable() && !i.isDeleted()).toList());
+//        homeHotelEntity.setReviews(homeHotelEntity.getReviews().stream().filter(i -> !i.isStatus()).toList());
+//        homeHotelEntity.setImages(homeHotelEntity.getImages().stream().filter(i -> !i.isDeleted()).toList());
+//        homeHotelEntity.setRooms(homeHotelEntity.getRooms().stream().filter(i -> i.isAvailable() && !i.isDeleted()).toList());
 
         log.info("ActionLog.homeHotelResponseFindById end");
 

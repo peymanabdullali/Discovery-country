@@ -8,7 +8,9 @@ import com.example.discovery_country.model.dto.request.HomeHotelRequest;
 import com.example.discovery_country.model.dto.response.*;
 import org.mapstruct.*;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface HomeHotelMapper {
@@ -19,34 +21,34 @@ public interface HomeHotelMapper {
     List<HomeHotelResponse> mapToResponseList(List<HomeHotelEntity> entityList);
 
     default HomeHotelResponse mapToResponse(HomeHotelEntity entity) {
-        HomeHotelResponse.HomeHotelResponseBuilder responseBuilder = HomeHotelResponse.builder()
-                .id(entity.getId())
-                .name(entity.getName());
+        HomeHotelResponse responseBuilder = new HomeHotelResponse();
+        responseBuilder.setId(entity.getId());
+        responseBuilder.setName(entity.getName());
 
         if (!entity.getImages().isEmpty()) {
-            responseBuilder.image(mapImageResponseForHomeHotel(
+            responseBuilder.setImage((mapImageResponseForHomeHotel(
                     entity.getImages().stream()
                             .filter(image -> !image.isDeleted())
                             .findFirst()
                             .orElseThrow()
-            ));
+            )));
         }
 
-        return responseBuilder.build();
+        return null;
     }
 
     HomeHotelResponseFindById mapToHomeHotelResponseFindById(HomeHotelEntity homeHotelEntity);
 
-    RoomResponseForHomeHotel mapToRoomResponse(RoomEntity entity);
+//    RoomResponseForHomeHotel mapToRoomResponse(RoomEntity entity);
 
-    ReviewResponse mapToReviewResponse(ReviewEntity entity);
+//    ReviewResponse mapToReviewResponse(ReviewEntity entity);
 
-    ImageResponseForHomeHotel mapImageResponseForHomeHotel(ImageEntity entity);
+    ImageResponseForRelations mapImageResponseForHomeHotel(ImageEntity entity);
 
     void mapForUpdate(@MappingTarget HomeHotelEntity homeHotelEntity, HomeHotelRequest homeHotelRequest);
 
     @AfterMapping
-    default void linkImages(@MappingTarget HomeHotelEntity homeHotel, List<ImageEntity> images) {
+    default void linkImages(@MappingTarget HomeHotelEntity homeHotel, LinkedHashSet<ImageEntity> images) {
         for (ImageEntity image : images) {
             image.setHomeHotel(homeHotel);
         }

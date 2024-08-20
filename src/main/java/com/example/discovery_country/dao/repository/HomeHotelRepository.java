@@ -18,18 +18,10 @@ import java.util.Optional;
 public interface HomeHotelRepository extends JpaRepository<HomeHotelEntity, Long>,
         PagingAndSortingRepository<HomeHotelEntity, Long>, JpaSpecificationExecutor<HomeHotelEntity> {
 
-    @EntityGraph(attributePaths = {"images"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Override
+    @EntityGraph(attributePaths = {"images"})
     Page<HomeHotelEntity> findAll(Specification<HomeHotelEntity> spec, Pageable pageable);
 
-//    @Query("SELECT h FROM HomeHotelEntity h " +
-//            "LEFT JOIN FETCH h.reviews r " +
-//            "LEFT JOIN FETCH h.images i " +
-//            "LEFT JOIN FETCH h.rooms ro " +
-//            "WHERE h.id = :id " +
-//            "AND (r IS NULL OR r.status = false) " +
-//            "AND (i IS NULL OR i.deleted = false) " +
-//            "AND (ro IS NULL OR (ro.available = true AND ro.deleted = false))")
-//    Optional<HomeHotelEntity> findByIdWithFilters(@Param("id") Long id);
 
     @Modifying
     @Transactional
