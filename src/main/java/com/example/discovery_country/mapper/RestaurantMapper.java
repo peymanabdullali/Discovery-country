@@ -35,11 +35,11 @@ public interface RestaurantMapper {
 
     List<RestaurantResponse> mapToResponseList(List<RestaurantEntity> entities);
 
-    List<ImageResponse> mapImageResponseList(List<ImageEntity> entities);
+//    List<ImageResponse> mapImageResponseList(List<ImageEntity> entities);
 
     ImageResponse mapToImageResponse(ImageEntity entities);
 
-    ReviewResponse mapToReviewResponse(ReviewEntity entities);
+//    ReviewResponse mapToReviewResponse(ReviewEntity entities);
 
 
     @AfterMapping
