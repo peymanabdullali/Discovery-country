@@ -9,7 +9,7 @@ import com.example.discovery_country.helper.IncreaseViewCount;
 import com.example.discovery_country.mapper.RoomMapper;
 import com.example.discovery_country.model.dto.criteria.RoomCriteriaRequest;
 import com.example.discovery_country.model.dto.request.RoomRequest;
-import com.example.discovery_country.model.dto.request.RoomResponseFindById;
+import com.example.discovery_country.model.dto.response.RoomResponseFindById;
 import com.example.discovery_country.model.dto.response.RoomResponse;
 
 import com.example.discovery_country.service.specification.RoomSpecification;
@@ -20,8 +20,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service

@@ -4,7 +4,7 @@ import com.example.discovery_country.dao.entity.HomeHotelEntity;
 import com.example.discovery_country.dao.entity.RoomEntity;
 import com.example.discovery_country.dao.entity.ImageEntity;
 import com.example.discovery_country.model.dto.request.RoomRequest;
-import com.example.discovery_country.model.dto.request.RoomResponseFindById;
+import com.example.discovery_country.model.dto.response.RoomResponseFindById;
 import com.example.discovery_country.model.dto.response.*;
 import org.mapstruct.*;
 
@@ -14,10 +14,6 @@ import java.util.List;
 public interface RoomMapper {
     @Mapping(target = "homeHotel.id", source = "roomRequest.homeHotelId")
     RoomEntity mapToEntity(RoomRequest roomRequest, List<ImageEntity> images);
-    @AfterMapping
-    default void setAvailable(@MappingTarget RoomEntity roomEntity) {
-      roomEntity.setAvailable(true);
-    }
     default RoomResponse mapToResponse(RoomEntity entity) {
         RoomResponse.RoomResponseBuilder name = RoomResponse.builder().
                 id(entity.getId()).
@@ -28,13 +24,13 @@ public interface RoomMapper {
         return name.build();
     }
 
-    List<ImageResponseForRoom> mapToImageResponse(List<ImageEntity> imageEntity);
+//    List<ImageResponseForRelations> mapToImageResponse(List<ImageEntity> imageEntity);
 
-    HomeHotelResponseForRoom mapToHomeHotelResponse(HomeHotelEntity homeHotelEntity);
+//    HomeHotelResponseForRoom mapToHomeHotelResponse(HomeHotelEntity homeHotelEntity);
 
     RoomResponseFindById mapToRoomResponseFindById(RoomEntity roomEntity);
 
-    ImageResponseForRoom mapImageResponseForRoom(ImageEntity entity);
+    ImageResponseForRelations mapImageResponseForRoom(ImageEntity entity);
 
     void mapForUpdate(@MappingTarget RoomEntity roomEntity, RoomRequest roomRequest);
 }

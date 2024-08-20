@@ -3,7 +3,7 @@ package com.example.discovery_country.controller;
 import com.example.discovery_country.model.dto.criteria.RoomCriteriaRequest;
 import com.example.discovery_country.model.dto.request.RoomRequest;
 import com.example.discovery_country.model.dto.response.RoomResponse;
-import com.example.discovery_country.model.dto.request.RoomResponseFindById;
+import com.example.discovery_country.model.dto.response.RoomResponseFindById;
 import com.example.discovery_country.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
