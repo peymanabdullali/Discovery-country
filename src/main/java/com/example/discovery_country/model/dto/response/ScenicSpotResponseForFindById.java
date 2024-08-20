@@ -20,7 +20,7 @@ public class ScenicSpotResponseForFindById {
     String description;
 
     RegionResponse region;
-    List<ImageResponse> images;
+    List<ImageResponseForRelations> images;
     List<ReviewResponse> reviews;
     Long viewed;
 
