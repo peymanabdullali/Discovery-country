@@ -17,17 +17,16 @@ public interface RegionMapper {
 
     List<RegionResponse> mapEntityListToResponseList(List<RegionEntity> entities);
 
-    ZoneResponseForRegion mapEntityToResponse(ZoneEntity zone);
+//    ZoneResponseForRegion mapEntityToResponse(ZoneEntity zone);
 
-    List<ActivityCategoryResponse> mapToActivityCategoryResponseList(List<ActivityCategoryEntity> entities);
+//    List<ActivityCategoryResponse> mapToActivityCategoryResponseList(List<ActivityCategoryEntity> entities);
 
     List<RestaurantResponseForRegion> mapToRestaurantResponseList(List<RestaurantEntity> entities);
 
-    List<ImageResponse> mapToImageResponseList(List<ImageEntity> entities);
 
-    List<HomeHotelResponse> mapToHomeHotelResponseList(List<HomeHotelEntity> entities);
-
-    List<ScenicSpotResponse> mapToScenicSpotResponseList(List<ScenicSpotEntity> entities);
+//    List<HomeHotelResponse> mapToHomeHotelResponseList(List<HomeHotelEntity> entities);
+//
+//    List<ScenicSpotResponse> mapToScenicSpotResponseList(List<ScenicSpotEntity> entities);
 
     //    default RegionResponse mapToResponse(RegionEntity entity) {
 //        return RegionResponse.builder().name(entity.getName()).mapUrl(entity.getMapUrl()).build();
