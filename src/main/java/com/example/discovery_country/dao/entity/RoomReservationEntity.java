@@ -35,6 +35,9 @@ public class RoomReservationEntity {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     UserEntity user;
-
+    @PrePersist
+    public void setStatusTrue() {
+        status = true;
+    }
 
 }

@@ -19,10 +19,5 @@ public interface RoomReservationMapper {
     @Mapping(target = "user.id", source = "request.userId")
     RoomReservationEntity mapToEntity(RoomReservationRequest request);
 
-    @AfterMapping
-    default void setDefaultStatus(@MappingTarget RoomReservationEntity entity) {
-        entity.setStatus(true);
-    }
-
     RoomReservationResponse mapToResponse(RoomReservationEntity entity);
 }
