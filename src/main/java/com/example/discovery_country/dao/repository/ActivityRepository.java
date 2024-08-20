@@ -1,7 +1,6 @@
 package com.example.discovery_country.dao.repository;
 
 import com.example.discovery_country.dao.entity.ActivityEntity;
-import com.example.discovery_country.model.dto.response.ImageResponseForActivity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;

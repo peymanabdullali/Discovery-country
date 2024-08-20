@@ -23,20 +23,20 @@ public interface ActivityMapper {
                 id(entity.getId()).
                 name(entity.getName());
         if (!entity.getImages().isEmpty()) {
-            name.image(mapImageResponseForActivity(entity.getImages().stream().filter(s -> !s.isDeleted()).findFirst().orElseThrow()));
+            name.image(mapImageResponseForRelations(entity.getImages().stream().filter(s -> !s.isDeleted()).findFirst().orElseThrow()));
         }
         return name.build();
 
     }
 
-    List<ImageResponseForActivity> mapToImageResponse(List<ImageEntity> imageEntity);
+//    List<ImageResponseForRelations> mapToImageResponse(List<ImageEntity> imageEntity);
 
-    ActivityCategoryResponseForActivity mapToActivityCategoryResponse(ActivityCategoryEntity activityCategoryEntity);
+//    ActivityCategoryResponseForActivity mapToActivityCategoryResponse(ActivityCategoryEntity activityCategoryEntity);
 
     //ActivityResponseFindById mapToActivityResponseFindById(ActivityEntity activity);
     ActivityResponseFindById mapToActivityResponseFindById(ActivityEntity activityEntity);
 
-    ImageResponseForActivity mapImageResponseForActivity(ImageEntity entity);
+    ImageResponseForRelations mapImageResponseForRelations(ImageEntity entity);
 
     void mapForUpdate(@MappingTarget ActivityEntity activityEntity, ActivityRequest activityRequest);
 
