@@ -45,7 +45,7 @@ public class RatingHelper {
 
         } else if (entity instanceof ScenicSpotEntity) {
             ScenicSpotEntity scenicSpot = (ScenicSpotEntity) entity;
-            long newRatingCount = scenicSpot.getRatingCount() + 1;
+            int newRatingCount = scenicSpot.getRatingCount() + 1;
             double newAverageRating = (scenicSpot.getAverageRating() * scenicSpot.getRatingCount() + stars) / newRatingCount;
             scenicSpot.setRatingCount(newRatingCount);
             scenicSpot.setAverageRating(newAverageRating);
