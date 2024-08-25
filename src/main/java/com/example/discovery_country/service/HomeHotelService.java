@@ -21,6 +21,7 @@ import com.example.discovery_country.model.dto.response.HomeHotelResponseFindByI
 import com.example.discovery_country.service.specification.HomeHotelSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -38,7 +40,6 @@ public class HomeHotelService {
     private final HomeHotelMapper homeHotelMapper;
     private final HomeHotelRepository homeHotelRepository;
     private final ImageRepository imageRepository;
-    private final RegionRepository regionRepository;
     private final IncreaseViewCount viewCount;
     private final RatingHelper ratingHelper;
     private final UpdateLike updateLike;
@@ -63,25 +64,25 @@ public class HomeHotelService {
 
         HomeHotelEntity homeHotelEntity = homeHotelRepository.findOne(HomeHotelSpecification.findByIdWithFilters(id)).orElseThrow(() ->
                 new HomeHotelNotFoundException(HttpStatus.NOT_FOUND.name(), "Home Hotel not found"));
+      homeHotelEntity.setRooms(homeHotelEntity.getRooms().stream().filter(i->
+              i.isAvailable()&&!i.isDeleted()).collect(Collectors.toSet()));
         viewCount.updateViewCount(homeHotelEntity);
-//        homeHotelEntity.setReviews(homeHotelEntity.getReviews().stream().filter(i -> !i.isStatus()).toList());
-//        homeHotelEntity.setImages(homeHotelEntity.getImages().stream().filter(i -> !i.isDeleted()).toList());
-//        homeHotelEntity.setRooms(homeHotelEntity.getRooms().stream().filter(i -> i.isAvailable() && !i.isDeleted()).toList());
-
         log.info("ActionLog.homeHotelResponseFindById end");
 
         return homeHotelMapper.mapToHomeHotelResponseFindById(homeHotelEntity);
     }
 
-    public List<HomeHotelResponse> getHomeHotels(Pageable page, HomeHotelCriteriaRequest criteria) {
+    public Page<HomeHotelResponse> getHomeHotels(Pageable page, HomeHotelCriteriaRequest criteria) {
 
         log.info("ActionLog.getHomes start");
+        System.out.println(criteria.getName()+criteria.getType());
         Specification<HomeHotelEntity> spec = HomeHotelSpecification.homeByCriteria(criteria);
         List<HomeHotelEntity> list = homeHotelRepository.findAll(spec, page).toList();
         List<HomeHotelResponse> homeHotelResponses = homeHotelMapper.
                 mapToResponseList(list);
+
         log.info("ActionLog.getHomes end");
-        return homeHotelResponses;
+        return new PageImpl<>(homeHotelResponses);
     }
 
     public HomeHotelResponse updateHomeHotel(Long id, HomeHotelRequest homeHotelRequest) {

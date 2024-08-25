@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public interface HomeHotelMapper {
+public interface    HomeHotelMapper {
 
     @Mapping(target = "region.id", source = "homeHotelRequest.regionId")
     HomeHotelEntity mapToEntity(HomeHotelRequest homeHotelRequest, List<ImageEntity> images);
@@ -27,14 +27,12 @@ public interface HomeHotelMapper {
 
         if (!entity.getImages().isEmpty()) {
             responseBuilder.setImage((mapImageResponseForHomeHotel(
-                    entity.getImages().stream()
-                            .filter(image -> !image.isDeleted())
-                            .findFirst()
-                            .orElseThrow()
+                    entity.getImages().stream().
+                            findFirst().orElseThrow(()->new RuntimeException("IMAGE_NOT_FOUND"))
             )));
         }
 
-        return null;
+        return responseBuilder;
     }
 
     HomeHotelResponseFindById mapToHomeHotelResponseFindById(HomeHotelEntity homeHotelEntity);
@@ -48,7 +46,7 @@ public interface HomeHotelMapper {
     void mapForUpdate(@MappingTarget HomeHotelEntity homeHotelEntity, HomeHotelRequest homeHotelRequest);
 
     @AfterMapping
-    default void linkImages(@MappingTarget HomeHotelEntity homeHotel, LinkedHashSet<ImageEntity> images) {
+    default void linkImages(@MappingTarget HomeHotelEntity homeHotel, List<ImageEntity> images) {
         for (ImageEntity image : images) {
             image.setHomeHotel(homeHotel);
         }

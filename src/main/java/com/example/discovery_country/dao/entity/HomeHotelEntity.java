@@ -34,28 +34,21 @@ public class HomeHotelEntity {
     int ratingCount;
     boolean deleted;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn
+    RegionEntity region;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude // Döngüden kaçınmak için
-
+    @EqualsAndHashCode.Exclude
     Set<RoomEntity> rooms;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude // Döngüden kaçınmak için
-
-    Set<ImageEntity> images;
+    @EqualsAndHashCode.Exclude
+    List<ImageEntity> images;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude // Döngüden kaçınmak için
-
+    @EqualsAndHashCode.Exclude
     Set<ReviewEntity> reviews;
-//
-//    @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-//    List<RoomReservationEntity> roomReservations;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(nullable = false)
-    RegionEntity region;
 
 
 }

@@ -17,12 +17,6 @@ import java.util.Optional;
 @Repository
 public interface HomeHotelRepository extends JpaRepository<HomeHotelEntity, Long>,
         PagingAndSortingRepository<HomeHotelEntity, Long>, JpaSpecificationExecutor<HomeHotelEntity> {
-
-    @Override
-    @EntityGraph(attributePaths = {"images"})
-    Page<HomeHotelEntity> findAll(Specification<HomeHotelEntity> spec, Pageable pageable);
-
-
     @Modifying
     @Transactional
     @Query("UPDATE HomeHotelEntity a SET a.deleted = true WHERE a.id = :id")

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -19,7 +20,6 @@ public class HomeHotelResponseFindById {
 
     Long id;
     String name;
-    @Column(columnDefinition = "TEXT")
     String description;
     String address;
     String contact;
@@ -32,10 +32,10 @@ public class HomeHotelResponseFindById {
     long ratingCount;
 
 
-    List<RoomResponseForHomeHotel> rooms;
+    Set<RoomResponseForHomeHotel> rooms;
 
     List<ImageResponseForRelations> images;
 
-    List<ReviewResponse> reviews;
+    Set<ReviewResponse> reviews;
 
 }
