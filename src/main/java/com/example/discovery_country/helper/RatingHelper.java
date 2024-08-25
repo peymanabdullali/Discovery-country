@@ -27,12 +27,14 @@ public class RatingHelper {
             activity.setAverageRating(newAverageRating);
              activityRepository.save(activity);
 
+
         } else if (entity instanceof RestaurantEntity restaurant) {
             int newRatingCount = restaurant.getRatingCount() + 1;
             double newAverageRating = (restaurant.getAverageRating() * restaurant.getRatingCount() + stars) / newRatingCount;
             restaurant.setRatingCount(newRatingCount);
             restaurant.setAverageRating(newAverageRating);
             restaurantRepository.save(restaurant);
+
 
         } else if (entity instanceof HomeHotelEntity homeHotel) {
             int newRatingCount = homeHotel.getRatingCount() + 1;

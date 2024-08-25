@@ -26,6 +26,9 @@ public class HomeHotelEntity {
     String contact;
     String mapUrl;
 
+
+
+
     @Enumerated(EnumType.STRING)
     HomeHotelType type;
     long viewed;

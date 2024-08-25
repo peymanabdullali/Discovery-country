@@ -15,8 +15,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface RoomReservationMapper {
-    @Mapping(target = "room.id", source = "request.roomId")
-    @Mapping(target = "user.id", source = "request.userId")
+//    @Mapping(target = "room.id", source = "request.roomId")
+//    @Mapping(target = "user.id", source = "request.userId")
     RoomReservationEntity mapToEntity(RoomReservationRequest request);
 
     RoomReservationResponse mapToResponse(RoomReservationEntity entity);

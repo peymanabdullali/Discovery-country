@@ -1,5 +1,6 @@
 package com.example.discovery_country.dao.entity;
 
+import com.example.discovery_country.dao.entity.auth.User;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -39,5 +40,6 @@ public class RoomReservationEntity {
     public void setStatusTrue() {
         status = true;
     }
+
 
 }
