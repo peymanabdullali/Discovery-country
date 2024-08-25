@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.w3c.dom.stylesheets.LinkStyle;
+
+import java.util.List;
 
 
 @Data
@@ -13,7 +16,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ImageResponse {
-    Long id;
+    List<Integer> ids;
     String url;
     String name;
 

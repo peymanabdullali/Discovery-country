@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,25 +31,28 @@ public class ImageService {
     private final ImageMapper mapper;
 
 
-    public ImageResponse addPhoto(MultipartFile file) {
-        String uploadDir = "C:\\photos\\";
+    public List<Long> addPhoto(MultipartFile[] file) {
+        String uploadDir = "C:\\Users\\pabdu\\Desktop\\saaaalam\\";
+        List<Long> list = new ArrayList<>();
         File uploadDirFile = new File(uploadDir);
         if (!uploadDirFile.exists()) {
             uploadDirFile.mkdirs();
         }
 
         try {
-            String fileName = file.getOriginalFilename();
-            File destinationFile = new File(uploadDir + fileName);
-            file.transferTo(destinationFile);
+            for (MultipartFile s : file) {
 
-            ImageEntity imageEntity = new ImageEntity();
+                String fileName = s.getOriginalFilename();
+                File destinationFile = new File(uploadDir + fileName);
+                s.transferTo(destinationFile);
+                ImageEntity imageEntity = mapper.mapToEntity(fileName,  uploadDir + fileName);
+                imageEntity.setName(fileName);
+                imageEntity.setUrl(uploadDir + fileName);
 
-            imageEntity.setName(fileName);
-            imageEntity.setUrl(uploadDir + fileName);
-
-            ImageEntity save = imageRepository.save(imageEntity);
-            return mapper.mapToResponse(save);
+                ImageEntity save = imageRepository.save(imageEntity);
+                list.add(save.getId());
+            }
+            return list;
         } catch (IOException e) {
             e.printStackTrace();
         }

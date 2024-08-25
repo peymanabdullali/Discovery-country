@@ -12,7 +12,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL) // Və ya IGNORE seçin
 public interface ImageMapper {
-    ImageEntity mapToEntity(ImageRequest request);
+    ImageEntity mapToEntity(String name, String url);
 
     ImageResponse mapToResponse(ImageEntity imageEntity);
 
