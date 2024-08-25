@@ -14,10 +14,13 @@ import java.util.List;
 public interface RoomMapper {
     @Mapping(target = "homeHotel.id", source = "roomRequest.homeHotelId")
     RoomEntity mapToEntity(RoomRequest roomRequest, List<ImageEntity> images);
+
     default RoomResponse mapToResponse(RoomEntity entity) {
         RoomResponse.RoomResponseBuilder name = RoomResponse.builder().
                 id(entity.getId()).
-                name(entity.getName());
+                name(entity.getName()).
+                price(entity.getPrice()).
+                roomType(entity.getRoomType());
         if (!entity.getImages().isEmpty()) {
             name.image(mapImageResponseForRoom(entity.getImages().stream().filter(s -> !s.isDeleted()).findFirst().orElseThrow()));
         }

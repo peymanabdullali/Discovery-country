@@ -16,11 +16,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomRequest {
 
-    Long id;
-    String name;
+               String name;
     double price;
     RoomType roomType;
-    boolean available;
     Long homeHotelId;
     List<Long> imageIds;
 }

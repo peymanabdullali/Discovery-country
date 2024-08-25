@@ -37,7 +37,7 @@ public interface RestaurantMapper {
 
 //    List<ImageResponse> mapImageResponseList(List<ImageEntity> entities);
 
-    ImageResponse mapToImageResponse(ImageEntity entities);
+    ImageResponseForRelations mapToImageResponse(ImageEntity entities);
 
 //    ReviewResponse mapToReviewResponse(ReviewEntity entities);
 
