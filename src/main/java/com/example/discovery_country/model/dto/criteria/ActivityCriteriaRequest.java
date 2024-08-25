@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,8 +17,6 @@ public class ActivityCriteriaRequest {
     String name;
     double priceGreaterThan;
     double priceLessThan;
-    LocalDateTime startDate;
-    LocalDateTime endDate;
-
-
+    LocalDate startDate;
+    LocalDate endDate;
 }
