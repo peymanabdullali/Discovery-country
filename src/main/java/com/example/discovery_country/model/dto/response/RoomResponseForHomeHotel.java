@@ -18,7 +18,6 @@ public class RoomResponseForHomeHotel {
     String name;
     double price;
     byte roomCount;
-    @Enumerated(EnumType.STRING)
     RoomType roomType;
 
 

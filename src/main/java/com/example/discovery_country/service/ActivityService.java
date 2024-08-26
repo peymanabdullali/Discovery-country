@@ -41,7 +41,6 @@ public class ActivityService {
     public ActivityResponse create(ActivityRequest request) {
         log.info("ActionLog.createActivity start");
 
-        // ActivityCategoryEntity activityCategory=categoryRepository.findById(request.getActivityCategoryId()).orElseThrow(()->new ActivityCategoryNotFoundException(HttpStatus.NOT_FOUND.name(), "ActivityCategory not found"))
 
         ActivityEntity activityEntity = activityMapper.mapToEntity(request, imageRepository.findAllById(request.getImageIds()));
         ActivityResponse activityResponse = activityMapper.mapToResponse(activityRepository.save(activityEntity));
@@ -56,7 +55,6 @@ public class ActivityService {
         Page<ActivityEntity> activities = activityRepository.findAll(spec, pageable);
 
         log.info("ActionLog.getActivity end");
-
         return activities.map(activityMapper::mapToResponse);
     }
 

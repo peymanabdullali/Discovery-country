@@ -38,9 +38,9 @@ public class HomeHotelController {
 
     @GetMapping
     public ResponseEntity<Page<HomeHotelResponse>> getHomeHotels(HomeHotelCriteriaRequest criteriaRequest,
-                                                                 @PageableDefault(sort = "name") Pageable pageable) {
-        List<HomeHotelResponse> homeHotels = homeHotelService.getHomeHotels(pageable, criteriaRequest);
-        return ResponseEntity.ok(new PageImpl<>(homeHotels));
+                                                                 Pageable pageable) {
+        Page<HomeHotelResponse> homeHotels = homeHotelService.getHomeHotels(pageable, criteriaRequest);
+        return ResponseEntity.ok(homeHotels);
     }
 
 

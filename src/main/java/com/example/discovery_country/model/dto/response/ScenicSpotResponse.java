@@ -16,7 +16,7 @@ public class ScenicSpotResponse {
 
     long id;
     String name;
-    ImageResponse image;
+    ImageResponseForRelations image;
 
 
 }

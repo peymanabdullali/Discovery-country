@@ -8,7 +8,9 @@ import jakarta.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
+
 import jakarta.persistence.criteria.Predicate;
+
 import java.util.List;
 
 public class RoomSpecification implements Specification<RoomEntity> {
@@ -33,6 +35,8 @@ public class RoomSpecification implements Specification<RoomEntity> {
                 predicates.add(criteriaBuilder.between(root.get("price"),
                         roomCriteriaRequest.getMinPrice(), roomCriteriaRequest.getMaxPrice()));
             }
+            predicates.add(criteriaBuilder.isTrue(root.get("available")));
+            predicates.add(criteriaBuilder.isFalse(root.get("deleted")));
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
