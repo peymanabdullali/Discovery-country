@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.3.2"
     id("io.spring.dependency-management") version "1.1.6"
+    groovy
 }
 
 group = "com.example"
@@ -67,10 +68,19 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     implementation("org.springframework.security:spring-security-oauth2-core")
     implementation("org.springframework.security:spring-security-oauth2-jose")
+    //testImplementation("org.spockframework:spock-spring:2.3-groovy-4.0")
+    testImplementation("org.spockframework:spock-core:2.2-groovy-3.0")
+    testImplementation("org.spockframework:spock-spring:2.2-groovy-3.0")
+    testImplementation("org.codehaus.groovy:groovy-all:3.0.9")
+    testImplementation("io.github.benas:random-beans:3.9.0")
+    testImplementation("org.mockito:mockito-core:4.6.1")
+
+
+    //testImplementation ("io.github.benas:random-beans:3.10.0") // Or the appropriate version you need
 
 
 
-  //  implementation("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.7.RELEASE")
+    //  implementation("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.7.RELEASE")
 
 }
 
