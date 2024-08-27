@@ -7,11 +7,9 @@ import lombok.experimental.FieldDefaults;
 import java.util.List;
 
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HomeHotelResponse {
 
@@ -21,6 +19,6 @@ public class HomeHotelResponse {
 
     double price;
     Long viewed;
-    ImageResponseForHomeHotel image;
+    ImageResponseForRelations image;
 
 }

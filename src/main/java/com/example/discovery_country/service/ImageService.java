@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,45 +28,35 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ImageService {
     private final ImageRepository imageRepository;
+    private final ImageMapper mapper;
 
 
-    public ImageResponse addPhoto(long id, MultipartFile file) {
-        String uploadDir = "C:\\photos\\";
+    public List<Long> addPhoto(MultipartFile[] file) {
+        String uploadDir = "C:\\Users\\pabdu\\Desktop\\saaaalam\\";
+        List<Long> list = new ArrayList<>();
         File uploadDirFile = new File(uploadDir);
         if (!uploadDirFile.exists()) {
             uploadDirFile.mkdirs();
         }
 
         try {
-            String fileName = file.getOriginalFilename();
-            File destinationFile = new File(uploadDir + fileName);
-            file.transferTo(destinationFile);
+            for (MultipartFile s : file) {
 
-            ImageEntity imageEntity = imageRepository.findById(id).orElseThrow(() ->
-                    new RuntimeException("ImageEntity not found for id: " + id));
+                String fileName = s.getOriginalFilename();
+                File destinationFile = new File(uploadDir + fileName);
+                s.transferTo(destinationFile);
+                ImageEntity imageEntity = mapper.mapToEntity(fileName,  uploadDir + fileName);
+                imageEntity.setName(fileName);
+                imageEntity.setUrl(uploadDir + fileName);
 
-            imageEntity.setName(fileName);
-            imageEntity.setUrl(uploadDir + fileName);
-
-            imageRepository.save(imageEntity);
-
-            ImageResponse imageResponse=new ImageResponse();
-            imageResponse.setId(id);
-            imageResponse.setText("File uploaded and saved successfully!");
-
-            return imageResponse;
+                ImageEntity save = imageRepository.save(imageEntity);
+                list.add(save.getId());
+            }
+            return list;
         } catch (IOException e) {
             e.printStackTrace();
-            ImageResponse errorResponse = new ImageResponse();
-            errorResponse.setId(id);
-            errorResponse.setText("Failed to upload file!");
-            return errorResponse;
-        } catch (Exception e) {
-            e.printStackTrace();
-            ImageResponse errorResponse = new ImageResponse();
-            errorResponse.setId(id);
-            errorResponse.setText("Failed to find ImageEntity!");
-            return errorResponse;        }
+        }
+        return null;
     }
 
 

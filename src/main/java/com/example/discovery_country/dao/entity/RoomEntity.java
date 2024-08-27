@@ -38,6 +38,8 @@ public class RoomEntity {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     List<RoomReservationEntity> roomReservations;
 
-
-
+    @PrePersist
+    public void setAvailableTrue() {
+        available = true;
+    }
 }

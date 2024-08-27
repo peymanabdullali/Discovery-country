@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ImageResponseForActivity {
+public class ImageResponseForRelations {
 
     String name;
     String url;

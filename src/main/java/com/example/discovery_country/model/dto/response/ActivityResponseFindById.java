@@ -1,6 +1,5 @@
 package com.example.discovery_country.model.dto.response;
 
-import com.example.discovery_country.enums.Status;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -51,7 +50,7 @@ public class ActivityResponseFindById {
     @NotBlank(message = "can't be blank")
     Integer numberOfPeople;
 
-    List<ImageResponseForActivity> images;
+    List<ImageResponseForRelations> images;
     ActivityCategoryResponseForActivity activityCategory;
 
 }

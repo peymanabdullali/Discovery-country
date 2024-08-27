@@ -16,5 +16,5 @@ import java.util.List;
 public class ZoneResponse {
     long id;
     String name;
-    List<RegionResponseForZone> regions;
+    List<RegionResponseForRelations> regions;
 }

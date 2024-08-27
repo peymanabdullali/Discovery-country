@@ -16,9 +16,5 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ActivityCategoryResponse {
-
-
-    @NotBlank(message = "can't be blank")
     String name;
-    List<RegionResponseForActivityCategory> regions;
 }

@@ -20,7 +20,7 @@ public class RoomResponse {
     String name;
     double price;
     RoomType roomType;
-    ImageResponseForRoom image;
+    ImageResponseForRelations image;
 
 
 

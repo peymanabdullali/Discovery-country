@@ -23,9 +23,9 @@ public class HotelRoomsResponse {
     RoomType roomType;
     boolean available;
     HomeHotelResponse homeHotels;
-    List<ImageResponse> images;
+    List<ImageResponseForRelations> images;
     List<RoomReservationResponse> roomReservations;
 
-    String amenities;//json b
+    String amenities;
 
 }

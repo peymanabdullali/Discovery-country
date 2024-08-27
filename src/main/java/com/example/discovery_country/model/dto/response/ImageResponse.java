@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.w3c.dom.stylesheets.LinkStyle;
+
+import java.util.List;
 
 
 @Data
@@ -13,13 +16,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ImageResponse {
+    List<Integer> ids;
+    String url;
+    String name;
 
-
-    String text;
-    Long id;
-//    HotelRoomsResponse hotelRoom;
-//    HomeHotelResponse homeHotel;
-//    ActivityResponse activity;
-//    ScenicSpotResponse scenicSpot;
-//    RestaurantResponse restaurant;
 }

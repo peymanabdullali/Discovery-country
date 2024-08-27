@@ -1,15 +1,14 @@
 package com.example.discovery_country.model.dto.response;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class RegionResponseForZone {
+public class RegionResponseForRelations {
     String name;
 }

@@ -28,9 +28,9 @@ public interface ScenicSpotMapper {
 
     ScenicSpotResponseForFindById mapToResponseForFindById(ScenicSpotEntity entity);
 
-    List<ImageResponse> mapScenicSpotResponseList(List<ImageEntity> entities);
-    ImageResponse mapToImageResponse(ImageEntity entities);
-    ReviewResponse mapToReviewResponse(ReviewEntity entities);
+//    List<ImageResponseForRelations> mapScenicSpotResponseList(List<ImageEntity> entities);
+    ImageResponseForRelations mapToImageResponse(ImageEntity entities);
+//    ReviewResponse mapToReviewResponse(ReviewEntity entities);
 
 
         @AfterMapping

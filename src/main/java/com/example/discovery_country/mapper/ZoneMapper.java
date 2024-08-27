@@ -21,9 +21,8 @@ public interface ZoneMapper {
     ZoneEntity mapToEntity(ZoneRequest request);
 
     ZoneResponse mapToResponse(ZoneEntity entity);
-    List<RegionResponseForZone> mapToRegionResponseList(List<RegionEntity> entities);
+//    List<RegionResponseForRelations> mapToRegionResponseList(List<RegionEntity> entities);
     List<ZoneResponse> mapToZoneResponseList(List<ZoneEntity> entities);
-//    @Mapping(target = "zone.id",source = "request.zoneId")
     void mapForUpdate (@MappingTarget ZoneEntity entity, ZoneRequest request);
 
 

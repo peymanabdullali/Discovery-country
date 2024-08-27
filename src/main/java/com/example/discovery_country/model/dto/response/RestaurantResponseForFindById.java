@@ -24,12 +24,11 @@ public class RestaurantResponseForFindById {
 
     String contact;
 
-    RegionResponseForZone region;
+    RegionResponseForRelations region;
 
     List<ImageResponse> images;
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    List<ReviewEntity> reviews;
+    List<ReviewResponse> reviews;
 
     double averageRating;
     String mapUrl;

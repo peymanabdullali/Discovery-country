@@ -6,11 +6,14 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "homehotels")
 public class HomeHotelEntity {
     @Id
@@ -34,22 +37,21 @@ public class HomeHotelEntity {
     int ratingCount;
     boolean deleted;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn
+    RegionEntity region;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-    List<RoomEntity> rooms;
+    @EqualsAndHashCode.Exclude
+    Set<RoomEntity> rooms;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
     List<ImageEntity> images;
 
     @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-    List<ReviewEntity> reviews;
-//
-//    @OneToMany(mappedBy = "homeHotel", cascade = CascadeType.ALL)
-//    List<RoomReservationEntity> roomReservations;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(nullable = false)
-    RegionEntity region;
+    @EqualsAndHashCode.Exclude
+    Set<ReviewEntity> reviews;
 
 
 }

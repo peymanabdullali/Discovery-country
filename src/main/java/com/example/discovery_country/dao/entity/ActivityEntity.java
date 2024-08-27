@@ -62,19 +62,11 @@ public class ActivityEntity {
     @Column(nullable = false)
     int numberOfPeople;
 
-//    @ManyToOne
-//    @JoinColumn(nullable = false)
-//    ImageEntity image;
-//
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "activity_id", referencedColumnName = "id")
-//    ActivityCategoryEntity activityCategory;
 
     @OneToMany(mappedBy = "activity" ,cascade = CascadeType.ALL)
     List<ImageEntity> images;
   
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-
     @JoinColumn
     ActivityCategoryEntity activityCategory;
 
