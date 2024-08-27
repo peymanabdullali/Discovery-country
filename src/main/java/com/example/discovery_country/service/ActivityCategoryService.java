@@ -29,17 +29,19 @@ import java.util.List;
 public class ActivityCategoryService {
     private final ActivityCategoryRepository activityCategoryRepository;
     private final RegionRepository regionRepository;
-    private final ActivityRepository activityRepository;
 
     public ActivityCategoryResponse create(ActivityCategoryRequest request) {
         log.info("ActionLog.createActivityCategory start");
 
         if (request.getRegionIds() == null || request.getRegionIds().isEmpty()) {
+            log.error("Region IDs must not be null or empty");
+
             throw new IllegalArgumentException("Region IDs must not be null or empty");
         }
 
        List<RegionEntity> regions=regionRepository.findAllById(request.getRegionIds());
-       if (regions.isEmpty()){
+       if (regions==null || regions.isEmpty()){
+           log.error("Regions not found for IDs: {}", request.getRegionIds());
            throw new RuntimeException("regions not founds");
        }
 
