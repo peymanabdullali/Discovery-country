@@ -109,7 +109,7 @@ databaseChangeLog:
 
               - column:
                   name: rating_count
-                  type: INTEGER
+                  type: INT
                   defaultValueNumeric: 0
 
               - column:
@@ -165,21 +165,21 @@ databaseChangeLog:
               - column:
                   name: user_id
                   type: BIGINT
-  - changeSet:
-      id: 9
-      author: ${AUTHOR}
-      changes:
-        - createTable:
-            tableName: roles
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-
-              - column:
-                  name: name
-                  type: VARCHAR(255)
+#  - changeSet:
+#      id: 9
+#      author: ${AUTHOR}
+#      changes:
+#        - createTable:
+#            tableName: roles
+#            columns:
+#              - column:
+#                  name: id
+#                  type: BIGINT
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#                    nullable: false
+#
+#              - column:
+#                  name: name
+#                  type: VARCHAR(255)

@@ -4,7 +4,7 @@ databaseChangeLog:
       author: ${AUTHOR}
       changes:
         - createTable:
-            tableName: activitycategories
+            tableName: activity_categories
             columns:
               - column:
                   name: id
@@ -123,7 +123,7 @@ databaseChangeLog:
       author: ${AUTHOR}
       changes:
         - createTable:
-            tableName: homehotels
+            tableName: home_hotels
             columns:
               - column:
                   name: id
@@ -172,7 +172,7 @@ databaseChangeLog:
 
               - column:
                   name: rating_count
-                  type: INTEGER
+                  type: INT
                   defaultValueNumeric: 0
 
               - column:
