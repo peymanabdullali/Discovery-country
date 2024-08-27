@@ -26,11 +26,10 @@ public class ReviewController {
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String uploadFile(
-            @RequestPart("file") MultipartFile file)
-    {
+            @RequestPart("file") MultipartFile file) {
         log.info("Controller.uploadFile start");
 
-        String path = reviewService.addPhoto(file);
+        String path = reviewService.uploadFile(file);
         log.info("Controller.uploadFile end");
 
         return path;
@@ -62,7 +61,7 @@ public class ReviewController {
                                                                 @RequestPart("photo") MultipartFile photo) {
         log.info("Controller.createHomeHotelReview start");
 
-        ReviewResponse response = reviewService.createHomeHotelReview(review,photo);
+        ReviewResponse response = reviewService.createHomeHotelReview(review, photo);
 
         log.info("Controller.createHomeHotelReview end");
 
@@ -70,22 +69,23 @@ public class ReviewController {
     }
 
     @PostMapping("/scenic-spot")
-    public ResponseEntity<ReviewResponse> createScenicSpotReview(@RequestPart("review") ReviewRequestForScenicSpots  review,
+    public ResponseEntity<ReviewResponse> createScenicSpotReview(@RequestPart("review") ReviewRequestForScenicSpots review,
                                                                  @RequestPart("photo") MultipartFile photo) {
         log.info("Controller.createScenicSpotReview start");
 
-        ReviewResponse response = reviewService.createScenicSpotReview(review,photo);
+        ReviewResponse response = reviewService.createScenicSpotReview(review, photo);
 
         log.info("Controller.createScenicSpotReview end");
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-        @PostMapping("/restaurant")
+
+    @PostMapping("/restaurant")
     public ResponseEntity<ReviewResponse> createRestaurantReview(@RequestPart("review") ReviewRequestForRestaurant review,
                                                                  @RequestPart("photo") MultipartFile photo) {
         log.info("Controller.createRestaurantReview start");
 
-        ReviewResponse response = reviewService.createRestaurantReview(review,photo);
+        ReviewResponse response = reviewService.createRestaurantReview(review, photo);
 
         log.info("Controller.createRestaurantReview end");
 

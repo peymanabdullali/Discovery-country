@@ -63,6 +63,10 @@ dependencies {
    // implementation("org.liquibase:liquibase-core:4.24.0")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("io.swagger:swagger-annotations:1.6.4")
+//AWS s3
+//    implementation("com.amazonaws:aws-java-sdk-s3")
+    implementation("com.amazonaws:aws-java-sdk-s3:1.12.569")
+
 
 
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
