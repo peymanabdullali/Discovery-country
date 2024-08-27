@@ -60,7 +60,7 @@ public class ActivityEntity {
     String requirements;
 
     @Column(nullable = false)
-    Integer numberOfPeople;
+    int numberOfPeople;
 
 
     @OneToMany(mappedBy = "activity" ,cascade = CascadeType.ALL)
