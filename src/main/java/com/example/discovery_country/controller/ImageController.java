@@ -6,6 +6,7 @@ import com.example.discovery_country.service.ImageService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -26,9 +27,9 @@ public class ImageController {
     @PostMapping(value = "/addPhoto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<List<Long>> addPhoto(@RequestPart MultipartFile[] photo) {
         List<Long> list = imageService.addPhoto(photo);
-       return ResponseEntity.ok(list);
-
+        return ResponseEntity.ok(list);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteImage(@PathVariable Long id) {
         log.info("ActionLog.deleteImage start with id#" + id);
