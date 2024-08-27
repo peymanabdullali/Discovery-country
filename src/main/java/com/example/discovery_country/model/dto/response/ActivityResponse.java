@@ -1,12 +1,8 @@
 package com.example.discovery_country.model.dto.response;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,7 +16,7 @@ public class ActivityResponse {
     String name;
     @NotBlank(message = "can't be blank")
     double price;
-    ImageResponseForActivity image;
+    ImageResponseForRelations image;
 }
 
 

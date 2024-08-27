@@ -23,11 +23,10 @@ public class ImageController {
 
     private final ImageService imageService;
 
-    @ApiOperation("Adding photo by Id")
-    @PostMapping(value = "/addPhoto/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ImageResponse> addPhoto(@PathVariable Long id, @RequestParam MultipartFile photo) {
-       ImageResponse imageResponse=imageService.addPhoto(id,photo);
-       return ResponseEntity.ok(imageResponse);
+    @PostMapping(value = "/addPhoto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<List<Long>> addPhoto(@RequestPart MultipartFile[] photo) {
+        List<Long> list = imageService.addPhoto(photo);
+       return ResponseEntity.ok(list);
 
     }
     @DeleteMapping("/{id}")

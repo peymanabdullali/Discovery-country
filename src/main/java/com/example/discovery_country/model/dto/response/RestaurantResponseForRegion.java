@@ -20,7 +20,7 @@ public class RestaurantResponseForRegion {
 
     String address;
     double rating;
-    RegionResponseForZone regionResponseForZone;
+    RegionResponseForRelations regionResponseForZone;
     List<ImageResponse> image;
     Long viewed;
 }

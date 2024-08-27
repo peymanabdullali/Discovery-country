@@ -43,6 +43,4 @@ public class RegionEntity {
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     List<ScenicSpotEntity> scenicSpots;
 
-
-
 }

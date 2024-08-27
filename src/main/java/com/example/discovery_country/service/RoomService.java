@@ -1,5 +1,7 @@
 package com.example.discovery_country.service;
 
+import com.example.discovery_country.dao.entity.HomeHotelEntity;
+import com.example.discovery_country.dao.entity.RegionEntity;
 import com.example.discovery_country.dao.entity.RoomEntity;
 import com.example.discovery_country.dao.repository.RoomRepository;
 import com.example.discovery_country.dao.repository.ImageRepository;
@@ -9,7 +11,8 @@ import com.example.discovery_country.helper.IncreaseViewCount;
 import com.example.discovery_country.mapper.RoomMapper;
 import com.example.discovery_country.model.dto.criteria.RoomCriteriaRequest;
 import com.example.discovery_country.model.dto.request.RoomRequest;
-import com.example.discovery_country.model.dto.request.RoomResponseFindById;
+import com.example.discovery_country.model.dto.response.RegionResponse;
+import com.example.discovery_country.model.dto.response.RoomResponseFindById;
 import com.example.discovery_country.model.dto.response.RoomResponse;
 
 import com.example.discovery_country.service.specification.RoomSpecification;
@@ -21,8 +24,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -30,14 +31,12 @@ public class RoomService {
     public final RoomRepository roomRepository;
     public final ImageRepository imageRepository;
     private final RoomMapper roomMapper;
-    private final IncreaseViewCount viewCount;
 
 
     public RoomResponse create(RoomRequest request) {
         log.info("ActionLog.createRoom start");
-
-        RoomEntity roomEntity = roomMapper.mapToEntity(request, imageRepository.findAllById(request.getImageIds()));
-        RoomResponse roomResponse = roomMapper.mapToResponse(roomRepository.save(roomEntity));
+        RoomEntity room = roomRepository.save(roomMapper.mapToEntity(request, imageRepository.findAllById(request.getImageIds())));
+        RoomResponse roomResponse = roomMapper.mapToResponse(room);
         log.info("ActionLog.createRoom end");
         return roomResponse;
     }

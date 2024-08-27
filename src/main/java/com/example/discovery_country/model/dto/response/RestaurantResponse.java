@@ -14,6 +14,6 @@ import java.util.List;
 public class RestaurantResponse {
     long id;
     String name;
-    ImageResponse image;
+    ImageResponseForRelations image;
     Long viewed;
 }

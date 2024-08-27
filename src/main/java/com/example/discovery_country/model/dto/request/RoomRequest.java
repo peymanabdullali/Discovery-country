@@ -17,9 +17,9 @@ import java.util.List;
 public class RoomRequest {
 
     String name;
+
     double price;
     RoomType roomType;
-    boolean available;
     Long homeHotelId;
     List<Long> imageIds;
 }

@@ -8,10 +8,12 @@ import com.example.discovery_country.model.dto.request.HomeHotelRequest;
 import com.example.discovery_country.model.dto.response.*;
 import org.mapstruct.*;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public interface HomeHotelMapper {
+public interface    HomeHotelMapper {
 
     @Mapping(target = "region.id", source = "homeHotelRequest.regionId")
     HomeHotelEntity mapToEntity(HomeHotelRequest homeHotelRequest, List<ImageEntity> images);
@@ -19,29 +21,27 @@ public interface HomeHotelMapper {
     List<HomeHotelResponse> mapToResponseList(List<HomeHotelEntity> entityList);
 
     default HomeHotelResponse mapToResponse(HomeHotelEntity entity) {
-        HomeHotelResponse.HomeHotelResponseBuilder responseBuilder = HomeHotelResponse.builder()
-                .id(entity.getId())
-                .name(entity.getName());
+        HomeHotelResponse responseBuilder = new HomeHotelResponse();
+        responseBuilder.setId(entity.getId());
+        responseBuilder.setName(entity.getName());
 
         if (!entity.getImages().isEmpty()) {
-            responseBuilder.image(mapImageResponseForHomeHotel(
-                    entity.getImages().stream()
-                            .filter(image -> !image.isDeleted())
-                            .findFirst()
-                            .orElseThrow()
-            ));
+            responseBuilder.setImage((mapImageResponseForHomeHotel(
+                    entity.getImages().stream().
+                            findFirst().orElseThrow(()->new RuntimeException("IMAGE_NOT_FOUND"))
+            )));
         }
 
-        return responseBuilder.build();
+        return responseBuilder;
     }
 
     HomeHotelResponseFindById mapToHomeHotelResponseFindById(HomeHotelEntity homeHotelEntity);
 
-    RoomResponseForHomeHotel mapToRoomResponse(RoomEntity entity);
+//    RoomResponseForHomeHotel mapToRoomResponse(RoomEntity entity);
 
-    ReviewResponse mapToReviewResponse(ReviewEntity entity);
+//    ReviewResponse mapToReviewResponse(ReviewEntity entity);
 
-    ImageResponseForHomeHotel mapImageResponseForHomeHotel(ImageEntity entity);
+    ImageResponseForRelations mapImageResponseForHomeHotel(ImageEntity entity);
 
     void mapForUpdate(@MappingTarget HomeHotelEntity homeHotelEntity, HomeHotelRequest homeHotelRequest);
 
