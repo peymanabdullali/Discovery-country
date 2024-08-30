@@ -1,5 +1,6 @@
 package com.example.discovery_country.model.dto.criteria;
 
+import com.example.discovery_country.enums.LangType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,4 +20,5 @@ public class ActivityCriteriaRequest {
     double priceLessThan;
     LocalDate startDate;
     LocalDate endDate;
+    LangType key;
 }

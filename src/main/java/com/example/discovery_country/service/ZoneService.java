@@ -3,6 +3,7 @@ package com.example.discovery_country.service;
 import com.example.discovery_country.dao.entity.ZoneEntity;
 import com.example.discovery_country.dao.repository.RegionRepository;
 import com.example.discovery_country.dao.repository.ZoneRepository;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.mapper.ZoneMapper;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ZoneRequest;
@@ -31,7 +32,7 @@ public class ZoneService {
 
         ZoneEntity zoneEntity = zoneMapper.mapToEntity(request);
         ZoneEntity zone = zoneRepository.save(zoneEntity);
-        ZoneResponse zoneResponse = zoneMapper.mapToResponse(zone);
+        ZoneResponse zoneResponse = zoneMapper.mapToResponse(zone,null);
         log.info("ActionLog.createZone end");
         return zoneResponse;
 
@@ -42,10 +43,9 @@ public class ZoneService {
 
         Specification<ZoneEntity> spec = ZoneSpecification.getZoneByCriteria(criteriaRequest);
         Page<ZoneEntity> zoneEntities = zoneRepository.findAll(spec, pageable);
-        List<ZoneResponse> zoneResponses = zoneMapper.mapToZoneResponseList(zoneEntities.toList());
+        List<ZoneResponse> list = zoneEntities.map(i -> zoneMapper.mapToResponse(i, criteriaRequest.getKey())).toList();
         log.info("ActionLog.getZone end");
-
-        return new PageImpl<>(zoneResponses);
+        return new PageImpl<>(list);
 
     }
 
@@ -56,7 +56,7 @@ public class ZoneService {
         ZoneEntity zoneEntity = zoneRepository.findById(id).orElseThrow(() -> new RuntimeException(HttpStatus.NOT_FOUND.name()));
         zoneMapper.mapForUpdate(zoneEntity, zoneRequest);
         zoneEntity = zoneRepository.save(zoneEntity);
-        ZoneResponse zoneResponse = zoneMapper.mapToResponse(zoneEntity);
+        ZoneResponse zoneResponse = zoneMapper.mapToResponse(zoneEntity,null);
         log.info("ActionLog.updateZone end");
         return zoneResponse;
     }

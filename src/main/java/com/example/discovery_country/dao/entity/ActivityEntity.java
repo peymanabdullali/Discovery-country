@@ -1,14 +1,18 @@
 package com.example.discovery_country.dao.entity;
 
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.enums.Status;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Entity
@@ -22,9 +26,9 @@ public class ActivityEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    String name;
-
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    Map<LangType, String> name;
     @Column(nullable = false)
     double price;
 
@@ -33,7 +37,7 @@ public class ActivityEntity {
     double averageRating;
     int ratingCount;
 
-//    @Enumerated(EnumType.STRING)
+    //    @Enumerated(EnumType.STRING)
     Status activityStatus;
 
     String mapUrl;
@@ -41,9 +45,10 @@ public class ActivityEntity {
     double latitude;
     @Column(nullable = false)
     double longitude;
-    @Column(columnDefinition = "TEXT")
-    String description;
-    boolean deleted=false;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    Map<LangType, String> description;
+    boolean deleted = false;
     @Column(nullable = false)
     LocalDateTime startDate;
 
@@ -63,9 +68,9 @@ public class ActivityEntity {
     int numberOfPeople;
 
 
-    @OneToMany(mappedBy = "activity" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
     List<ImageEntity> images;
-  
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn
     ActivityCategoryEntity activityCategory;

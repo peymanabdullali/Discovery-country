@@ -40,13 +40,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-mail")
     runtimeOnly("org.postgresql:postgresql")
 
-//    implementation("org.liquibase:liquibase-core")
 
     implementation  ("org.mapstruct:mapstruct:1.5.5.Final")
     annotationProcessor  ("org.mapstruct:mapstruct-processor:1.5.5.Final")
 
-//    implementation("org.mapstruct:mapstruct:1.4.2.Final")
-//    annotationProcessor("org.mapstruct:mapstruct-processor:1.4.2.Final")
+
 
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
@@ -60,11 +58,9 @@ dependencies {
 
 
 
-   // implementation("org.liquibase:liquibase-core:4.24.0")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("io.swagger:swagger-annotations:1.6.4")
 //AWS s3
-//    implementation("com.amazonaws:aws-java-sdk-s3")
     implementation("com.amazonaws:aws-java-sdk-s3:1.12.569")
 
 

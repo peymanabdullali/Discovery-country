@@ -7,6 +7,7 @@ import com.example.discovery_country.dao.entity.RegionEntity;
 import com.example.discovery_country.dao.repository.HomeHotelRepository;
 import com.example.discovery_country.dao.repository.ImageRepository;
 import com.example.discovery_country.dao.repository.RegionRepository;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.exception.ActivityNotFoundException;
 import com.example.discovery_country.exception.HomeHotelNotFoundException;
 import com.example.discovery_country.helper.IncreaseViewCount;
@@ -49,7 +50,7 @@ public class HomeHotelService {
         log.info("ActionLog.createHomeHotel start");
 
         HomeHotelEntity homeHotelEntity = homeHotelMapper.mapToEntity(homeHotelRequest, imageRepository.findAllById(homeHotelRequest.getImageIds()));
-        HomeHotelResponse homeHotelResponse = homeHotelMapper.mapToResponse(homeHotelRepository.save(homeHotelEntity));
+        HomeHotelResponse homeHotelResponse = homeHotelMapper.mapToResponse(homeHotelRepository.save(homeHotelEntity), LangType.AZ);
 
         log.info("ActionLog.createHomeHotel end");
 
@@ -58,7 +59,7 @@ public class HomeHotelService {
     }
 
 
-    public HomeHotelResponseFindById homeHotelResponseFindById(Long id) {
+    public HomeHotelResponseFindById homeHotelResponseFindById(Long id,LangType key) {
 
         log.info("ActionLog.homeHotelResponseFindById start with id#" + id);
 
@@ -69,7 +70,7 @@ public class HomeHotelService {
         viewCount.updateViewCount(homeHotelEntity);
         log.info("ActionLog.homeHotelResponseFindById end");
 
-        return homeHotelMapper.mapToHomeHotelResponseFindById(homeHotelEntity);
+        return homeHotelMapper.mapToHomeHotelResponseFindById(homeHotelEntity,key);
     }
 
     public Page<HomeHotelResponse> getHomeHotels(Pageable page, HomeHotelCriteriaRequest criteria) {
@@ -77,12 +78,12 @@ public class HomeHotelService {
         log.info("ActionLog.getHomes start");
         System.out.println(criteria.getName()+criteria.getType());
         Specification<HomeHotelEntity> spec = HomeHotelSpecification.homeByCriteria(criteria);
-        List<HomeHotelEntity> list = homeHotelRepository.findAll(spec, page).toList();
-        List<HomeHotelResponse> homeHotelResponses = homeHotelMapper.
-                mapToResponseList(list);
+        Page<HomeHotelEntity> list = homeHotelRepository.findAll(spec, page);
+
+        List<HomeHotelResponse> list1 = list.map(i -> homeHotelMapper.mapToResponse(i, criteria.getKey())).toList();
 
         log.info("ActionLog.getHomes end");
-        return new PageImpl<>(homeHotelResponses);
+        return new PageImpl<>(list1);
     }
 
     public HomeHotelResponse updateHomeHotel(Long id, HomeHotelRequest homeHotelRequest) {
@@ -95,7 +96,7 @@ public class HomeHotelService {
 
         log.info("ActionLog.updateHomeHotel end");
 
-        return homeHotelMapper.mapToResponse(homeHotelEntity);
+        return homeHotelMapper.mapToResponse(homeHotelEntity,LangType.AZ);
     }
 
     public void softDelete(Long id) {

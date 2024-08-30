@@ -1,5 +1,6 @@
 package com.example.discovery_country.controller;
 
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.ScenicSpotRequest;
 import com.example.discovery_country.model.dto.response.ScenicSpotResponse;
@@ -60,9 +61,9 @@ public class ScenicSpotController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ScenicSpotResponseForFindById> findById(@PathVariable Long id) {
+    public ResponseEntity<ScenicSpotResponseForFindById> findById(@PathVariable Long id, LangType key) {
         log.info("Controller.findScenicSpot start with id#" + id);
-        ScenicSpotResponseForFindById byId = service.findById(id);
+        ScenicSpotResponseForFindById byId = service.findById(id, key);
         log.info("Controller.findScenicSpot end");
         return ResponseEntity.ok(byId);
     }
