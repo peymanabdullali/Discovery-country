@@ -1,5 +1,6 @@
 package com.example.discovery_country.dao.entity;
 
+import com.example.discovery_country.enums.LangType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,8 +9,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Entity
@@ -21,11 +25,13 @@ public class ScenicSpotEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
-    String name;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    Map<LangType, String> name;
 
-    @Column(columnDefinition = "TEXT")
-    String description;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    Map<LangType, String> description;
     boolean checkStatus;
     boolean status;
 

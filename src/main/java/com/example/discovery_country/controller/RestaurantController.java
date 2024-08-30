@@ -1,5 +1,6 @@
 package com.example.discovery_country.controller;
 
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.criteria.RestaurantCriteriaRequest;
 import com.example.discovery_country.model.dto.request.RegionRequest;
@@ -63,9 +64,9 @@ public class RestaurantController {
 
     @GetMapping("/{id}")
     public ResponseEntity<RestaurantResponseForFindById> findRestaurantById(
-            @PathVariable Long id) {
+            @PathVariable Long id, LangType key) {
         log.info("Controller.findRestaurantById start with id#" + id);
-        RestaurantResponseForFindById restaurant = service.findRestaurantById(id);
+        RestaurantResponseForFindById restaurant = service.findRestaurantById(id,key);
         log.info("Controller.findRestaurantById end");
         return ResponseEntity.ok(restaurant);
     }

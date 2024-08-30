@@ -6,6 +6,7 @@ import com.example.discovery_country.dao.entity.RestaurantEntity;
 import com.example.discovery_country.dao.entity.ScenicSpotEntity;
 import com.example.discovery_country.dao.repository.ImageRepository;
 import com.example.discovery_country.dao.repository.RestaurantRepository;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.exception.HomeHotelNotFoundException;
 import com.example.discovery_country.helper.IncreaseViewCount;
 import com.example.discovery_country.helper.RatingHelper;
@@ -44,7 +45,7 @@ public class RestaurantService {
         log.info("ActionLog.createRestaurant start");
         RestaurantEntity restaurantEntity = restaurantMapper.mapToEntity(request, imageRepository.findAllById(request.getImageIds()));
         restaurantRepository.save(restaurantEntity);
-        RestaurantResponse restaurantResponse = restaurantMapper.mapToResponse(restaurantEntity);
+        RestaurantResponse restaurantResponse = restaurantMapper.mapToResponse(restaurantEntity,LangType.AZ);
         log.info("ActionLog.createRestaurant end");
         return restaurantResponse;
     }
@@ -52,12 +53,13 @@ public class RestaurantService {
     public Page<RestaurantResponse> getRestaurants(RestaurantCriteriaRequest criteriaRequest, Pageable page) {
         log.info("ActionLog.getRestaurants start");
         Specification<RestaurantEntity> spec = RestaurantSpecification.getRestaurants(criteriaRequest);
-        List<RestaurantResponse> restaurantResponses = restaurantMapper.mapToResponseList(restaurantRepository.findAll(spec, page).toList());
+        List<RestaurantResponse> list = restaurantRepository.
+                findAll(spec, page).map(i -> restaurantMapper.mapToResponse(i, criteriaRequest.getKey())).toList();
         log.info("ActionLog.getRestaurants end");
-        return new PageImpl<>(restaurantResponses.stream().toList());
+        return new PageImpl<>(list);
     }
 
-    public RestaurantResponseForFindById findRestaurantById(long id) {
+    public RestaurantResponseForFindById findRestaurantById(long id,LangType key) {
         log.info("ActionLog.findRestaurantById start with id#" + id);
         RestaurantEntity restaurant = restaurantRepository.
                 findByIdAndStatusFalse(id).orElseThrow(() -> new RuntimeException("RESTAURANT_NOT_FOuND"));
@@ -66,7 +68,8 @@ public class RestaurantService {
         restaurant.setReviews(restaurant.getReviews().stream().filter(i -> !i.isStatus()).toList());
         restaurant.setImages(restaurant.getImages().stream().filter(i -> !i.isDeleted()).toList());
 
-        RestaurantResponseForFindById restaurantResponseForFindById = restaurantMapper.mapToResponseForFindById(restaurant);
+        RestaurantResponseForFindById restaurantResponseForFindById =
+                restaurantMapper.mapToResponseForFindById(restaurant, key);
         log.info("ActionLog.findRestaurantById end");
         return restaurantResponseForFindById;
     }

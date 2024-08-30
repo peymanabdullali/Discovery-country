@@ -5,6 +5,7 @@ import com.example.discovery_country.dao.entity.ImageEntity;
 import com.example.discovery_country.dao.repository.ActivityCategoryRepository;
 import com.example.discovery_country.dao.repository.ActivityRepository;
 import com.example.discovery_country.dao.repository.ImageRepository;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.enums.Status;
 import com.example.discovery_country.exception.ActivityNotFoundException;
 import com.example.discovery_country.helper.IncreaseViewCount;
@@ -43,7 +44,7 @@ public class ActivityService {
 
 
         ActivityEntity activityEntity = activityMapper.mapToEntity(request, imageRepository.findAllById(request.getImageIds()));
-        ActivityResponse activityResponse = activityMapper.mapToResponse(activityRepository.save(activityEntity));
+        ActivityResponse activityResponse = activityMapper.mapToResponse(activityRepository.save(activityEntity), LangType.AZ);
         log.info("ActionLog.createActivity end");
         return activityResponse;
     }
@@ -55,10 +56,10 @@ public class ActivityService {
         Page<ActivityEntity> activities = activityRepository.findAll(spec, pageable);
 
         log.info("ActionLog.getActivity end");
-        return activities.map(activityMapper::mapToResponse);
+        return activities.map(i -> activityMapper.mapToResponse(i, criteriaRequest.getKey()));
     }
 
-    public ActivityResponseFindById activityResponseFindById(Long id) {
+    public ActivityResponseFindById activityResponseFindById(Long id,LangType key) {
 
         log.info("ActionLog.activityResponseFindById start with id#" + id);
 
@@ -74,23 +75,23 @@ public class ActivityService {
 
         log.info("ActionLog.activityResponseFindById end");
 
-        return activityMapper.mapToActivityResponseFindById(activityEntity);
+        return activityMapper.mapToActivityResponseFindById(activityEntity,key);
 
     }
 
-    public ActivityResponse getActivity(Long id) {
-
-        log.info("ActionLog.getActivity start with id#" + id);
-
-        ActivityEntity activity = activityRepository.findById(id).orElseThrow(() ->
-                new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
-        activity.setViewed(activity.getViewed() + 1);
-        activityRepository.save(activity);
-
-        log.info("ActionLog.getActivity end with id#" + id);
-
-        return activityMapper.mapToResponse(activity);
-    }
+//    public ActivityResponse getActivity(Long id,LangType key) {
+//
+//        log.info("ActionLog.getActivity start with id#" + id);
+//
+//        ActivityEntity activity = activityRepository.findById(id).orElseThrow(() ->
+//                new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
+//        activity.setViewed(activity.getViewed() + 1);
+//        activityRepository.save(activity);
+//
+//        log.info("ActionLog.getActivity end with id#" + id);
+//
+//        return activityMapper.mapToResponse(activity,key);
+//    }
 
     public ActivityResponse update(Long id, ActivityRequest activityRequest) {
         log.info("ActionLog.updateActivity start with id#" + id);
@@ -102,37 +103,12 @@ public class ActivityService {
 
         log.info("ActionLog.updateActivity end");
 
-        return activityMapper.mapToResponse(activityEntity);
+        return activityMapper.mapToResponse(activityEntity,LangType.AZ);
     }
 
     public void softDelete(Long id) {
         activityRepository.softDelete(id);
     }
-
-
-//    public void updateLikeCount(Long id, boolean increment) {
-//        log.info("ActionLog.updateLikeCount start with id#" + id);
-//
-//        ActivityEntity activity = activityRepository.findById(id).orElseThrow(() -> new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
-//        activity.setLikeCount(increment ? activity.getLikeCount() + 1 : activity.getLikeCount() - 1);
-//        activityRepository.save(activity);
-//
-//        log.info("ActionLog.updateLikeCount end with id#" + id);
-//    }
-//
-//    public void updateAverageRating(Long id, double rating) {
-//        log.info("ActionLog.updateAverageRating start with id#" + id);
-//
-//        ActivityEntity activity = activityRepository.findById(id).orElseThrow(() -> new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
-//        double currentRating = activity.getAverageRating() == null ? 0 : activity.getAverageRating();
-//        Long currentView = activity.getViewed();
-//        double newAverageRating = (currentRating * currentView + rating) / (currentView + 1);
-//        activity.setAverageRating(newAverageRating);
-//        activity.setViewed(currentView + 1);
-//        activityRepository.save(activity);
-//
-//        log.info("ActionLog.updateAverageRating end with id#" + id);
-//    }
 
 
     public void updateLikeCount(Long id, boolean increment) {
@@ -141,11 +117,12 @@ public class ActivityService {
 
         updateLike.updateLikeCount(activity, increment);
     }
-    public void updateAverageRating(Long id, int stars) {
-    ActivityEntity activity = activityRepository.findById(id).orElseThrow(() ->
-            new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
 
-    ratingHelper.addRating(activity, stars);
-}
+    public void updateAverageRating(Long id, int stars) {
+        ActivityEntity activity = activityRepository.findById(id).orElseThrow(() ->
+                new ActivityNotFoundException(HttpStatus.NOT_FOUND.name(), "Activity not found"));
+
+        ratingHelper.addRating(activity, stars);
+    }
 
 }

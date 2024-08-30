@@ -54,7 +54,16 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/forgotPassword/**", "/oauth2/**", "/login", "/register/**", "/home-hotels/**", "/rooms/**", "/s3/upload").permitAll()
+                        .requestMatchers("/auth/**",
+                                "zone",
+                                "/forgotPassword/**",
+                                "/oauth2/**",
+                                "/login",
+                                "/register/**",
+                                "/home-hotels/**",
+                                "/rooms/**",
+                                "/s3/upload").permitAll()
+                        .requestMatchers(permitSwagger).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
@@ -68,19 +77,27 @@ public class SecurityConfiguration {
 //                        })
 //                )
                 .formLogin(AbstractHttpConfigurer::disable)
-                .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/home", true)
-                        .successHandler(oAuth2LoginSuccessHandler())
-                )
+//                .oauth2Login(oauth2 -> oauth2
+//                        .loginPage("/login")
+//                        .defaultSuccessUrl("/home", true)
+//                        .successHandler(oAuth2LoginSuccessHandler())
+//                )
                 .addFilterBefore(authFilterService, SessionManagementFilter.class);
 
         return http.build();
     }
 
 
-    @Bean
-    public AuthenticationSuccessHandler oAuth2LoginSuccessHandler() {
-        return new OAuth2LoginSuccessHandler(userRepository);
-    }
+//    @Bean
+//    public AuthenticationSuccessHandler oAuth2LoginSuccessHandler() {
+//        return new OAuth2LoginSuccessHandler(userRepository);
+//    }
+    public static String[] permitSwagger = {
+            "swagger-ui/**",
+            "/v3/api-docs/**",
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/webjars/**"
+    };
+
 }

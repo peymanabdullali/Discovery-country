@@ -6,6 +6,7 @@ import com.example.discovery_country.dao.entity.RegionEntity;
 import com.example.discovery_country.dao.repository.ActivityCategoryRepository;
 import com.example.discovery_country.dao.repository.ActivityRepository;
 import com.example.discovery_country.dao.repository.RegionRepository;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.exception.ActivityCategoryNotFoundException;
 import com.example.discovery_country.mapper.ActivityCategoryMapper;
 import com.example.discovery_country.model.dto.criteria.ActivityCategoryCriteriaRequest;
@@ -40,7 +41,7 @@ public class ActivityCategoryService {
         }
 
        List<RegionEntity> regions=regionRepository.findAllById(request.getRegionIds());
-       if (regions==null || regions.isEmpty()){
+       if (regions.isEmpty()){
            log.error("Regions not found for IDs: {}", request.getRegionIds());
            throw new RuntimeException("regions not founds");
        }
@@ -54,7 +55,7 @@ public class ActivityCategoryService {
 
         log.info("ActionLog.createActivityCategory end");
 
-        return ActivityCategoryMapper.INSTANCE.mapToResponse(activityCategory);
+        return ActivityCategoryMapper.INSTANCE.mapToResponse(activityCategory, LangType.AZ);
 
     }
 
@@ -66,7 +67,7 @@ public class ActivityCategoryService {
 
         log.info("ActionLog.getActivityCategory end");
 
-        return activityCategories.map(ActivityCategoryMapper.INSTANCE::mapToResponse);
+        return activityCategories.map(i->ActivityCategoryMapper.INSTANCE.mapToResponse(i,criteriaRequest.getKey()));
 
     }
 
@@ -80,7 +81,7 @@ public class ActivityCategoryService {
 
         log.info("ActionLog.updateActivityCategory end");
 
-        return ActivityCategoryMapper.INSTANCE.mapToResponse(categoryEntity);
+        return ActivityCategoryMapper.INSTANCE.mapToResponse(categoryEntity,LangType.AZ);
 
     }
 

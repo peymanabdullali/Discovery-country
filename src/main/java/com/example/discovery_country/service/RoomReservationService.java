@@ -5,6 +5,7 @@ import com.example.discovery_country.dao.entity.RoomReservationEntity;
 
 import com.example.discovery_country.dao.repository.RoomRepository;
 import com.example.discovery_country.dao.repository.RoomReservationRepository;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.mapper.RoomReservationMapper;
 import com.example.discovery_country.model.dto.request.RoomReservationRequest;
 import com.example.discovery_country.model.dto.response.RoomReservationResponse;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,27 +35,28 @@ public class RoomReservationService {
         calculateAndSetTotalDayAndAmount(roomReservationEntity, request.getRoomId());
         roomRepository.updateAvailableFalseById(request.getRoomId());
         roomReservationRepository.save(roomReservationEntity);
-        RoomReservationResponse roomReservationResponse = roomReservationMapper.mapToResponse(roomReservationEntity);
+        RoomReservationResponse roomReservationResponse = roomReservationMapper.mapToResponse(roomReservationEntity,LangType.AZ);
         log.info("ActionLog.createReservation end");
 
         return roomReservationResponse;
     }
 
-    public RoomReservationResponse getReservationByUserId(long id) {
+    public RoomReservationResponse getReservationByUserId(long id,LangType key) {
         log.info("ActionLog.getReservationByUserId start with id: " + id);
         RoomReservationEntity roomReservationEntity = roomReservationRepository.
-                findRoomReservationEntitiesByUserIdAndStatusTrue(id).orElseThrow(() -> new RuntimeException("ROOM_RESERVATION_NOT_FOUND"));
-        RoomReservationResponse roomReservationResponse = roomReservationMapper.mapToResponse(roomReservationEntity);
+                findRoomReservationEntityByUserIdAndStatusTrue(id).orElseThrow(() -> new RuntimeException("ROOM_RESERVATION_NOT_FOUND"));
+        RoomReservationResponse roomReservationResponse = roomReservationMapper.mapToResponse(roomReservationEntity, key);
         log.info("ActionLog.getReservationByUserId end");
         return roomReservationResponse;
     }
-    public RoomReservationResponse getReservationHistoryByUserId(long id) {
+    public List<RoomReservationResponse> getReservationHistoryByUserId(long id, LangType key) {
         log.info("ActionLog.getReservationByUserId start with id: " + id);
-        RoomReservationEntity roomReservationEntity = roomReservationRepository.
-                findRoomReservationEntitiesByUserIdAndStatusFalse(id).orElseThrow(() -> new RuntimeException("ROOM_RESERVATION_NOT_FOUND"));
-        RoomReservationResponse roomReservationResponse = roomReservationMapper.mapToResponse(roomReservationEntity);
+        List<RoomReservationEntity> entityList = roomReservationRepository.
+                findRoomReservationEntitiesByUserIdAndStatusFalse(id);
+        List<RoomReservationResponse> list = entityList.stream().map(i ->
+                roomReservationMapper.mapToResponse(i, key)).toList();
         log.info("ActionLog.getReservationByUserId end");
-        return roomReservationResponse;
+        return list;
     }
 
 

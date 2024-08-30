@@ -1,10 +1,12 @@
 package com.example.discovery_country.model.dto.request;
 
+import com.example.discovery_country.enums.LangType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 
 @Data
@@ -14,7 +16,7 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomReservationRequest {
 
-    String name;
+    Map<LangType, String> name;
     LocalDate entryDate;
     LocalDate exitDate;
     byte numberOfGuests;

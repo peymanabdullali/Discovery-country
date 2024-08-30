@@ -1,11 +1,15 @@
 package com.example.discovery_country.dao.entity;
 
+import com.example.discovery_country.enums.LangType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Entity
@@ -19,11 +23,11 @@ public class ActivityCategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    Map<LangType, String> name;
     @Column(nullable = false)
-    String name;
-
-    @Column(nullable = false)
-    Boolean deleted = false;
+    boolean deleted;
 
     @OneToMany(mappedBy = "activityCategory", cascade = CascadeType.MERGE)
     List<ActivityEntity> activities;

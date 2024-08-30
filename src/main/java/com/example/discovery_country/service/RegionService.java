@@ -2,6 +2,7 @@ package com.example.discovery_country.service;
 
 import com.example.discovery_country.dao.entity.RegionEntity;
 import com.example.discovery_country.dao.repository.RegionRepository;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.mapper.RegionMapper;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.*;
@@ -28,7 +29,7 @@ public class RegionService {
     public RegionResponse createRegion(RegionRequest request) {
         log.info("ActionLog.createRegion start");
         RegionEntity region = regionRepository.save(regionMapper.mapToEntity(request));
-        RegionResponse regionResponse = regionMapper.mapToResponse(region);
+        RegionResponse regionResponse = regionMapper.mapToResponse(region, LangType.AZ);
         log.info("ActionLog.createRegion end");
         return regionResponse;
 
@@ -39,35 +40,26 @@ public class RegionService {
 
         Specification<RegionEntity> spec = RegionSpecification.getRegionByCriteria(criteriaRequest);
         Page<RegionEntity> regionEntities = regionRepository.findAll(spec, pageable);
-        List<RegionResponse> regionResponses = regionMapper.mapEntityListToResponseList(regionEntities.toList());
+        List<RegionResponse> list = regionEntities.map(i -> regionMapper.mapToResponse(i, criteriaRequest.getKey())).toList();
+
         log.info("ActionLog.getRegions end");
 
-        return new PageImpl<>(regionResponses);
+        return new PageImpl<>(list);
 
     }
-//
-//    public ZoneResponse update(Long id, ZoneRequest zoneRequest) {
-//
-//        log.info("ActionLog.updateZone start with id#" + id);
-//
-//        ZoneEntity zoneEntity = zoneRepository.findById(id).orElseThrow(() -> new RuntimeException(HttpStatus.NOT_FOUND.name()));
-//        zoneMapper.mapForUpdate(zoneEntity, zoneRequest);
-//        zoneEntity = zoneRepository.save(zoneEntity);
-//        ZoneResponse zoneResponse = zoneMapper.mapToResponse(zoneEntity);
-//        log.info("ActionLog.updateZone end");
-//        return zoneResponse;
-//    }
-//
+
 public void deleteRegion(Long id) {
     log.info("ActionLog.deleteRegion start with id#" + id);
     regionRepository.deleteById(id) ;
     log.info("ActionLog.deleteRegion end");
 }
-public RegionResponseForFindById findRegionById(Long id) {
+public RegionResponseForFindById findRegionById(Long id,LangType key) {
         log.info("ActionLog.findRegion start with id#" + id);
     RegionEntity regionEntity = regionRepository.
             findById(id).orElseThrow(() -> new RuntimeException("REGION_NOT_FOUND"));
-    RegionResponseForFindById regionResponseForFindById = regionMapper.mapToResponseForFindById(regionEntity);
+
+
+    RegionResponseForFindById regionResponseForFindById = regionMapper.mapToResponseForFindById(regionEntity,key);
     log.info("ActionLog.findRegion end");
     return regionResponseForFindById;
     }
