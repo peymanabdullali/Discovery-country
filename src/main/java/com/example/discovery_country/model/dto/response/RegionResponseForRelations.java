@@ -10,5 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegionResponseForRelations {
-    String name;
+    long id;
+    private String name;
 }

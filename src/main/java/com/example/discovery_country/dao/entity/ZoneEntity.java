@@ -1,10 +1,14 @@
 package com.example.discovery_country.dao.entity;
 
+import com.example.discovery_country.enums.LangType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "zones")
@@ -18,8 +22,9 @@ public class ZoneEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
-    String name;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    Map<LangType, String> name;
 
     @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL)
     List<RegionEntity> regions;

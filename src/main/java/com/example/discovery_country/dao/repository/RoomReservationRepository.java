@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,7 +21,8 @@ public interface RoomReservationRepository extends JpaRepository<RoomReservation
     @Query("UPDATE RoomReservationEntity  SET status = false " +
             "WHERE exitDate <= CURRENT_DATE AND status = true ")
     void updateRoomReservationStatus();
-    Optional<RoomReservationEntity> findRoomReservationEntitiesByUserIdAndStatusTrue(long id);
-    Optional<RoomReservationEntity> findRoomReservationEntitiesByUserIdAndStatusFalse(long id);
+    Optional<RoomReservationEntity> findRoomReservationEntityByUserIdAndStatusTrue(long id);
+//    List<RoomReservationEntity> findAllByRoomReservationEntitiesByUserIdAndStatusFalse(long id);
+    List<RoomReservationEntity> findRoomReservationEntitiesByUserIdAndStatusFalse(long id);
 
 }

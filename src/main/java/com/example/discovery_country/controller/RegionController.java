@@ -1,5 +1,6 @@
 package com.example.discovery_country.controller;
 
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.*;
 import com.example.discovery_country.model.dto.response.RegionResponse;
@@ -39,20 +40,7 @@ public class RegionController {
         return ResponseEntity.ok(regions);
     }
 
-    //
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ZoneResponse> updateZone(
-//            @PathVariable Long id,
-//            @RequestBody ZoneRequest zoneRequest) {
-//        log.info("Controller.updateZone start with id#" + id);
-//
-//        ZoneResponse response = service.update(id, zoneRequest);
-//
-//        log.info("Controller.updateZone end");
-//
-//        return ResponseEntity.ok(response);
-//    }
-//
+
     @DeleteMapping("/{id}")
     public void deleteRegion(
             @PathVariable Long id) {
@@ -63,9 +51,9 @@ public class RegionController {
 
     @GetMapping("/{id}")
     public RegionResponseForFindById findRegionById(
-            @PathVariable Long id) {
+            @PathVariable Long id, LangType key) {
         log.info("Controller.findRegion start with id#" + id);
-        RegionResponseForFindById regionById = service.findRegionById(id);
+        RegionResponseForFindById regionById = service.findRegionById(id,key);
         log.info("Controller.findRegion end");
         return regionById;
     }

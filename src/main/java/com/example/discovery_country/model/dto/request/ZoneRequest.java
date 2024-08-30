@@ -8,7 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
+
+import java.util.Map;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +18,6 @@ import java.util.List;
 public class ZoneRequest {
 
     @NotBlank(message = "can't be blank")
-    String name;
+    Map<String, String> name;
 
 }

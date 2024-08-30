@@ -4,6 +4,7 @@ import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
 import com.example.discovery_country.dao.entity.ActivityEntity;
 import com.example.discovery_country.dao.entity.HomeHotelEntity;
 import com.example.discovery_country.dao.entity.ImageEntity;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.model.dto.request.ActivityRequest;
 import com.example.discovery_country.model.dto.response.*;
 import org.mapstruct.*;
@@ -16,10 +17,10 @@ public interface ActivityMapper {
     @Mapping(target = "activityCategory.id", source = "activityRequest.activityCategoryId")
     ActivityEntity mapToEntity(ActivityRequest activityRequest, List<ImageEntity> images);
 
-    default ActivityResponse mapToResponse(ActivityEntity entity) {
+    default ActivityResponse mapToResponse(ActivityEntity entity,LangType key) {
         ActivityResponse.ActivityResponseBuilder name = ActivityResponse.builder().
                 id(entity.getId()).
-                name(entity.getName());
+                name(entity.getName().getOrDefault(key, entity.getName().get(LangType.AZ)));
         if (!entity.getImages().isEmpty()) {
             name.image((mapImageResponseForRelations(
                     entity.getImages().stream().
@@ -30,12 +31,9 @@ public interface ActivityMapper {
 
     }
 
-//    List<ImageResponseForRelations> mapToImageResponse(List<ImageEntity> imageEntity);
-
-//    ActivityCategoryResponseForActivity mapToActivityCategoryResponse(ActivityCategoryEntity activityCategoryEntity);
-
-    //ActivityResponseFindById mapToActivityResponseFindById(ActivityEntity activity);
-    ActivityResponseFindById mapToActivityResponseFindById(ActivityEntity activityEntity);
+    @Mapping(target = "description", expression = "java(entity.getDescription().getOrDefault(key, entity.getDescription().get(LangType.AZ)))")
+    @Mapping(target = "name", expression = "java(entity.getName().getOrDefault(key, entity.getName().get(LangType.AZ)))")
+    ActivityResponseFindById mapToActivityResponseFindById(ActivityEntity entity, LangType key);
 
     ImageResponseForRelations mapImageResponseForRelations(ImageEntity entity);
 

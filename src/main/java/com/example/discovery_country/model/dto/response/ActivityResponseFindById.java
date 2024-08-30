@@ -15,42 +15,31 @@ import java.util.List;
 public class ActivityResponseFindById {
 
 
-    @NotBlank(message = "can't be blank")
     String name;
 
-    @NotBlank(message = "can't be blank")
     double price;
 
     String mapUrl;
 
-//    @NotBlank(message = "can't be blank")
-//    double latitude;
-//
-//    @NotBlank(message = "can't be blank")
-//    double longitude;
+    double latitude;
 
-    @NotBlank(message = "can't be blank")
+    double longitude;
+
     String description;
 
-    @NotBlank(message = "can't be blank")
     LocalDateTime startDate;
 
-    @NotBlank(message = "can't be blank")
     LocalDateTime endDate;
 
-    @NotBlank(message = "can't be blank")
     LocalDateTime registrationDeadline;
 
-    @NotBlank(message = "can't be blank")
     String contact;
 
-    @NotBlank(message = "can't be blank")
     String requirements;
 
-    @NotBlank(message = "can't be blank")
     Integer numberOfPeople;
 
     List<ImageResponseForRelations> images;
-    ActivityCategoryResponseForActivity activityCategory;
+//    ActivityCategoryResponseForActivity activityCategory;
 
 }

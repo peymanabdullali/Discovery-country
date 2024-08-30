@@ -5,6 +5,7 @@ import com.example.discovery_country.dao.entity.ReviewEntity;
 import com.example.discovery_country.dao.entity.ScenicSpotEntity;
 import com.example.discovery_country.dao.repository.ImageRepository;
 import com.example.discovery_country.dao.repository.ScenicSpotRepository;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.helper.IncreaseViewCount;
 import com.example.discovery_country.helper.RatingHelper;
 import com.example.discovery_country.helper.UpdateLike;
@@ -39,7 +40,7 @@ public class ScenicSpotService {
     public ScenicSpotResponse createScenicSpot(ScenicSpotRequest request) {
         log.info("ActionLog.createScenicSpot start");
         ScenicSpotEntity scenicSpot = scenicSpotRepository.save(scenicSpotMapper.mapToEntity(request, imageRepository.findAllById(request.getImageIds())));
-        ScenicSpotResponse scenicSpotResponse = scenicSpotMapper.mapToResponse(scenicSpot);
+        ScenicSpotResponse scenicSpotResponse = scenicSpotMapper.mapToResponse(scenicSpot, LangType.AZ);
         log.info("ActionLog.createScenicSpot end");
         return scenicSpotResponse;
 
@@ -50,18 +51,19 @@ public class ScenicSpotService {
         log.info("ActionLog.getScenicSpots start");
 
         Specification<ScenicSpotEntity> spec = ScenicSpotSpecification.getScenicSpotByCriteria(criteriaRequest);
-        List<ScenicSpotResponse> scenicSpotResponse = scenicSpotMapper.mapToResponseList(scenicSpotRepository.findAll(spec, pageable).toList());
+        List<ScenicSpotResponse> list = scenicSpotRepository.findAll(spec, pageable).
+                map(i -> scenicSpotMapper.mapToResponse(i, criteriaRequest.getKey())).toList();
         log.info("ActionLog.getScenicSpots end");
-        return new PageImpl<>(scenicSpotResponse);
+        return new PageImpl<>(list);
     }
 
-    public ScenicSpotResponseForFindById findById(Long id) {
+    public ScenicSpotResponseForFindById findById(Long id,LangType key) {
         log.info("ActionLog.findScenicSpot start with id#" + id);
         ScenicSpotEntity scenicSpotEntity = scenicSpotRepository.findByIdAndCheckStatusTrueAndStatusFalse(id).orElseThrow(() -> new RuntimeException("SCENIC_SPOT_NOT_FOUND"));
        viewCount.updateViewCount(scenicSpotEntity);
         scenicSpotEntity.setReviews(scenicSpotEntity.getReviews().stream().filter(i -> !i.isStatus()).toList());
         scenicSpotEntity.setImages(scenicSpotEntity.getImages().stream().filter(i -> !i.isDeleted()).toList());
-        ScenicSpotResponseForFindById scenicSpotResponseForFindById = scenicSpotMapper.mapToResponseForFindById(scenicSpotEntity);
+        ScenicSpotResponseForFindById scenicSpotResponseForFindById = scenicSpotMapper.mapToResponseForFindById(scenicSpotEntity,key);
         log.info("ActionLog.findScenicSpot end");
         return scenicSpotResponseForFindById;
 
