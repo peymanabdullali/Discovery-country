@@ -1,5 +1,6 @@
 package com.example.discovery_country.controller;
 
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.model.dto.criteria.ActivityCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityRequest;
 import com.example.discovery_country.model.dto.response.ActivityResponse;
@@ -32,16 +33,16 @@ public class ActivityController {
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
     @GetMapping("/{id}/homepage")
-    public ResponseEntity<ActivityResponseFindById> getActivityForHomePage(@PathVariable Long id) {
-        ActivityResponseFindById response = activityService.activityResponseFindById(id);
+    public ResponseEntity<ActivityResponseFindById> getActivityForHomePage(@PathVariable Long id, LangType key) {
+        ActivityResponseFindById response = activityService.activityResponseFindById(id,key);
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ActivityResponse> getActivity(@PathVariable Long id) {
-        ActivityResponse response = activityService.getActivity(id);
-        return ResponseEntity.ok(response);
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<ActivityResponse> getActivity(@PathVariable Long id) {
+//        ActivityResponse response = activityService.getActivity(id);
+//        return ResponseEntity.ok(response);
+//    }
 
 
     @PutMapping("/{id}")

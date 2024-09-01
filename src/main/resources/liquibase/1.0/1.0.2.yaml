@@ -8,47 +8,56 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
-                  type: VARCHAR(255)
-
+                  type: jsonb
+                  constraints:
+                    nullable: true
               - column:
                   name: entry_date
-                  type: DATE
-
+                  type: date
+                  constraints:
+                    nullable: false
               - column:
                   name: exit_date
-                  type: DATE
-
+                  type: date
+                  constraints:
+                    nullable: false
               - column:
                   name: total_day
-                  type: TINYINT
-
+                  type: tinyint
+                  constraints:
+                    nullable: false
               - column:
                   name: total_amount
-                  type: DOUBLE
-
+                  type: double precision
+                  constraints:
+                    nullable: false
               - column:
                   name: number_of_guests
-                  type: TINYINT
-
+                  type: tinyint
+                  constraints:
+                    nullable: false
               - column:
                   name: status
-                  type: BOOLEAN
-
+                  type: boolean
+                  constraints:
+                    nullable: false
               - column:
                   name: room_id
-                  type: BIGINT
-
+                  type: bigint
+                  constraints:
+                    nullable: true
               - column:
                   name: user_id
-                  type: BIGINT
+                  type: bigint
+                  constraints:
+                    nullable: true
   - changeSet:
       id: 10
       author: ${AUTHOR}
@@ -58,49 +67,57 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
-                  type: VARCHAR(255)
-
+                  type: jsonb
+                  constraints:
+                    nullable: true
               - column:
                   name: price
-                  type: DOUBLE
-
-              - column:
-                  name: amenities
-                  type: TEXT
-
-              - column:
-                  name: room_number
-                  type: TINYINT
-
-              - column:
-                  name: room_count
-                  type: TINYINT
-
-              - column:
-                  name: room_type
-                  type: VARCHAR(50)
+                  type: double precision
                   constraints:
                     nullable: false
-
+              - column:
+                  name: amenities
+                  type: jsonb
+                  constraints:
+                    nullable: true
+              - column:
+                  name: room_number
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: room_count
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: room_type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
               - column:
                   name: available
-                  type: BOOLEAN
-
+                  type: boolean
+                  constraints:
+                    nullable: false
               - column:
                   name: deleted
-                  type: BOOLEAN
-
+                  type: boolean
+                  constraints:
+                    nullable: false
               - column:
                   name: home_hotel_id
-                  type: BIGINT
+                  type: bigint
+                  constraints:
+                    nullable: true
+
   - changeSet:
       id: 11
       author: ${AUTHOR}
@@ -110,52 +127,56 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
-                  type: VARCHAR(255)
+                  type: jsonb
                   constraints:
-                    nullable: false
-
+                    nullable: true
               - column:
                   name: description
-                  type: TEXT
-
+                  type: jsonb
+                  constraints:
+                    nullable: true
               - column:
                   name: check_status
-                  type: BOOLEAN
-
-              - column:
-                  name: status
-                  type: BOOLEAN
-
-              - column:
-                  name: region_id
-                  type: BIGINT
+                  type: boolean
                   constraints:
                     nullable: false
-
+              - column:
+                  name: status
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: region_id
+                  type: bigint
+                  constraints:
+                    nullable: false
               - column:
                   name: viewed
-                  type: BIGINT
-
+                  type: bigint
+                  constraints:
+                    nullable: false
               - column:
                   name: like_count
-                  type: BIGINT
-
+                  type: bigint
+                  constraints:
+                    nullable: false
               - column:
                   name: average_rating
-                  type: DOUBLE
-                  defaultValue: 0.0
-
+                  type: double precision
+                  constraints:
+                    nullable: false
               - column:
                   name: rating_count
-                  type: INT
+                  type: int
+                  constraints:
+                    nullable: false
 
   - changeSet:
       id: 12
@@ -166,73 +187,72 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
-                  type: VARCHAR(255)
-
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
               - column:
                   name: username
-                  type: VARCHAR(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
                     unique: true
-
               - column:
                   name: email
-                  type: VARCHAR(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
                     unique: true
-
               - column:
                   name: password
-                  type: VARCHAR(255)
-
-#              - column:
-#                  name: phone_number
-#                  type: VARCHAR(15)
-
-              - column:
-                  name: surname
-                  type: VARCHAR(255)
-
-              - column:
-                  name: enabled
-                  type: BOOLEAN
-
-              - column:
-                  name: account_non_locked
-                  type: BOOLEAN
-
-              - column:
-                  name: failed_attempt
-                  type: INT
-
-              - column:
-                  name: lock_time
-                  type: TIMESTAMP
-
-              - column:
-                  name: created_date
-                  type: TIMESTAMP
-                  defaultValueComputed: CURRENT_TIMESTAMP
-
-              - column:
-                  name: updated_date
-                  type: TIMESTAMP
-                  defaultValueComputed: CURRENT_TIMESTAMP
+                  type: varchar(255)
                   constraints:
                     nullable: false
-
+              - column:
+                  name: role
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+              - column:
+                  name: account_non_locked
+                  type: boolean
+              - column:
+                  name: failed_attempt
+                  type: int
+              - column:
+                  name: lock_time
+                  type: timestamp
+              - column:
+                  name: created_date
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_date
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
               - column:
                   name: email_verified
-                  type: BOOLEAN
+                  type: boolean
+              - column:
+                  name: refresh_token_id
+                  type: bigint
+              - column:
+                  name: forgot_password_id
+                  type: bigint
 
 
   - changeSet:
@@ -244,14 +264,104 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
-                  type: VARCHAR(255)
+                  type: jsonb
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: 14
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: forgot_password
+            columns:
+              - column:
+                  name: fpid
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: otp
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiration_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+
+
+  - changeSet:
+      id: 15
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: refresh_token
+            columns:
+              - column:
+                  name: token_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: refresh_token
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiration_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 16
+      author: ${AUTHOR}
+      changes:
+        - createTable:
+            tableName: user_otp
+            columns:
+              - column:
+                  name: fpid
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: otp
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiration_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
                   constraints:
                     nullable: false

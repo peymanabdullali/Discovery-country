@@ -1,5 +1,6 @@
 package com.example.discovery_country.controller;
 
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.model.dto.criteria.RoomCriteriaRequest;
 import com.example.discovery_country.model.dto.request.RoomRequest;
 import com.example.discovery_country.model.dto.response.RoomResponse;
@@ -33,16 +34,16 @@ public class RoomController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RoomResponseFindById> getRoomById(@PathVariable Long id) {
-        RoomResponseFindById roomResponse = roomService.roomResponseFindById(id);
+    public ResponseEntity<RoomResponseFindById> getRoomById(@PathVariable Long id, LangType key) {
+        RoomResponseFindById roomResponse = roomService.roomResponseFindById(id,key);
         return new ResponseEntity<>(roomResponse, HttpStatus.OK);
     }
-
-    @GetMapping("/room/{id}")
-    public ResponseEntity<RoomResponse> getRoom(@PathVariable Long id) {
-        RoomResponse roomResponse = roomService.getRoom(id);
-        return new ResponseEntity<>(roomResponse, HttpStatus.OK);
-    }
+//
+//    @GetMapping("/room/{id}")
+//    public ResponseEntity<RoomResponse> getRoom(@PathVariable Long id) {
+//        RoomResponse roomResponse = roomService.getRoom(id);
+//        return new ResponseEntity<>(roomResponse, HttpStatus.OK);
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long id,  @RequestBody RoomRequest roomRequest) {

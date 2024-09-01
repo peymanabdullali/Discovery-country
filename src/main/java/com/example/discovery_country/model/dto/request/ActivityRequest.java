@@ -1,5 +1,6 @@
 package com.example.discovery_country.model.dto.request;
 
+import com.example.discovery_country.enums.LangType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -7,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -19,7 +21,7 @@ public class ActivityRequest {
 
 
     //NotBlank(message = "can't be blank")
-    String name;
+    Map<LangType, String> name;
 
     //@NotBlank(message = "can't be blank")
     double price;
@@ -33,7 +35,8 @@ public class ActivityRequest {
     double longitude;
 
    // @NotBlank(message = "can't be blank")
-    String description;
+   Map<LangType, String> description;
+
 
     ///@NotBlank(message = "can't be blank")
     LocalDateTime startDate;
@@ -48,7 +51,7 @@ public class ActivityRequest {
     String contact;
 
    // @NotBlank(message = "can't be blank")
-    String requirements;
+   Map<LangType, String> requirements;
 
     //@NotBlank(message = "can't be blank")
     Integer numberOfPeople;

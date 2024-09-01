@@ -25,7 +25,7 @@ public class NotificationEntity {
     @JoinColumn
     User user;
 
-    Boolean deleted;
+    boolean deleted;
 
 
 }

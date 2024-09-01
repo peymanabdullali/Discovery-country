@@ -1,11 +1,15 @@
 package com.example.discovery_country.dao.entity;
 
 import com.example.discovery_country.enums.HomeHotelType;
+import com.example.discovery_country.enums.LangType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -19,16 +23,18 @@ public class HomeHotelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String name;
-    @Column(columnDefinition = "TEXT")
-    String description;
-    String address;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    Map<LangType, String> name;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    Map<LangType, String> description;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    Map<LangType, String>  address;
     String contact;
     String mapUrl;
-
-
-
-
     @Enumerated(EnumType.STRING)
     HomeHotelType type;
     long viewed;

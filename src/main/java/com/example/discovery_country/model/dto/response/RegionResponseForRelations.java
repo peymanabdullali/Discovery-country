@@ -12,7 +12,9 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegionResponseForRelations {
-    String name;
+
+   long id;
+    private String name;
 
 
     @Override
@@ -28,5 +30,5 @@ public class RegionResponseForRelations {
     public int hashCode() {
         return Objects.hash( name);
     }
-
 }
+   

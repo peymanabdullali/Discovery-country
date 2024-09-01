@@ -1,5 +1,6 @@
 package com.example.discovery_country.controller;
 
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.model.dto.criteria.HomeHotelCriteriaRequest;
 import com.example.discovery_country.model.dto.criteria.RestaurantCriteriaRequest;
 import com.example.discovery_country.service.HomeHotelService;
@@ -31,8 +32,8 @@ public class HomeHotelController {
     }
 
     @GetMapping("/details/{id}")
-    public ResponseEntity<HomeHotelResponseFindById> getHomeHotelById(@PathVariable Long id) {
-        HomeHotelResponseFindById homeHotelResponseFindById = homeHotelService.homeHotelResponseFindById(id);
+    public ResponseEntity<HomeHotelResponseFindById> getHomeHotelById(@PathVariable Long id, LangType key) {
+        HomeHotelResponseFindById homeHotelResponseFindById = homeHotelService.homeHotelResponseFindById(id,key);
         return new ResponseEntity<>(homeHotelResponseFindById, HttpStatus.OK);
     }
 

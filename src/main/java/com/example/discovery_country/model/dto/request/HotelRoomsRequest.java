@@ -1,5 +1,6 @@
 package com.example.discovery_country.model.dto.request;
 
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.enums.RoomType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -7,6 +8,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Getter
@@ -17,7 +19,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HotelRoomsRequest {
 
-    String name;
+    Map<LangType, String> name;
     double price;
     byte roomNumber;
     byte roomCount;

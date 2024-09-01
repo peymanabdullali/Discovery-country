@@ -5,6 +5,7 @@ import com.example.discovery_country.dao.entity.RegionEntity;
 import com.example.discovery_country.dao.entity.RoomEntity;
 import com.example.discovery_country.dao.repository.RoomRepository;
 import com.example.discovery_country.dao.repository.ImageRepository;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.exception.RoomNotFoundException;
 import com.example.discovery_country.helper.IncreaseViewCount;
 
@@ -36,7 +37,7 @@ public class RoomService {
     public RoomResponse create(RoomRequest request) {
         log.info("ActionLog.createRoom start");
         RoomEntity room = roomRepository.save(roomMapper.mapToEntity(request, imageRepository.findAllById(request.getImageIds())));
-        RoomResponse roomResponse = roomMapper.mapToResponse(room);
+        RoomResponse roomResponse = roomMapper.mapToResponse(room, LangType.AZ);
         log.info("ActionLog.createRoom end");
         return roomResponse;
     }
@@ -49,10 +50,10 @@ public class RoomService {
 
         log.info("ActionLog.getRooms end");
 
-        return rooms.map(roomMapper::mapToResponse);
+        return rooms.map(i->roomMapper.mapToResponse(i,criteriaRequest.getKey()));
     }
 
-    public RoomResponseFindById roomResponseFindById(Long id) {
+    public RoomResponseFindById roomResponseFindById(Long id,LangType key) {
 
         log.info("ActionLog.roomResponseFindById start with id#" + id);
 
@@ -61,21 +62,21 @@ public class RoomService {
         roomEntity.setImages(roomEntity.getImages().stream().filter(i -> !i.isDeleted()).toList());
         log.info("ActionLog.roomResponseFindById end");
 
-        return roomMapper.mapToRoomResponseFindById(roomEntity);
+        return roomMapper.mapToRoomResponseFindById(roomEntity,key);
 
     }
 
-    public RoomResponse getRoom(Long id) {
-
-        log.info("ActionLog.getRoom start with id#" + id);
-
-        RoomEntity room = roomRepository.findById(id).orElseThrow(() ->
-                new RoomNotFoundException(HttpStatus.NOT_FOUND.name(), "Room not found"));
-
-        log.info("ActionLog.getRoom end with id#" + id);
-
-        return roomMapper.mapToResponse(room);
-    }
+//    public RoomResponse getRoom(Long id,LangType key) {
+//
+//        log.info("ActionLog.getRoom start with id#" + id);
+//
+//        RoomEntity room = roomRepository.findById(id).orElseThrow(() ->
+//                new RoomNotFoundException(HttpStatus.NOT_FOUND.name(), "Room not found"));
+//
+//        log.info("ActionLog.getRoom end with id#" + id);
+//
+//        return roomMapper.mapToResponse(room,key);
+//    }
 
     public RoomResponse update(Long id, RoomRequest roomRequest) {
         log.info("ActionLog.updateRoom start with id#" + id);
@@ -87,7 +88,7 @@ public class RoomService {
 
         log.info("ActionLog.updateRoom end");
 
-        return roomMapper.mapToResponse(roomEntity);
+        return roomMapper.mapToResponse(roomEntity,LangType.AZ);
     }
 
     public void softDelete(Long id) {
