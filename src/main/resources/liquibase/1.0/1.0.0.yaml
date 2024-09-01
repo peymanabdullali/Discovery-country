@@ -4,27 +4,39 @@ databaseChangeLog:
       author: ${AUTHOR}
       changes:
         - createTable:
-            tableName: activity_categories
+            tableName: activitycategories
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
-                  type: VARCHAR(255)
+                  type: jsonb
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deleted
+                  type: boolean
                   constraints:
                     nullable: false
 
-              - column:
-                  name: deleted
-                  type: BOOLEAN
-                  constraints:
-                    nullable: false
+              - createTable:
+                  tableName: region_act_category
+                  columns:
+                    - column:
+                        name: activity_category_id
+                        type: bigint
+                        constraints:
+                          nullable: false
+                    - column:
+                        name: region_id
+                        type: bigint
+                        constraints:
+                          nullable: false
   - changeSet:
       id: 2
       author: ${AUTHOR}
@@ -34,157 +46,190 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
                   name: name
-                  type: VARCHAR(255)
+                  type: jsonb
                   constraints:
                     nullable: false
               - column:
                   name: price
-                  type: DOUBLE
+                  type: double
                   constraints:
                     nullable: false
               - column:
                   name: viewed
-                  type: BIGINT
+                  type: bigint
+                  constraints:
+                    nullable: false
+                  defaultValue: 0
               - column:
                   name: like_count
-                  type: BIGINT
-                  defaultValueNumeric: 0
+                  type: bigint
+                  constraints:
+                    nullable: false
+                  defaultValue: 0
               - column:
                   name: average_rating
-                  type: DOUBLE
-                  defaultValueNumeric: 0.0
+                  type: double
+                  constraints:
+                    nullable: false
+                  defaultValue: 0.0
               - column:
                   name: rating_count
-                  type: INT
-                  defaultValueNumeric: 0
+                  type: int
+                  constraints:
+                    nullable: false
+                  defaultValue: 0
               - column:
                   name: activity_status
-                  type: VARCHAR(255)
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
               - column:
                   name: map_url
-                  type: VARCHAR(255)
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
               - column:
                   name: latitude
-                  type: DOUBLE
+                  type: double
                   constraints:
                     nullable: false
               - column:
                   name: longitude
-                  type: DOUBLE
+                  type: double
                   constraints:
                     nullable: false
               - column:
                   name: description
-                  type: TEXT
+                  type: jsonb
+                  constraints:
+                    nullable: false
               - column:
                   name: deleted
-                  type: BOOLEAN
-                  defaultValueBoolean: false
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValue: false
               - column:
                   name: start_date
-                  type: TIMESTAMP
+                  type: timestamp
                   constraints:
                     nullable: false
               - column:
                   name: end_date
-                  type: TIMESTAMP
+                  type: timestamp
                   constraints:
                     nullable: false
               - column:
                   name: registration_deadline
-                  type: TIMESTAMP
+                  type: timestamp
                   constraints:
                     nullable: false
               - column:
                   name: contact
-                  type: VARCHAR(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: requirements
-                  type: TEXT
+                  type: jsonb
+                  constraints:
+                    nullable: true
               - column:
                   name: number_of_people
-                  type: INT
+                  type: int
                   constraints:
                     nullable: false
               - column:
                   name: activity_category_id
-                  type: BIGINT
+                  type: bigint
+                  constraints:
+                    nullable: true
   - changeSet:
       id: 3
       author: ${AUTHOR}
       changes:
         - createTable:
-            tableName: home_hotels
+            tableName: homehotels
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
-                  type: VARCHAR(255)
-
-              - column:
-                  name: description
-                  type: TEXT
-
-              - column:
-                  name: address
-                  type: VARCHAR(255)
-
-              - column:
-                  name: contact
-                  type: VARCHAR(255)
-
-              - column:
-                  name: map_url
-                  type: VARCHAR(255)
-
-              - column:
-                  name: type
-                  type: VARCHAR(255)
-
-              - column:
-                  name: viewed
-                  type: BIGINT
-
-              - column:
-                  name: like_count
-                  type: BIGINT
-
-              - column:
-                  name: average_rating
-                  type: DOUBLE
-                  defaultValueNumeric: 0.0
-
-              - column:
-                  name: rating_count
-                  type: INT
-                  defaultValueNumeric: 0
-
-              - column:
-                  name: deleted
-                  type: BOOLEAN
-                  defaultValueBoolean: false
-
-              - column:
-                  name: region_id
-                  type: BIGINT
+                  type: jsonb
                   constraints:
                     nullable: false
+              - column:
+                  name: description
+                  type: jsonb
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: jsonb
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contact
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: map_url
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: type
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: viewed
+                  type: bigint
+                  constraints:
+                    nullable: false
+                  defaultValue: 0
+              - column:
+                  name: like_count
+                  type: bigint
+                  constraints:
+                    nullable: false
+                  defaultValue: 0
+              - column:
+                  name: average_rating
+                  type: double
+                  constraints:
+                    nullable: false
+                  defaultValue: 0.0
+              - column:
+                  name: rating_count
+                  type: int
+                  constraints:
+                    nullable: false
+                  defaultValue: 0
+              - column:
+                  name: deleted
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValue: false
+              - column:
+                  name: region_id
+                  type: bigint
+                  constraints:
+                    nullable: true
   - changeSet:
       id: 4
       author: ${AUTHOR}
@@ -194,47 +239,51 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
-                  type: VARCHAR(255)
-
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
               - column:
                   name: url
-                  type: VARCHAR(255)
-
-              - column:
-                  name: image_status
-                  type: VARCHAR(255)
-
-              - column:
-                  name: room_id
-                  type: BIGINT
-
-              - column:
-                  name: home_hotel_id
-                  type: BIGINT
-
-              - column:
-                  name: activity_id
-                  type: BIGINT
-
-              - column:
-                  name: scenic_spot_id
-                  type: BIGINT
-
-              - column:
-                  name: restaurant_id
-                  type: BIGINT
-
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
               - column:
                   name: deleted
-                  type: BOOLEAN
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: room_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: home_hotel_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: activity_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: scenic_spot_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: restaurant_id
+                  type: bigint
+                  constraints:
+                    nullable: true
   - changeSet:
       id: 5
       author: ${AUTHOR}
@@ -268,4 +317,6 @@ databaseChangeLog:
 
               - column:
                   name: deleted
-                  type: BOOLEAN
+                  type: boolean
+                  constraints:
+                    nullable: false

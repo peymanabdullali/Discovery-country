@@ -8,37 +8,36 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
-                  type: VARCHAR(255)
+                  type: jsonb
                   constraints:
                     nullable: false
-
               - column:
                   name: map_url
-                  type: VARCHAR(255)
-
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
               - column:
                   name: latitude
-                  type: DOUBLE
+                  type: double precision
                   constraints:
                     nullable: false
-
               - column:
                   name: longitude
-                  type: DOUBLE
+                  type: double precision
                   constraints:
                     nullable: false
-
               - column:
                   name: zone_id
-                  type: BIGINT
+                  type: bigint
+                  constraints:
+                    nullable: true
   - changeSet:
       id: 7
       author: ${AUTHOR}
@@ -48,73 +47,76 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGINT
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
-
               - column:
                   name: name
-                  type: VARCHAR(255)
+                  type: jsonb
                   constraints:
-                    nullable: false
-
+                    nullable: true
               - column:
                   name: description
-                  type: TEXT
-
+                  type: jsonb
+                  constraints:
+                    nullable: true
               - column:
                   name: address
-                  type: VARCHAR(255)
+                  type: jsonb
                   constraints:
-                    nullable: false
-
+                    nullable: true
               - column:
                   name: contact
-                  type: VARCHAR(255)
+                  type: varchar(255)
                   constraints:
                     nullable: false
-
               - column:
                   name: region_id
-                  type: BIGINT
+                  type: bigint
                   constraints:
                     nullable: false
-
-              - column:
-                  name: rating
-                  type: DOUBLE
-
               - column:
                   name: map_url
-                  type: VARCHAR(255)
-
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
               - column:
                   name: menu_url
-                  type: VARCHAR(255)
-
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: rating
+                  type: double precision
+                  constraints:
+                    nullable: true
               - column:
                   name: viewed
-                  type: BIGINT
-
+                  type: bigint
+                  constraints:
+                    nullable: true
               - column:
                   name: like_count
-                  type: BIGINT
-
+                  type: bigint
+                  constraints:
+                    nullable: true
               - column:
                   name: average_rating
-                  type: DOUBLE
-                  defaultValueNumeric: 0.0
-
+                  type: double precision
+                  constraints:
+                    nullable: true
               - column:
                   name: rating_count
-                  type: INT
-                  defaultValueNumeric: 0
-
+                  type: int
+                  constraints:
+                    nullable: true
               - column:
                   name: status
-                  type: BOOLEAN
+                  type: boolean
+                  constraints:
+                    nullable: true
   - changeSet:
       id: 8
       author: ${AUTHOR}
@@ -148,7 +150,9 @@ databaseChangeLog:
 
               - column:
                   name: status
-                  type: BOOLEAN
+                  type: boolean
+                  constraints:
+                    nullable: false
 
               - column:
                   name: scenic_spot_id

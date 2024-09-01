@@ -202,3 +202,30 @@ databaseChangeLog:
             constraintName: fk_scenicspot_region
             referencedTableName: regions
             referencedColumnNames: id
+
+
+
+
+
+        - addForeignKeyConstraint:
+            baseTableName: refresh_token
+            baseColumnNames: user_id
+            constraintName: fk_refresh_token_user
+            referencedTableName: users
+            referencedColumnNames: id
+
+
+        - addForeignKeyConstraint:
+            baseTableName: forgot_password
+            baseColumnNames: user_id
+            constraintName: fk_forgot_password_user
+            referencedTableName: users
+            referencedColumnNames: id
+
+
+        - addForeignKeyConstraint:
+            baseTableName: user_otp
+            baseColumnNames: user_id
+            constraintName: fk_user_otp_user
+            referencedTableName: users
+            referencedColumnNames: id
