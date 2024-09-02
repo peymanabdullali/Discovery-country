@@ -33,7 +33,7 @@ class ActivityCategoryServiceTest extends Specification {
         random = EnhancedRandomBuilder.aNewEnhancedRandom()
     }
 
-    def "create ActivityCategory"() {
+    def "create ActivityCategoryTest"() {
         given: "A valid ActivityCategoryRequest and corresponding entities"
         def request = random.nextObject(ActivityCategoryRequest)
         def regions = random.objects(RegionEntity, request.getRegionIds().size()).toList()
