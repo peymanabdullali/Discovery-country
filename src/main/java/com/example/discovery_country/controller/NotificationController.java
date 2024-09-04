@@ -3,6 +3,7 @@ package com.example.discovery_country.controller;
 import com.example.discovery_country.model.dto.request.NotificationRequest;
 import com.example.discovery_country.model.dto.response.NotificationResponse;
 import com.example.discovery_country.service.NotificationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class NotificationController {
     private final NotificationService notificationService;
 
     @PostMapping
-    public ResponseEntity<NotificationResponse> createNotification(@RequestBody NotificationRequest notificationRequest) {
+    public ResponseEntity<NotificationResponse> createNotification(@Valid @RequestBody NotificationRequest notificationRequest) {
         log.info("ActionLog.createNotification start");
         NotificationResponse notificationResponse = notificationService.createNotification(notificationRequest);
         log.info("ActionLog.createNotification end");

@@ -4,6 +4,7 @@ import com.example.discovery_country.model.dto.criteria.ActivityCategoryCriteria
 import com.example.discovery_country.model.dto.request.ActivityCategoryRequest;
 import com.example.discovery_country.model.dto.response.ActivityCategoryResponse;
 import com.example.discovery_country.service.ActivityCategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,7 @@ public class ActivityCategoryController {
     private final ActivityCategoryService activityCategoryService;
 
     @PostMapping
-    public ResponseEntity<ActivityCategoryResponse> createActivityCategory(@RequestBody ActivityCategoryRequest request) {
+    public ResponseEntity<ActivityCategoryResponse> createActivityCategory(@Valid @RequestBody ActivityCategoryRequest request) {
         log.info("Controller.createActivityCategory start");
 
         ActivityCategoryResponse response = activityCategoryService.create(request);
@@ -47,7 +48,7 @@ public class ActivityCategoryController {
     @PutMapping("/{id}")
     public ResponseEntity<ActivityCategoryResponse> updateActivityCategory(
             @PathVariable Long id,
-            @RequestBody ActivityCategoryRequest categoryRequest) {
+           @Valid @RequestBody ActivityCategoryRequest categoryRequest) {
         log.info("Controller.updateActivityCategory start with id#" + id);
 
         ActivityCategoryResponse response = activityCategoryService.update(id, categoryRequest);

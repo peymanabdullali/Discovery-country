@@ -5,6 +5,7 @@ import com.example.discovery_country.dao.entity.RegionEntity;
 import com.example.discovery_country.enums.LangType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -20,9 +21,10 @@ public class ActivityCategoryRequest {
 
 
 
-    @NotBlank(message = "can't be blank")
-    Map<LangType, String> name;
-    List<Long> regionIds;
+    @NotEmpty(message = "Name can't be empty")
+    Map<LangType,String>name;
 
+    @NotEmpty(message = "Name can't be empty")
+    List<Long> regionIds;
 
 }

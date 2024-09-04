@@ -12,6 +12,7 @@ import com.example.discovery_country.model.dto.response.RestaurantResponse;
 import com.example.discovery_country.model.dto.response.RestaurantResponseForFindById;
 import com.example.discovery_country.service.RegionService;
 import com.example.discovery_country.service.RestaurantService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -29,7 +30,7 @@ public class RestaurantController {
 
 
     @PostMapping
-    public ResponseEntity<RestaurantResponse> createRestaurant(@RequestBody RestaurantRequest request) {
+    public ResponseEntity<RestaurantResponse> createRestaurant(@Valid @RequestBody RestaurantRequest request) {
         log.info("Controller.createRestaurant start");
         RestaurantResponse response = service.createRestaurant(request);
         log.info("Controller.createRestaurant end");
@@ -48,7 +49,7 @@ public class RestaurantController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateRestaurant(
             @PathVariable Long id,
-            @RequestBody RestaurantRequestForUpdate request) {
+            @Valid @RequestBody RestaurantRequestForUpdate request) {
         log.info("Controller.updateZone start with id#" + id);
         service.updateRestaurant(id, request);
         log.info("Controller.updateZone end");

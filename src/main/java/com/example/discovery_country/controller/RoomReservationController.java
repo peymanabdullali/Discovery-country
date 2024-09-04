@@ -4,6 +4,7 @@ import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.model.dto.request.RoomReservationRequest;
 import com.example.discovery_country.model.dto.response.RoomReservationResponse;
 import com.example.discovery_country.service.RoomReservationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class RoomReservationController {
     private final RoomReservationService roomReservationService;
 //
     @PostMapping
-    public ResponseEntity<RoomReservationResponse> createReservation(@RequestBody RoomReservationRequest request) {
+    public ResponseEntity<RoomReservationResponse> createReservation(@Valid  @RequestBody RoomReservationRequest request) {
         log.info("Controller.createReservation start");
         RoomReservationResponse reservation = roomReservationService.createReservation(request);
         log.info("Controller.createReservation end");
