@@ -1,0 +1,37 @@
+databaseChangeLog:
+    - changeSet:
+          id: 15
+          author: ${AUTHOR}
+          changes:
+              - sql:
+                    sql: |
+                        INSERT INTO users (
+                         name,
+                         surname,
+                         username,
+                         email,
+                         password,
+                         role,
+                         enabled,
+                         account_non_locked,
+                         failed_attempt,
+                         lock_time,
+                         created_date,
+                         updated_date,
+                         email_verified
+                         )
+                         VALUES (
+                         'Admin',
+                         'Admin',
+                         'admin1',
+                         'admin@gmail.com',
+                         '$2a$12$FN2OqemiDb79HhOA4ViYH.jYPVWTAI7yJdI5UpeokHOKlziiYlPcm',
+                         'ADMIN',
+                         true, 
+                         true,
+                         0,   
+                         NULL,
+                         CURRENT_TIMESTAMP,
+                         CURRENT_TIMESTAMP,
+                         true
+                         )
