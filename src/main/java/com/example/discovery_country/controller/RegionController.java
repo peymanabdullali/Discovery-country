@@ -6,6 +6,7 @@ import com.example.discovery_country.model.dto.request.*;
 import com.example.discovery_country.model.dto.response.RegionResponse;
 import com.example.discovery_country.model.dto.response.RegionResponseForFindById;
 import com.example.discovery_country.service.RegionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -23,7 +24,7 @@ public class RegionController {
 
 
     @PostMapping
-    public ResponseEntity<RegionResponse> createRegion(@RequestBody RegionRequest request) {
+    public ResponseEntity<RegionResponse> createRegion(@Valid @RequestBody RegionRequest request) {
         log.info("Controller.createRegion start");
         RegionResponse region = service.createRegion(request);
         log.info("Controller.createRegion end");

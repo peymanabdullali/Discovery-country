@@ -7,6 +7,7 @@ import com.example.discovery_country.service.HomeHotelService;
 import com.example.discovery_country.model.dto.request.HomeHotelRequest;
 import com.example.discovery_country.model.dto.response.HomeHotelResponse;
 import com.example.discovery_country.model.dto.response.HomeHotelResponseFindById;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -26,7 +27,7 @@ public class HomeHotelController {
     private final HomeHotelService homeHotelService;
 
     @PostMapping
-    public ResponseEntity<HomeHotelResponse> createHomeHotel(@RequestBody HomeHotelRequest homeHotelRequest) {
+    public ResponseEntity<HomeHotelResponse> createHomeHotel(@Valid @RequestBody HomeHotelRequest homeHotelRequest) {
         HomeHotelResponse homeHotelResponse = homeHotelService.create(homeHotelRequest);
         return new ResponseEntity<>(homeHotelResponse, HttpStatus.CREATED);
     }
@@ -48,7 +49,7 @@ public class HomeHotelController {
     @PutMapping("/{id}")
     public ResponseEntity<HomeHotelResponse> updateHomeHotel(
             @PathVariable Long id,
-            @RequestBody HomeHotelRequest homeHotelRequest) {
+            @Valid @RequestBody HomeHotelRequest homeHotelRequest) {
         HomeHotelResponse homeHotelResponse = homeHotelService.updateHomeHotel(id, homeHotelRequest);
         return new ResponseEntity<>(homeHotelResponse, HttpStatus.OK);
     }

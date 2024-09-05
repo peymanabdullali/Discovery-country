@@ -4,6 +4,7 @@ import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.*;
 import com.example.discovery_country.model.dto.response.ZoneResponse;
 import com.example.discovery_country.service.ZoneService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,7 @@ public class ZoneController {
 
 
     @PostMapping
-    public ResponseEntity<ZoneResponse> createZone(@RequestBody ZoneRequest request) {
+    public ResponseEntity<ZoneResponse> createZone(@Valid  @RequestBody ZoneRequest request) {
         log.info("Controller.createZone start");
 
         ZoneResponse response = service.create(request);
