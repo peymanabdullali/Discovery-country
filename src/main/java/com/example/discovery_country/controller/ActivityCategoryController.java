@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/activity-categories")
+@RequestMapping("v1/api/activity-categories")
 @RequiredArgsConstructor
 public class ActivityCategoryController {
 
     private final ActivityCategoryService activityCategoryService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<ActivityCategoryResponse> createActivityCategory(@RequestBody ActivityCategoryRequest request) {
         log.info("Controller.createActivityCategory start");
 
@@ -44,7 +44,7 @@ public class ActivityCategoryController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<ActivityCategoryResponse> updateActivityCategory(
             @PathVariable Long id,
             @RequestBody ActivityCategoryRequest categoryRequest) {
@@ -57,7 +57,7 @@ public class ActivityCategoryController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteActivityCategory(@PathVariable Long id) {
         log.info("Controller.softDeleteActivityCategory start with id#" + id);
 

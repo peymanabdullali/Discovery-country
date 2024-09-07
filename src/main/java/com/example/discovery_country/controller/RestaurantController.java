@@ -21,14 +21,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("restaurant")
+@RequestMapping("v1/api/restaurant")
 @Slf4j
 @RequiredArgsConstructor
 public class RestaurantController {
     private final RestaurantService service;
 
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<RestaurantResponse> createRestaurant(@RequestBody RestaurantRequest request) {
         log.info("Controller.createRestaurant start");
         RestaurantResponse response = service.createRestaurant(request);
@@ -37,15 +37,14 @@ public class RestaurantController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<RestaurantResponse>> getRestaurants(RestaurantCriteriaRequest criteriaRequest,
-                                                                   Pageable pageable) {
+    public ResponseEntity<Page<RestaurantResponse>> getRestaurants(RestaurantCriteriaRequest criteriaRequest, Pageable pageable) {
         log.info("Controller.getRestaurants start");
         Page<RestaurantResponse> responses = service.getRestaurants(criteriaRequest, pageable);
         log.info("Controller.getRestaurants end");
         return ResponseEntity.ok(responses);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> updateRestaurant(
             @PathVariable Long id,
             @RequestBody RestaurantRequestForUpdate request) {
@@ -55,14 +54,14 @@ public class RestaurantController {
         return ResponseEntity.ok("Update successful");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void softDelete(@PathVariable Long id) {
         log.info("Controller.softDelete start with id#" + id);
         service.softDelete(id);
         log.info("Controller.softDelete end");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<RestaurantResponseForFindById> findRestaurantById(
             @PathVariable Long id, LangType key) {
         log.info("Controller.findRestaurantById start with id#" + id);

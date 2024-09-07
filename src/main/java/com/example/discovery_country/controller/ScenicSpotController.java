@@ -20,13 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("scenicSpot")
+@RequestMapping("v1/api/scenicSpot")
 @Slf4j
 @RequiredArgsConstructor
 public class ScenicSpotController {
     private final ScenicSpotService service;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<ScenicSpotResponse> createScenicSpot(@RequestBody ScenicSpotRequest request) {
         log.info("Controller.createScenicSpot start");
 
@@ -46,21 +46,21 @@ public class ScenicSpotController {
         return ResponseEntity.ok(scenicSpots);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/apporove/{id}")
     public void updateStatus(@PathVariable Long id) {
         log.info("Controller.updateStatus start with id#" + id);
         service.updateStatus(id);
         log.info("Controller.updateStatus end");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void softDelete(@PathVariable Long id) {
         log.info("Controller.softDelete start with id#" + id);
         service.softDelete(id);
         log.info("Controller.softDelete end");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<ScenicSpotResponseForFindById> findById(@PathVariable Long id, LangType key) {
         log.info("Controller.findScenicSpot start with id#" + id);
         ScenicSpotResponseForFindById byId = service.findById(id, key);

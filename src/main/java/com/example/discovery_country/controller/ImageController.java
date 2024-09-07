@@ -18,7 +18,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/images")
+@RequestMapping("v1/api/images")
 @RequiredArgsConstructor
 public class ImageController {
 
@@ -30,7 +30,7 @@ public class ImageController {
         return ResponseEntity.ok(list);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteImage(@PathVariable Long id) {
         log.info("ActionLog.deleteImage start with id#" + id);
 
