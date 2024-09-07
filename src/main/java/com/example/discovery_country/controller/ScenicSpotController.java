@@ -7,6 +7,7 @@ import com.example.discovery_country.model.dto.response.ScenicSpotResponse;
 import com.example.discovery_country.model.dto.response.ScenicSpotResponseForFindById;
 import com.example.discovery_country.service.ScenicSpotService;
 import io.swagger.annotations.ApiOperation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,7 @@ public class ScenicSpotController {
 
     @PostMapping("/create")
     public ResponseEntity<ScenicSpotResponse> createScenicSpot(@RequestBody ScenicSpotRequest request) {
+
         log.info("Controller.createScenicSpot start");
 
         ScenicSpotResponse scenicSpot = service.createScenicSpot(request);

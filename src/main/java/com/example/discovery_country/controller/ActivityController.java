@@ -6,6 +6,7 @@ import com.example.discovery_country.model.dto.request.ActivityRequest;
 import com.example.discovery_country.model.dto.response.ActivityResponse;
 import com.example.discovery_country.model.dto.response.ActivityResponseFindById;
 import com.example.discovery_country.service.ActivityService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
@@ -41,6 +42,7 @@ public class ActivityController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<ActivityResponse> updateActivity(@PathVariable Long id, @RequestBody ActivityRequest request) {
+
         ActivityResponse response = activityService.update(id, request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

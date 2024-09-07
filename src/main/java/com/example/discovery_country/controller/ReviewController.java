@@ -7,6 +7,7 @@ import com.example.discovery_country.model.dto.response.ZoneResponse;
 import com.example.discovery_country.service.ReviewService;
 import com.example.discovery_country.service.ZoneService;
 import io.swagger.annotations.ApiOperation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -38,7 +39,7 @@ public class ReviewController {
 
 
     @PostMapping("/home-hotel")
-    public ResponseEntity<ReviewResponse> createHomeHotelReview(@RequestPart("review") ReviewRequestForHomeHotel review,
+    public ResponseEntity<ReviewResponse> createHomeHotelReview(@Valid @RequestPart("review") ReviewRequestForHomeHotel review,
                                                                 @RequestPart("photo") MultipartFile photo) {
         log.info("Controller.createHomeHotelReview start");
 
@@ -50,7 +51,7 @@ public class ReviewController {
     }
 
     @PostMapping("/scenic-spot")
-    public ResponseEntity<ReviewResponse> createScenicSpotReview(@RequestPart("review") ReviewRequestForScenicSpots review,
+    public ResponseEntity<ReviewResponse> createScenicSpotReview(@Valid @RequestPart("review") ReviewRequestForScenicSpots review,
                                                                  @RequestPart("photo") MultipartFile photo) {
         log.info("Controller.createScenicSpotReview start");
 
@@ -62,7 +63,7 @@ public class ReviewController {
     }
 
     @PostMapping("/restaurant")
-    public ResponseEntity<ReviewResponse> createRestaurantReview(@RequestPart("review") ReviewRequestForRestaurant review,
+    public ResponseEntity<ReviewResponse> createRestaurantReview(@Valid @RequestPart("review") ReviewRequestForRestaurant review,
                                                                  @RequestPart("photo") MultipartFile photo) {
         log.info("Controller.createRestaurantReview start");
 

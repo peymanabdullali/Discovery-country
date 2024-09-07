@@ -1,3 +1,4 @@
+
 package com.example.discovery_country.service;
 
 import com.example.discovery_country.dao.entity.ActivityCategoryEntity;
@@ -5,6 +6,7 @@ import com.example.discovery_country.dao.entity.ActivityEntity;
 import com.example.discovery_country.dao.entity.RegionEntity;
 import com.example.discovery_country.dao.repository.ActivityCategoryRepository;
 import com.example.discovery_country.dao.repository.RegionRepository;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.exception.ActivityCategoryNotFoundException;
 import com.example.discovery_country.model.dto.criteria.ActivityCategoryCriteriaRequest;
 import com.example.discovery_country.model.dto.request.ActivityCategoryRequest;
@@ -23,6 +25,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -53,10 +56,10 @@ class ActivityCategoryServiceTest {
         final ActivityCategoryRequest request = ActivityCategoryRequest.builder()
                 .regionIds(List.of(0L))
                 .build();
-
+        final Map<LangType, String> nameMap = Map.of(LangType.EN, "updatedName");
         final RegionEntity regionEntity = new RegionEntity();
         regionEntity.setId(0L);
-        regionEntity.setName("name");
+        regionEntity.setName(nameMap);
         regionEntity.setMapUrl("mapUrl");
         regionEntity.setLatitude(0.0);
         regionEntity.setLongitude(0.0);
@@ -65,7 +68,7 @@ class ActivityCategoryServiceTest {
 
         final ActivityCategoryEntity activityCategoryEntity = new ActivityCategoryEntity();
         activityCategoryEntity.setId(0L);
-        activityCategoryEntity.setName("name");
+        activityCategoryEntity.setName(nameMap);
         activityCategoryEntity.setDeleted(false);
         final ActivityEntity activity = new ActivityEntity();
         activityCategoryEntity.setActivities(List.of(activity));
@@ -106,10 +109,11 @@ class ActivityCategoryServiceTest {
         final ActivityCategoryRequest request = ActivityCategoryRequest.builder()
                 .regionIds(List.of(0L))
                 .build();
+        final Map<LangType, String> nameMap = Map.of(LangType.EN, "updatedName");
 
         final RegionEntity regionEntity = new RegionEntity();
         regionEntity.setId(0L);
-        regionEntity.setName("name");
+        regionEntity.setName(nameMap);
         regionEntity.setMapUrl("mapUrl");
         regionEntity.setLatitude(0.0);
         regionEntity.setLongitude(0.0);
@@ -129,10 +133,10 @@ class ActivityCategoryServiceTest {
         final ActivityCategoryCriteriaRequest criteriaRequest = ActivityCategoryCriteriaRequest.builder()
                 .name("name")
                 .build();
-
+        final Map<LangType, String> nameMap = Map.of(LangType.EN, "updatedName");
         final ActivityCategoryEntity activityCategoryEntity = new ActivityCategoryEntity();
         activityCategoryEntity.setId(0L);
-        activityCategoryEntity.setName("name");
+        activityCategoryEntity.setName(nameMap);
         activityCategoryEntity.setDeleted(false);
         final ActivityEntity activity = new ActivityEntity();
         activityCategoryEntity.setActivities(List.of(activity));
@@ -165,10 +169,11 @@ class ActivityCategoryServiceTest {
         final ActivityCategoryRequest categoryRequest = ActivityCategoryRequest.builder()
                 .regionIds(List.of(0L))
                 .build();
+        final Map<LangType, String> nameMap = Map.of(LangType.EN, "updatedName");
 
         final ActivityCategoryEntity existingCategoryEntity = new ActivityCategoryEntity();
         existingCategoryEntity.setId(0L);
-        existingCategoryEntity.setName("existingName");
+        existingCategoryEntity.setName(nameMap);
         existingCategoryEntity.setDeleted(false);
         final ActivityEntity existingActivity = new ActivityEntity();
         existingCategoryEntity.setActivities(List.of(existingActivity));
@@ -179,7 +184,7 @@ class ActivityCategoryServiceTest {
 
         final ActivityCategoryEntity updatedCategoryEntity = new ActivityCategoryEntity();
         updatedCategoryEntity.setId(0L);
-        updatedCategoryEntity.setName("updatedName");
+        updatedCategoryEntity.setName(nameMap);
         updatedCategoryEntity.setDeleted(false);
         final ActivityEntity updatedActivity = new ActivityEntity();
         updatedCategoryEntity.setActivities(List.of(updatedActivity));

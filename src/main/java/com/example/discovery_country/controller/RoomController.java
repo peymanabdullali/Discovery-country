@@ -6,6 +6,7 @@ import com.example.discovery_country.model.dto.request.RoomRequest;
 import com.example.discovery_country.model.dto.response.RoomResponse;
 import com.example.discovery_country.model.dto.response.RoomResponseFindById;
 import com.example.discovery_country.service.RoomService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,7 @@ public class RoomController {
 
     @PostMapping("/create")
     public ResponseEntity<RoomResponse> createRoom( @RequestBody RoomRequest roomRequest) {
+
         RoomResponse roomResponse = roomService.create(roomRequest);
         return new ResponseEntity<>(roomResponse, HttpStatus.CREATED);
     }
@@ -41,6 +43,7 @@ public class RoomController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long id,  @RequestBody RoomRequest roomRequest) {
+
         RoomResponse updatedRoom = roomService.update(id, roomRequest);
         return new ResponseEntity<>(updatedRoom, HttpStatus.OK);
     }

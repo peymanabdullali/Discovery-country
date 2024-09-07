@@ -2,6 +2,7 @@ package com.example.discovery_country.model.dto.request;
 
 import com.example.discovery_country.enums.LangType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,13 +18,13 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RestaurantRequestForUpdate {
 
-    @NotBlank(message = "can't be blank")
+    @NotEmpty(message = "Name cannot be empty")
     Map<LangType, String> name;
 
-    @NotBlank(message = "can't be blank")
+    @NotEmpty(message = "Description cannot be empty")
     Map<LangType, String> description;
 
-    @NotBlank(message = "can't be blank")
+    @NotEmpty(message = "Address cannot be empty")
     Map<LangType, String> address;
 
     @NotBlank(message = "can't be blank")
