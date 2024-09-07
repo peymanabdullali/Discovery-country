@@ -36,19 +36,15 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "The name field can't be blank")
     private String name;
 
-    @NotBlank(message = "The username field can't be blank")
     @Column(unique = true)
     private String username;
 
-    @NotBlank(message = "The email field can't be blank")
     @Column(unique = true)
     @Email(message = "Please enter email in proper format!")
     private String email;
 
-    @NotBlank(message = "The password field can't be blank")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{7,}$",
             message = "Password must be at least 7 characters long, contain at least one uppercase letter, one lowercase letter, and one number.")
     private String password;
@@ -63,18 +59,14 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @NotBlank(message = "The surname field can't be blank")
     private String surname;
 
     private boolean enabled;
 
-    @Column(name = "account_non_locked")
     private boolean accountNonLocked;
 
-    @Column(name = "failed_attempt")
     private int failedAttempt;
 
-    @Column(name = "lock_time")
     private Date lockTime;
 
     @CreationTimestamp
@@ -85,13 +77,7 @@ public class User implements UserDetails {
 
     private boolean emailVerified;
 
-//    @NotBlank(message = "The phone prefix field can't be blank")
-//    private PhonePrefix phonePrefix;
-//
-//    @NotBlank(message = "The phone number field can't be blank")
-//    @Pattern(regexp = "^\\d{7}$",
-//            message = "Phone number must be 7 digits")
-//    private String phoneNumber;
+
 
     @OneToMany(mappedBy = "user")
     List<NotificationEntity> notification;

@@ -1,0 +1,19 @@
+spring:
+  mail:
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+
+    host: smtp.gmail.com
+    username:
+    password:
+    default-encoding: UTF-8
+    protocol: smtp
+    port: 587
+
+
