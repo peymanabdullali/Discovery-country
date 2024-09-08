@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("review")
+@RequestMapping("v1/api/review")
 public class ReviewController {
     private final ReviewService reviewService;
 
@@ -36,25 +36,6 @@ public class ReviewController {
         return path;
     }
 
-//        @PostMapping(value = "/restaurant2", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public ResponseEntity<ReviewResponse> createRestaurantReview2(
-//            @RequestParam("request") ReviewRequestForRestaurant request,
-//            @RequestParam("file") MultipartFile file) {
-//
-//        log.info("Controller.createRestaurantReview start");
-//
-//        ReviewResponse response = reviewService.createRestaurantReview(request, file);
-//
-//        log.info("Controller.createRestaurantReview end");
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-//    }
-
-//    @ApiOperation("Adding photo by productId")
-//    @PostMapping(value = "/addPhoto3",produces = MediaType.MULTIPART_FORM_DATA)
-//    public void createRestaurantReview3(@RequestPart ReviewRequestForRestaurant request, @RequestPart MultipartFile photo) {
-//        reviewService.createRestaurantReview(request, photo);
-//    }
 
 
     @PostMapping("/home-hotel")

@@ -2,6 +2,7 @@ package com.example.discovery_country.controller;
 
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import com.example.discovery_country.model.dto.request.*;
+import com.example.discovery_country.model.dto.request.auth.ChangePassword;
 import com.example.discovery_country.model.dto.response.ZoneResponse;
 import com.example.discovery_country.service.ZoneService;
 import jakarta.validation.Valid;
@@ -14,15 +15,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("zone")
+@RequestMapping("v1/api/zone")
 @Slf4j
 @RequiredArgsConstructor
 public class ZoneController {
     private final ZoneService service;
 
 
-    @PostMapping
-    public ResponseEntity<ZoneResponse> createZone(@Valid  @RequestBody ZoneRequest request) {
+    @PostMapping("/create")
+    public ResponseEntity<ZoneResponse> createZone(@RequestBody ZoneRequest request) {
+
         log.info("Controller.createZone start");
 
         ZoneResponse response = service.create(request);
@@ -42,7 +44,7 @@ public class ZoneController {
         return ResponseEntity.ok(zones);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<ZoneResponse> updateZone(
             @PathVariable Long id,
             @RequestBody ZoneRequest zoneRequest) {
@@ -55,7 +57,7 @@ public class ZoneController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteZone(
             @PathVariable Long id) {
         log.info("Controller.deleteZone start with id#" + id);
@@ -64,3 +66,4 @@ public class ZoneController {
     }
 
 }
+

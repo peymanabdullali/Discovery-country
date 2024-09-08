@@ -16,15 +16,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/regions")
+@RequestMapping("v1/api/regions")
 @Slf4j
 @RequiredArgsConstructor
 public class RegionController {
     private final RegionService service;
 
 
-    @PostMapping
-    public ResponseEntity<RegionResponse> createRegion(@Valid @RequestBody RegionRequest request) {
+    @PostMapping("/create")
+    public ResponseEntity<RegionResponse> createRegion(@RequestBody RegionRequest request) {
+
         log.info("Controller.createRegion start");
         RegionResponse region = service.createRegion(request);
         log.info("Controller.createRegion end");
@@ -42,7 +43,7 @@ public class RegionController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteRegion(
             @PathVariable Long id) {
         log.info("Controller.deleteRegion start with id#" + id);
@@ -50,7 +51,7 @@ public class RegionController {
         log.info("Controller.deleteRegion end");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find/{id}")
     public RegionResponseForFindById findRegionById(
             @PathVariable Long id, LangType key) {
         log.info("Controller.findRegion start with id#" + id);

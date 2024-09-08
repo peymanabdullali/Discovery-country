@@ -16,14 +16,15 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/rooms")
+@RequestMapping("v1/api/room")
 @RequiredArgsConstructor
 public class RoomController {
 
     private final RoomService roomService;
 
-    @PostMapping
-    public ResponseEntity<RoomResponse> createRoom( @Valid  @RequestBody RoomRequest roomRequest) {
+    @PostMapping("/create")
+    public ResponseEntity<RoomResponse> createRoom( @RequestBody RoomRequest roomRequest) {
+
         RoomResponse roomResponse = roomService.create(roomRequest);
         return new ResponseEntity<>(roomResponse, HttpStatus.CREATED);
     }
@@ -34,25 +35,20 @@ public class RoomController {
         return new ResponseEntity<>(rooms, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<RoomResponseFindById> getRoomById(@PathVariable Long id, LangType key) {
         RoomResponseFindById roomResponse = roomService.roomResponseFindById(id,key);
         return new ResponseEntity<>(roomResponse, HttpStatus.OK);
     }
-//
-//    @GetMapping("/room/{id}")
-//    public ResponseEntity<RoomResponse> getRoom(@PathVariable Long id) {
-//        RoomResponse roomResponse = roomService.getRoom(id);
-//        return new ResponseEntity<>(roomResponse, HttpStatus.OK);
-//    }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long id,  @Valid @RequestBody RoomRequest roomRequest) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long id,  @RequestBody RoomRequest roomRequest) {
+
         RoomResponse updatedRoom = roomService.update(id, roomRequest);
         return new ResponseEntity<>(updatedRoom, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteRoom(@PathVariable Long id) {
         roomService.softDelete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

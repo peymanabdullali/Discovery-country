@@ -16,14 +16,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/activities")
+@RequestMapping("v1/api/activities")
 @RequiredArgsConstructor
 public class ActivityController {
 
     private final ActivityService activityService;
 
-    @PostMapping
-    public ResponseEntity<ActivityResponse> createActivity(@Valid @RequestBody ActivityRequest request) {
+    @PostMapping("/create")
+    public ResponseEntity<ActivityResponse> createActivity(@RequestBody ActivityRequest request) {
         ActivityResponse response = activityService.create(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -33,26 +33,21 @@ public class ActivityController {
         Page<ActivityResponse> responses = activityService.getActivities(criteriaRequest, pageable);
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
-    @GetMapping("/{id}/homepage")
+    @GetMapping("/find/{id}")
     public ResponseEntity<ActivityResponseFindById> getActivityForHomePage(@PathVariable Long id, LangType key) {
         ActivityResponseFindById response = activityService.activityResponseFindById(id,key);
         return ResponseEntity.ok(response);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<ActivityResponse> getActivity(@PathVariable Long id) {
-//        ActivityResponse response = activityService.getActivity(id);
-//        return ResponseEntity.ok(response);
-//    }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ActivityResponse> updateActivity(@PathVariable Long id, @RequestBody ActivityRequest request) {
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ActivityResponse> updateActivity(@PathVariable Long id, @Valid @RequestBody ActivityRequest request) {
         ActivityResponse response = activityService.update(id, request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> softDeleteActivity(@PathVariable Long id) {
         activityService.softDelete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

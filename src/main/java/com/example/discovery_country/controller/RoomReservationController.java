@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("roomReservations")
+@RequestMapping("v1/api/roomReservations")
 @Slf4j
 @RequiredArgsConstructor
 public class RoomReservationController {
     private final RoomReservationService roomReservationService;
-//
-    @PostMapping
-    public ResponseEntity<RoomReservationResponse> createReservation(@Valid  @RequestBody RoomReservationRequest request) {
+
+    @PostMapping("/create")
+    public ResponseEntity<RoomReservationResponse> createReservation(@RequestBody RoomReservationRequest request) {
+
         log.info("Controller.createReservation start");
         RoomReservationResponse reservation = roomReservationService.createReservation(request);
         log.info("Controller.createReservation end");

@@ -20,19 +20,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/home-hotels")
+@RequestMapping("v1/api/home-hotels")
 @RequiredArgsConstructor
 public class HomeHotelController {
 
     private final HomeHotelService homeHotelService;
 
-    @PostMapping
-    public ResponseEntity<HomeHotelResponse> createHomeHotel(@Valid @RequestBody HomeHotelRequest homeHotelRequest) {
+    @PostMapping("/create")
+    public ResponseEntity<HomeHotelResponse> createHomeHotel(@RequestBody HomeHotelRequest homeHotelRequest) {
+
         HomeHotelResponse homeHotelResponse = homeHotelService.create(homeHotelRequest);
         return new ResponseEntity<>(homeHotelResponse, HttpStatus.CREATED);
     }
 
-    @GetMapping("/details/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<HomeHotelResponseFindById> getHomeHotelById(@PathVariable Long id, LangType key) {
         HomeHotelResponseFindById homeHotelResponseFindById = homeHotelService.homeHotelResponseFindById(id,key);
         return new ResponseEntity<>(homeHotelResponseFindById, HttpStatus.OK);
@@ -46,7 +47,7 @@ public class HomeHotelController {
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<HomeHotelResponse> updateHomeHotel(
             @PathVariable Long id,
             @Valid @RequestBody HomeHotelRequest homeHotelRequest) {
@@ -54,19 +55,19 @@ public class HomeHotelController {
         return new ResponseEntity<>(homeHotelResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> softDeleteHomeHotel(@PathVariable Long id) {
         homeHotelService.softDelete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/{id}/rate")
+    @PostMapping("/rate/{id}")
     public ResponseEntity<Void> rateHomeHotel(@PathVariable Long id, @RequestParam int stars) {
         homeHotelService.rateHomeHotel(id, stars);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/{id}/like")
+    @PostMapping("/like/{id}")
     public ResponseEntity<Void> updateLikeCount(@PathVariable Long id, @RequestParam boolean increment) {
         homeHotelService.updateLikeCount(id, increment);
         return new ResponseEntity<>(HttpStatus.OK);

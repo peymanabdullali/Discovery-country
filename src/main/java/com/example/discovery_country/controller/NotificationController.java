@@ -14,21 +14,23 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/notifications")
+@RequestMapping("v1/api/notifications")
 @RequiredArgsConstructor
 public class NotificationController {
 
     private final NotificationService notificationService;
 
-    @PostMapping
-    public ResponseEntity<NotificationResponse> createNotification(@Valid @RequestBody NotificationRequest notificationRequest) {
+    @PostMapping("/create")
+    public ResponseEntity<NotificationResponse> createNotification(@RequestBody NotificationRequest notificationRequest) {
+
+
         log.info("ActionLog.createNotification start");
         NotificationResponse notificationResponse = notificationService.createNotification(notificationRequest);
         log.info("ActionLog.createNotification end");
         return new ResponseEntity<>(notificationResponse, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<NotificationResponse> updateNotification(@PathVariable Long id, @RequestBody NotificationRequest notificationRequest) {
         log.info("ActionLog.updateNotification start with id#" + id);
         NotificationResponse notificationResponse = notificationService.updateNotification(id, notificationRequest);
@@ -36,7 +38,7 @@ public class NotificationController {
         return new ResponseEntity<>(notificationResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteNotification(@PathVariable Long id) {
         log.info("ActionLog.deleteNotification start with id#" + id);
         notificationService.deleteNotification(id);
@@ -44,7 +46,7 @@ public class NotificationController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<NotificationResponse> getNotificationById(@PathVariable Long id) {
         log.info("ActionLog.getNotification start with id#" + id);
         NotificationResponse notificationResponse = notificationService.getNotificationById(id);
