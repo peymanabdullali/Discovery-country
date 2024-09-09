@@ -16,11 +16,20 @@ public class ScenicSpotSpecification implements Specification<ScenicSpotEntity> 
     public static Specification<ScenicSpotEntity>getScenicSpotByCriteria(CriteriaRequestForName criteriaRequest){
         return (root, query, criteriaBuilder) ->{
             List<Predicate> predicates=new ArrayList<>();
-                if(criteriaRequest.getName() != null && !criteriaRequest.getName().isEmpty()) {
-                predicates.add(criteriaBuilder.like(
-                        criteriaBuilder.lower(root.get("name")),
+            if (criteriaRequest.getName() != null && !criteriaRequest.getName().isEmpty()) {
+                Predicate namePredicate = criteriaBuilder.like(
+                        criteriaBuilder.lower(
+                                criteriaBuilder.function(
+                                        "jsonb_extract_path_text",
+                                        String.class,
+                                        root.get("name"),
+                                        criteriaBuilder.literal(criteriaRequest.getKey().name())
+                                )
+                        ),
                         "%" + criteriaRequest.getName().toLowerCase() + "%"
-                ));
+                );
+
+                predicates.add(namePredicate);
             }
             predicates.add(criteriaBuilder.isFalse(root.get("status")));
             predicates.add(criteriaBuilder.isTrue(root.get("checkStatus")));

@@ -18,10 +18,20 @@ public class RoomSpecification implements Specification<RoomEntity> {
     public static Specification<RoomEntity> getRoomByCriteria(RoomCriteriaRequest roomCriteriaRequest) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-
             if (roomCriteriaRequest.getName() != null && !roomCriteriaRequest.getName().isEmpty()) {
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),
-                        "%" + roomCriteriaRequest.getName().toLowerCase() + "%"));
+                Predicate namePredicate = criteriaBuilder.like(
+                        criteriaBuilder.lower(
+                                criteriaBuilder.function(
+                                        "jsonb_extract_path_text",
+                                        String.class,
+                                        root.get("name"),
+                                        criteriaBuilder.literal(roomCriteriaRequest.getKey().name())
+                                )
+                        ),
+                        "%" + roomCriteriaRequest.getName().toLowerCase() + "%"
+                );
+
+                predicates.add(namePredicate);
             }
 
             if (roomCriteriaRequest.getRoomCount() != null) {

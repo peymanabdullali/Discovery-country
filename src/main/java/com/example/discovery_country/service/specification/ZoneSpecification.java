@@ -1,6 +1,7 @@
 package com.example.discovery_country.service.specification;
 
 import com.example.discovery_country.dao.entity.ZoneEntity;
+import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.model.dto.criteria.CriteriaRequestForName;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -18,10 +19,19 @@ public class ZoneSpecification implements Specification<ZoneEntity> {
             List<Predicate> predicates = new ArrayList<>();
 
             if (criteriaRequest.getName() != null && !criteriaRequest.getName().isEmpty()) {
-                predicates.add(criteriaBuilder.like(
-                        criteriaBuilder.lower(root.get("name")),
+                Predicate namePredicate = criteriaBuilder.like(
+                        criteriaBuilder.lower(
+                                criteriaBuilder.function(
+                                        "jsonb_extract_path_text",
+                                        String.class,
+                                        root.get("name"),
+                                        criteriaBuilder.literal(criteriaRequest.getKey().name())
+                                )
+                        ),
                         "%" + criteriaRequest.getName().toLowerCase() + "%"
-                ));
+                );
+
+                predicates.add(namePredicate);
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

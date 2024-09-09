@@ -19,7 +19,19 @@ public class ActivityCategorySpecification implements Specification<ActivityCate
             List<Predicate> predicates = new ArrayList<>();
 
             if (criteriaRequest.getName() != null && !criteriaRequest.getName().isEmpty()) {
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + criteriaRequest.getName().toLowerCase() + "%"));
+                Predicate namePredicate = criteriaBuilder.like(
+                        criteriaBuilder.lower(
+                                criteriaBuilder.function(
+                                        "jsonb_extract_path_text",
+                                        String.class,
+                                        root.get("name"),
+                                        criteriaBuilder.literal(criteriaRequest.getKey().name())
+                                )
+                        ),
+                        "%" + criteriaRequest.getName().toLowerCase() + "%"
+                );
+
+                predicates.add(namePredicate);
             }
             predicates.add(criteriaBuilder.isFalse(root.get("deleted")));
 

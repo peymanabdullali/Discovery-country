@@ -17,8 +17,20 @@ public class RegionSpecification implements Specification<RegionEntity> {
         return (root, query, criteriaBuilder) ->{
             List<Predicate> predicates=new ArrayList<>();
 
-            if(criteriaRequest.getName()!=null && !criteriaRequest.getName().isEmpty()){
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),"%" + criteriaRequest.getName().toLowerCase() + "%"));
+            if (criteriaRequest.getName() != null && !criteriaRequest.getName().isEmpty()) {
+                Predicate namePredicate = criteriaBuilder.like(
+                        criteriaBuilder.lower(
+                                criteriaBuilder.function(
+                                        "jsonb_extract_path_text",
+                                        String.class,
+                                        root.get("name"),
+                                        criteriaBuilder.literal(criteriaRequest.getKey().name())
+                                )
+                        ),
+                        "%" + criteriaRequest.getName().toLowerCase() + "%"
+                );
+
+                predicates.add(namePredicate);
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

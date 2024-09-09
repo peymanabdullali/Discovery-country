@@ -15,13 +15,22 @@ public class ActivitySpecification implements Specification<ActivityEntity> {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            // Adı filtreleme
             if (activityCriteriaRequest.getName() != null && !activityCriteriaRequest.getName().isEmpty()) {
-                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")),
-                        "%" + activityCriteriaRequest.getName().toLowerCase() + "%"));
+                Predicate namePredicate = criteriaBuilder.like(
+                        criteriaBuilder.lower(
+                                criteriaBuilder.function(
+                                        "jsonb_extract_path_text",
+                                        String.class,
+                                        root.get("name"),
+                                        criteriaBuilder.literal(activityCriteriaRequest.getKey().name())
+                                )
+                        ),
+                        "%" + activityCriteriaRequest.getName().toLowerCase() + "%"
+                );
+
+                predicates.add(namePredicate);
             }
 
-            // Tarih aralığı filtreleme
             if (activityCriteriaRequest.getStartDate() != null && activityCriteriaRequest.getEndDate() != null) {
                 predicates.add(criteriaBuilder.between(
                         root.get("startDate"),
