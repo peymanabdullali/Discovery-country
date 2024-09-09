@@ -37,7 +37,7 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(permitALl).permitAll()
+                        .requestMatchers(permitAll).permitAll()
                         .requestMatchers(ADMIN).hasAuthority(UserRole.ADMIN.name())
                         .requestMatchers(USER).hasAuthority(UserRole.USER.name()))
                 .sessionManagement(session -> session
@@ -67,7 +67,10 @@ public class SecurityConfiguration {
         return new OAuth2LoginSuccessHandler(userRepository, jwtService, refreshTokenService);
     }
 
-    public static String[] permitALl = {
+    public static String[] permitAll = {
+            "/oauth2/**",
+            "/login",
+            "/auth/**",
             "/v2/api-docs",
             "/swagger-resources",
             "/swagger-resources/**",
@@ -158,26 +161,26 @@ public class SecurityConfiguration {
             "/v1/api/zone/update/{id}",
             "/v1/api/zone/delete/{id}"
     };
- public static String[] USER = {
+    public static String[] USER = {
 
-         "/v1/api/activities/like/{id}",
-         "/v1/api/activities/averageRating/{id}",
+            "/v1/api/activities/like/{id}",
+            "/v1/api/activities/averageRating/{id}",
 
-         "/v1/api/home-hotels/rate/{id}",
-         "/v1/api/home-hotels/like/{id}",
+            "/v1/api/home-hotels/rate/{id}",
+            "/v1/api/home-hotels/like/{id}",
 
-         "/v1/api/restaurant/like/{id}",
-         "/v1/api/restaurant/rate/{id}",
+            "/v1/api/restaurant/like/{id}",
+            "/v1/api/restaurant/rate/{id}",
 
-         "/v1/api/review/upload",
-         "/v1/api/review/home-hotel",
-         "/v1/api/review/scenic-spot",
-         "/v1/api/review/restaurant",
+            "/v1/api/review/upload",
+            "/v1/api/review/home-hotel",
+            "/v1/api/review/scenic-spot",
+            "/v1/api/review/restaurant",
 
-         "/v1/api/roomReservations/create",
+            "/v1/api/roomReservations/create",
 
-         "/v1/api/scenicSpot/like/{id}",
-         "/v1/api/scenicSpot/rate/{id}"
+            "/v1/api/scenicSpot/like/{id}",
+            "/v1/api/scenicSpot/rate/{id}"
     };
 
 }
