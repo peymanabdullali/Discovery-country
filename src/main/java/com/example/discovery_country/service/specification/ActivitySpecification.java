@@ -8,7 +8,6 @@ import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class ActivitySpecification implements Specification<ActivityEntity> {
 
     public static Specification<ActivityEntity> getActivityByCriteria(ActivityCriteriaRequest activityCriteriaRequest) {
@@ -27,7 +26,6 @@ public class ActivitySpecification implements Specification<ActivityEntity> {
                         ),
                         "%" + activityCriteriaRequest.getName().toLowerCase() + "%"
                 );
-
                 predicates.add(namePredicate);
             }
 
@@ -53,30 +51,26 @@ public class ActivitySpecification implements Specification<ActivityEntity> {
                 }
             }
 
-            // Fiyat aralığı filtreleme
             if (activityCriteriaRequest.getPriceGreaterThan() != 0 && activityCriteriaRequest.getPriceLessThan() != 0) {
                 predicates.add(criteriaBuilder.between(root.get("price"),
                         activityCriteriaRequest.getPriceGreaterThan(), activityCriteriaRequest.getPriceLessThan()));
             }
 
-            // Deleted false olanları filtreleme
             predicates.add(criteriaBuilder.isFalse(root.get("deleted")));
 
-            // İmage join işlemi ve deleted=false olan ilk resmi almak
             Join<ActivityEntity, ImageEntity> imagesJoin = root.join("images", JoinType.LEFT);
             predicates.add(criteriaBuilder.isFalse(imagesJoin.get("deleted")));
+
+            // Ensure both `activity.id` and `image.id` are grouped by
             query.orderBy(criteriaBuilder.asc(imagesJoin.get("id")));
-            query.groupBy(root.get("id"));
+            query.groupBy(root.get("id"), imagesJoin.get("id"));
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
-
-
 
     @Override
     public Predicate toPredicate(Root<ActivityEntity> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         return null;
     }
 }
-//qeyd
