@@ -647,10 +647,8 @@ class HomeHotelServiceTest {
 
     @Test
     void testUpdateLikeCount_HomeHotelRepositoryReturnsAbsent() {
-        // Setup
         when(mockHomeHotelRepository.findById(0L)).thenReturn(Optional.empty());
 
-        // Run the test
         assertThatThrownBy(() -> homeHotelServiceUnderTest.updateLikeCount(0L, false))
                 .isInstanceOf(HomeHotelNotFoundException.class);
     }
