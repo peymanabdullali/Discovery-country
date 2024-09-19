@@ -1,9 +1,6 @@
 package com.example.discovery_country.mapper;
 
-import com.example.discovery_country.dao.entity.HomeHotelEntity;
-import com.example.discovery_country.dao.entity.RegionEntity;
-import com.example.discovery_country.dao.entity.RoomEntity;
-import com.example.discovery_country.dao.entity.ImageEntity;
+import com.example.discovery_country.dao.entity.*;
 import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.model.dto.request.RoomRequest;
 import com.example.discovery_country.model.dto.response.RoomResponseFindById;
@@ -12,10 +9,18 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface RoomMapper {
-    @Mapping(target = "homeHotel.id", source = "roomRequest.homeHotelId")
-    RoomEntity mapToEntity(RoomRequest roomRequest, List<ImageEntity> images);
+    @Mapping(target = "homeHotel.id", source = "request.homeHotelId")
+    RoomEntity mapToEntity(RoomRequest request, List<ImageEntity> images);
+
+    @AfterMapping
+    default void linkImages(@MappingTarget RoomEntity room, List<ImageEntity> images) {
+        for (ImageEntity image : images) {
+            image.setRoom(room);
+        }
+        room.setImages(images);
+    }
 
     default RoomResponse mapToResponse(RoomEntity entity,LangType key) {
         RoomResponse.RoomResponseBuilder name = RoomResponse.builder().
@@ -37,6 +42,5 @@ public interface RoomMapper {
     RoomResponseFindById mapToRoomResponseFindById(RoomEntity entity, LangType key);
 
     ImageResponseForRelations mapImageResponseForRoom(ImageEntity entity);
-
-    void mapForUpdate(@MappingTarget RoomEntity roomEntity, RoomRequest roomRequest);
+//    void mapForUpdate(@MappingTarget RoomEntity roomEntity, RoomRequest roomRequest);
 }

@@ -38,7 +38,7 @@ public class ReviewController {
 
 
 
-    @PostMapping("/home-hotel")
+        @PostMapping("/home-hotel")
     public ResponseEntity<ReviewResponse> createHomeHotelReview(@Valid @RequestPart("review") ReviewRequestForHomeHotel review,
                                                                 @RequestPart("photo") MultipartFile photo) {
         log.info("Controller.createHomeHotelReview start");
@@ -62,8 +62,16 @@ public class ReviewController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PostMapping("/restaurant")
-    public ResponseEntity<ReviewResponse> createRestaurantReview(@Valid @RequestPart("review") ReviewRequestForRestaurant review,
+
+//    @PostMapping(value = "/upload", consumes = {"multipart/form-data"})
+//    public ResponseEntity<String> uploadFile(
+//            @RequestPart("requestDTO") RequestDTO requestDTO,
+//            @RequestPart("file") MultipartFile file)
+//
+
+    @PostMapping(value = "/restaurant", consumes = {"multipart/form-data"})
+    public ResponseEntity<ReviewResponse> createRestaurantReview
+            (@Valid @RequestPart("review") ReviewRequestForRestaurant review,
                                                                  @RequestPart("photo") MultipartFile photo) {
         log.info("Controller.createRestaurantReview start");
 

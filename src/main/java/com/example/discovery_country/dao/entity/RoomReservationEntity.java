@@ -31,7 +31,7 @@ public class RoomReservationEntity {
     double totalAmount;
     byte numberOfGuests;
     boolean status;
-
+    boolean deleted;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
@@ -40,6 +40,7 @@ public class RoomReservationEntity {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     User user;
+
     @PrePersist
     public void setStatusTrue() {
         status = true;

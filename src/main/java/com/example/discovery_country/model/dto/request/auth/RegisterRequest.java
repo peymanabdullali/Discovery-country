@@ -1,5 +1,7 @@
 package com.example.discovery_country.model.dto.request.auth;
 
+import com.example.discovery_country.annotation.ValidPhoneNumber;
+import com.example.discovery_country.enums.auth.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -32,9 +34,11 @@ public class RegisterRequest {
             message = "Password must be at least 7 characters long, contain at least one uppercase letter, one lowercase letter, and one number.")
     private String password;
 
+    @ValidPhoneNumber
+    private String phoneNumber;
+
     @NotBlank(message = "The password field can't be blank")
     private String repeatPassword;
-
 
 
 }

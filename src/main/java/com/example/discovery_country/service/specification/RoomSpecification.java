@@ -34,7 +34,7 @@ public class RoomSpecification implements Specification<RoomEntity> {
                 predicates.add(namePredicate);
             }
 
-            if (roomCriteriaRequest.getRoomCount() != null) {
+            if (roomCriteriaRequest.getRoomCount() != 0) {
                 predicates.add(criteriaBuilder.equal(root.get("roomCount"), roomCriteriaRequest.getRoomCount()));
             }
             if (roomCriteriaRequest.getRoomType() != null) {

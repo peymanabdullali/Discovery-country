@@ -39,6 +39,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(permitAll).permitAll()
                         .requestMatchers(ADMIN).hasAuthority(UserRole.ADMIN.name())
+                        .requestMatchers(HOTEL_USER).hasAuthority(UserRole.HOTEL_USER.name())
                         .requestMatchers(USER).hasAuthority(UserRole.USER.name()))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -68,6 +69,10 @@ public class SecurityConfiguration {
     }
 
     public static String[] permitAll = {
+
+//            "/v1/api/review/restaurant",
+
+
             "/oauth2/**",
             "/login",
             "/auth/**",
@@ -123,6 +128,8 @@ public class SecurityConfiguration {
             "/v1/api/zone"
     };
     public static String[] ADMIN = {
+            "/v1/api/auth/createHotelUser",
+
             "/v1/api/activity-categories/create",
             "/v1/api/activity-categories/update/{id}",
             "/v1/api/activity-categories/delete/{id}",
@@ -154,6 +161,7 @@ public class SecurityConfiguration {
             "/v1/api/room/delete/{id}",
 
             "/v1/api/scenicSpot/create",
+            "/v1/api/scenicSpot/getScenicSpotsForAdmin",
             "/v1/api/scenicSpot/approve/{id}",
             "/v1/api/scenicSpot/delete/{id}",
 
@@ -181,6 +189,12 @@ public class SecurityConfiguration {
 
             "/v1/api/scenicSpot/like/{id}",
             "/v1/api/scenicSpot/rate/{id}"
+    };
+    public static String[] HOTEL_USER = {
+            "/v1/api/home-hotels/create",
+            "/v1/api/home-hotels/update/{id}",
+            "/v1/api/roomReservations",
+            "/v1/api/roomReservations/delete",
     };
 
 }

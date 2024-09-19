@@ -30,9 +30,8 @@ public class RoomController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<RoomResponse>> getRooms(RoomCriteriaRequest criteriaRequest, Pageable pageable) {
-        Page<RoomResponse> rooms = roomService.getRooms(criteriaRequest, pageable);
-        return new ResponseEntity<>(rooms, HttpStatus.OK);
+    public Page<RoomResponse> getRooms(RoomCriteriaRequest criteriaRequest, Pageable pageable) {
+        return roomService.getRooms(criteriaRequest, pageable);
     }
 
     @GetMapping("/find/{id}")

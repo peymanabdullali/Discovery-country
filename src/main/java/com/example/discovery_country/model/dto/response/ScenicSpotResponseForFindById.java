@@ -14,7 +14,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ScenicSpotResponseForFindById {
 
-
+    long id;
     String name;
 
     String description;

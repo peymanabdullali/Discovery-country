@@ -59,6 +59,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    String phoneNumber;
+
     private String surname;
 
     private boolean enabled;
@@ -76,7 +78,6 @@ public class User implements UserDetails {
     private LocalDateTime updatedDate;
 
     private boolean emailVerified;
-
 
 
     @OneToMany(mappedBy = "user")

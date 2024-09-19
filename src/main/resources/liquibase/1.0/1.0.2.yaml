@@ -46,8 +46,10 @@ databaseChangeLog:
               - column:
                   name: status
                   type: boolean
-                  constraints:
-                    nullable: false
+              - column:
+                  name: deleted
+                  type: boolean
+
               - column:
                   name: room_id
                   type: bigint
@@ -209,9 +211,11 @@ databaseChangeLog:
                   name: password
                   type: varchar(255)
               - column:
+                  name: phone_number
+                  type: varchar(255)
+              - column:
                   name: role
                   type: varchar(255)
-
               - column:
                   name: surname
                   type: varchar(255)

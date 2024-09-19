@@ -27,6 +27,10 @@ public class AuthController {
         return ResponseEntity.ok(authService.register(request));
 
     }
+    @PostMapping("/createHotelUser")
+    public void createHotelUser(@RequestBody @Valid RegisterRequest request) {
+        authService.createHotelUser(request);
+    }
 
     @PostMapping("/verify-email/{email}")
     public ResponseEntity<String> verifyEmail(@PathVariable String email) {

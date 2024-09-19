@@ -10,11 +10,16 @@ import com.example.discovery_country.dao.repository.RoomReservationRepository;
 import com.example.discovery_country.dao.repository.auth.UserRepository;
 import com.example.discovery_country.enums.LangType;
 import com.example.discovery_country.mapper.RoomReservationMapper;
+import com.example.discovery_country.model.dto.criteria.RoomReservationCriteriaRequest;
 import com.example.discovery_country.model.dto.request.RoomReservationRequest;
 import com.example.discovery_country.model.dto.request.UserRequest;
 import com.example.discovery_country.model.dto.response.RoomReservationResponse;
+import com.example.discovery_country.service.specification.RoomReservationSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +28,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -75,7 +81,16 @@ public class RoomReservationService {
         log.info("ActionLog.getReservationByUserId end");
         return list;
     }
-
+public void deleteReservation(long id){
+        roomReservationRepository.softDelete(id);
+}
+public List<RoomReservationResponse> getReservations(
+        RoomReservationCriteriaRequest request, Pageable pageable){
+    Specification<RoomReservationEntity> spec =
+            RoomReservationSpecification.getRoomReservationByCriteria(request);
+    return roomReservationRepository.findAll(spec, pageable).stream().
+            map(i-> roomReservationMapper.mapToResponse(i,request.getLangType())).toList();
+}
 
     public void calculateAndSetTotalDayAndAmount(RoomReservationEntity entity, long id) {
         RoomEntity roomsEntity = roomRepository.findById(id).orElseThrow(() -> new RuntimeException("ROOM_NOT_FOUND"));

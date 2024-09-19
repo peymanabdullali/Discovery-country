@@ -10,13 +10,11 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.Map;
-
-@Entity
-@Table(name = "rooms")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Entity
+@Table(name = "rooms")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomEntity {
     @Id
@@ -50,3 +48,5 @@ public class RoomEntity {
         available = true;
     }
 }
+
+

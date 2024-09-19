@@ -51,10 +51,11 @@ public class ScenicSpotService {
         log.info("ActionLog.getScenicSpots start");
 
         Specification<ScenicSpotEntity> spec = ScenicSpotSpecification.getScenicSpotByCriteria(criteriaRequest);
-        List<ScenicSpotResponse> list = scenicSpotRepository.findAll(spec, pageable).
-                map(i -> scenicSpotMapper.mapToResponse(i, criteriaRequest.getKey())).toList();
+        List<ScenicSpotEntity> list = scenicSpotRepository.findAll(spec, pageable).stream().toList();
+        List<ScenicSpotResponse> list1 = list.stream().map(i ->
+                scenicSpotMapper.mapToResponse(i, criteriaRequest.getKey())).toList();
         log.info("ActionLog.getScenicSpots end");
-        return new PageImpl<>(list);
+        return new PageImpl<>(list1);
     }
 
     public ScenicSpotResponseForFindById findById(Long id,LangType key) {
@@ -80,7 +81,12 @@ public class ScenicSpotService {
         scenicSpotRepository.softDelete(id);
         log.info("ActionLog.softDelete end");
     }
-
+public List<ScenicSpotResponseForFindById> getScenicSpotsForAdmin(LangType langType){
+    List<ScenicSpotEntity> list = scenicSpotRepository.
+            findScenicSpotEntitiesByStatusFalseAndCheckStatusFalse();
+    return list.stream().
+            map(i -> scenicSpotMapper.mapToResponseForFindById(i, langType)).toList();
+}
 
     public void rateScenicSpot(Long id, int stars) {
         ScenicSpotEntity scenicSpot = scenicSpotRepository.findById(id).orElseThrow(() ->

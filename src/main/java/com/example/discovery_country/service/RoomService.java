@@ -66,24 +66,13 @@ public class RoomService {
 
     }
 
-//    public RoomResponse getRoom(Long id,LangType key) {
-//
-//        log.info("ActionLog.getRoom start with id#" + id);
-//
-//        RoomEntity room = roomRepository.findById(id).orElseThrow(() ->
-//                new RoomNotFoundException(HttpStatus.NOT_FOUND.name(), "Room not found"));
-//
-//        log.info("ActionLog.getRoom end with id#" + id);
-//
-//        return roomMapper.mapToResponse(room,key);
-//    }
 
     public RoomResponse update(Long id, RoomRequest roomRequest) {
         log.info("ActionLog.updateRoom start with id#" + id);
 
         RoomEntity roomEntity = roomRepository.findById(id).orElseThrow(() ->
                 new RoomNotFoundException(HttpStatus.NOT_FOUND.name(), "Room not found"));
-        roomMapper.mapForUpdate(roomEntity, roomRequest);
+//        roomMapper.mapForUpdate(roomEntity, roomRequest);
         roomEntity = roomRepository.save(roomEntity);
 
         log.info("ActionLog.updateRoom end");

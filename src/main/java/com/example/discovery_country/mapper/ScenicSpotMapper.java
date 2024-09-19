@@ -23,10 +23,12 @@ public interface ScenicSpotMapper {
         ScenicSpotResponse.ScenicSpotResponseBuilder name = ScenicSpotResponse.builder().
                 id(entity.getId()).
                 name(entity.getName().getOrDefault(key, entity.getName().get(LangType.AZ)));
-            name.image(mapToImageResponse(entity.getImages().stream().filter(s->!s.isDeleted()).findFirst().orElseThrow()));
+        if (!entity.getImages().isEmpty()) {
+            name.image(mapToImageResponse(
+                    entity.getImages().stream().filter(s->!s.isDeleted()).findFirst().orElseThrow()));
+        }
 
         return name.build();}
-
 
     @Mapping(target = "name", expression = "java(entity.getName().getOrDefault(key, entity.getName().get(LangType.AZ)))")
     RegionResponseForRelations toResponseMany(RegionEntity entity, @Context LangType key);

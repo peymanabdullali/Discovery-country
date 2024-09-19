@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("v1/api/scenicSpot")
@@ -31,7 +32,6 @@ public class ScenicSpotController {
     public ResponseEntity<ScenicSpotResponse> createScenicSpot(@RequestBody ScenicSpotRequest request) {
 
         log.info("Controller.createScenicSpot start");
-
         ScenicSpotResponse scenicSpot = service.createScenicSpot(request);
         log.info("Controller.createScenicSpot end");
         return ResponseEntity.status(HttpStatus.CREATED).body(scenicSpot);
@@ -48,7 +48,15 @@ public class ScenicSpotController {
         return ResponseEntity.ok(scenicSpots);
     }
 
-    @PatchMapping("/apporove/{id}")
+    @GetMapping("/getScenicSpotsForAdmin")
+    public ResponseEntity<List<ScenicSpotResponseForFindById>> getScenicSpotsForAdmin(LangType langType) {
+        log.info("Controller.getScenicSpotsForAdmin start");
+        List<ScenicSpotResponseForFindById> scenicSpotsForAdmin = service.getScenicSpotsForAdmin(langType);
+        log.info("Controller.getScenicSpotsForAdmin end");
+        return ResponseEntity.ok(scenicSpotsForAdmin);
+    }
+
+    @PatchMapping("/approve/{id}")
     public void updateStatus(@PathVariable Long id) {
         log.info("Controller.updateStatus start with id#" + id);
         service.updateStatus(id);

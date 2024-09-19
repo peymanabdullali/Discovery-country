@@ -64,6 +64,7 @@ public class AuthService {
                 .role(UserRole.USER)
                 .emailVerified(false)
                 .enabled(false)
+                .phoneNumber(registerRequest.getPhoneNumber())
                 .accountNonLocked(true)
                 .failedAttempt(0)
                 .lockTime(null)
@@ -78,6 +79,25 @@ public class AuthService {
                 .accessToken(accessToken)
                 .refreshToken(refreshToken.getRefreshToken())
                 .build();
+    }
+
+    public void createHotelUser(RegisterRequest registerRequest) {
+        User user = User.builder()
+                .email(registerRequest.getEmail())
+                .name(registerRequest.getName())
+                .surname(registerRequest.getSurname())
+                .username(registerRequest.getUsername())
+                .password(passwordEncoder.encode(registerRequest.getPassword()))
+                .role(UserRole.HOTEL_USER)
+                .emailVerified(false)
+                .enabled(false)
+                .phoneNumber(registerRequest.getPhoneNumber())
+                .accountNonLocked(true)
+                .failedAttempt(0)
+                .lockTime(null)
+                .build();
+
+        User savedUser = userRepository.save(user);
     }
 
     public ResponseEntity<String> verifyEmail(String email) {

@@ -22,6 +22,8 @@ public interface ScenicSpotRepository extends JpaRepository<ScenicSpotEntity, Lo
     @Query("UPDATE ScenicSpotEntity a SET a.checkStatus = true WHERE a.id = :id")
     void updateStatus(Long id);
 
+    List<ScenicSpotEntity> findScenicSpotEntitiesByStatusFalseAndCheckStatusFalse();
+
     @Modifying
     @Transactional
     @Query("UPDATE ScenicSpotEntity a SET a.status = true WHERE a.id = :id")

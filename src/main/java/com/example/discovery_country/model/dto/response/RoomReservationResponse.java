@@ -2,6 +2,7 @@ package com.example.discovery_country.model.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDate;
 
@@ -19,5 +20,5 @@ public class RoomReservationResponse {
     double totalAmount;
     LocalDate exitDate;
     byte numberOfGuests;
-
+    UserResponse user;
 }
