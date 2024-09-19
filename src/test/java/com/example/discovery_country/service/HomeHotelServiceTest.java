@@ -64,7 +64,6 @@ class HomeHotelServiceTest {
 
     @Test
     void testCreate() {
-        // Setup
         final HomeHotelRequest homeHotelRequest = HomeHotelRequest.builder()
                 .imageIds(List.of(0L))
                 .build();
@@ -75,90 +74,96 @@ class HomeHotelServiceTest {
         expectedResult.setPrice(0.0);
         expectedResult.setViewed(0L);
 
-        // Configure ImageRepository.findAllById(...).
         final ImageEntity imageEntity = new ImageEntity();
         imageEntity.setId(0L);
         imageEntity.setName("name");
         imageEntity.setUrl("url");
         imageEntity.setDeleted(false);
-        imageEntity.setRoom(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build());
+
+        RoomEntity roomEntity = new RoomEntity();
+        roomEntity.setAvailable(false);
+        roomEntity.setDeleted(false);
+        imageEntity.setRoom(roomEntity);
+
         final List<ImageEntity> imageEntities = List.of(imageEntity);
         when(mockImageRepository.findAllById(List.of(0L))).thenReturn(imageEntities);
 
-        // Configure HomeHotelMapper.mapToEntity(...).
         final HomeHotelEntity homeHotelEntity = new HomeHotelEntity();
         homeHotelEntity.setId(0L);
         homeHotelEntity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity1 = new RoomEntity();
+        roomEntity1.setAvailable(false);
+        roomEntity1.setDeleted(false);
+        homeHotelEntity.setRooms(Set.of(roomEntity1));
+
         final ImageEntity imageEntity1 = new ImageEntity();
         imageEntity1.setId(0L);
         imageEntity1.setName("name");
         imageEntity1.setUrl("url");
         imageEntity1.setDeleted(false);
-        imageEntity1.setRoom(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build());
+
+        RoomEntity roomEntity2 = new RoomEntity();
+        roomEntity2.setAvailable(false);
+        roomEntity2.setDeleted(false);
+        imageEntity1.setRoom(roomEntity2);
+
         final List<ImageEntity> images = List.of(imageEntity1);
         when(mockHomeHotelMapper.mapToEntity(any(HomeHotelRequest.class), eq(images))).thenReturn(homeHotelEntity);
 
-        // Configure HomeHotelRepository.save(...).
         final HomeHotelEntity homeHotelEntity1 = new HomeHotelEntity();
         homeHotelEntity1.setId(0L);
         homeHotelEntity1.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity1.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity3 = new RoomEntity();
+        roomEntity3.setAvailable(false);
+        roomEntity3.setDeleted(false);
+        homeHotelEntity1.setRooms(Set.of(roomEntity3));
+
         final HomeHotelEntity entity = new HomeHotelEntity();
         entity.setId(0L);
         entity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity4 = new RoomEntity();
+        roomEntity4.setAvailable(false);
+        roomEntity4.setDeleted(false);
+        entity.setRooms(Set.of(roomEntity4));
+
         when(mockHomeHotelRepository.save(entity)).thenReturn(homeHotelEntity1);
 
-        // Configure HomeHotelMapper.mapToResponse(...).
         final HomeHotelResponse homeHotelResponse = new HomeHotelResponse();
         homeHotelResponse.setId(0L);
         homeHotelResponse.setName("name");
         homeHotelResponse.setAddress("address");
         homeHotelResponse.setPrice(0.0);
         homeHotelResponse.setViewed(0L);
+
         final HomeHotelEntity entity1 = new HomeHotelEntity();
         entity1.setId(0L);
         entity1.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity1.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity1.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity1.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity5 = new RoomEntity();
+        roomEntity5.setAvailable(false);
+        roomEntity5.setDeleted(false);
+        entity1.setRooms(Set.of(roomEntity5));
+
         when(mockHomeHotelMapper.mapToResponse(entity1, LangType.AZ)).thenReturn(homeHotelResponse);
 
-        // Run the test
         final HomeHotelResponse result = homeHotelServiceUnderTest.create(homeHotelRequest);
 
-        // Verify the results
         assertThat(result).isEqualTo(expectedResult);
     }
 
     @Test
     void testCreate_ImageRepositoryReturnsNoItems() {
-        // Setup
         final HomeHotelRequest homeHotelRequest = HomeHotelRequest.builder()
                 .imageIds(List.of(0L))
                 .build();
@@ -176,10 +181,11 @@ class HomeHotelServiceTest {
         homeHotelEntity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity1 = new RoomEntity();
+        roomEntity1.setAvailable(false);
+        roomEntity1.setDeleted(false);
+        homeHotelEntity.setRooms(Set.of(roomEntity1));
 
         when(mockHomeHotelMapper.mapToEntity(any(HomeHotelRequest.class), eq(Collections.emptyList()))).thenReturn(homeHotelEntity);
 
@@ -188,10 +194,11 @@ class HomeHotelServiceTest {
         homeHotelEntity1.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity1.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity2 = new RoomEntity();
+        roomEntity2.setAvailable(false);
+        roomEntity2.setDeleted(false);
+        homeHotelEntity1.setRooms(Set.of(roomEntity2));
 
         when(mockHomeHotelRepository.save(any(HomeHotelEntity.class))).thenReturn(homeHotelEntity1);
 
@@ -204,76 +211,77 @@ class HomeHotelServiceTest {
 
         when(mockHomeHotelMapper.mapToResponse(any(HomeHotelEntity.class), eq(LangType.AZ))).thenReturn(homeHotelResponse);
 
-        // Run the test
         final HomeHotelResponse result = homeHotelServiceUnderTest.create(homeHotelRequest);
 
-        // Verify the results
         assertThat(result).isEqualTo(expectedResult);
     }
 
 
     @Test
     void testCreate_HomeHotelRepositoryThrowsOptimisticLockingFailureException() {
-        // Setup
         final HomeHotelRequest homeHotelRequest = HomeHotelRequest.builder()
                 .imageIds(List.of(0L))
                 .build();
 
-        // Configure ImageRepository.findAllById(...).
         final ImageEntity imageEntity = new ImageEntity();
         imageEntity.setId(0L);
         imageEntity.setName("name");
         imageEntity.setUrl("url");
         imageEntity.setDeleted(false);
-        imageEntity.setRoom(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build());
+
+        RoomEntity roomEntity = new RoomEntity();
+        roomEntity.setAvailable(false);
+        roomEntity.setDeleted(false);
+        imageEntity.setRoom(roomEntity);
+
         final List<ImageEntity> imageEntities = List.of(imageEntity);
         when(mockImageRepository.findAllById(List.of(0L))).thenReturn(imageEntities);
 
-        // Configure HomeHotelMapper.mapToEntity(...).
         final HomeHotelEntity homeHotelEntity = new HomeHotelEntity();
         homeHotelEntity.setId(0L);
         homeHotelEntity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity1 = new RoomEntity();
+        roomEntity1.setAvailable(false);
+        roomEntity1.setDeleted(false);
+        homeHotelEntity.setRooms(Set.of(roomEntity1));
+
         final ImageEntity imageEntity1 = new ImageEntity();
         imageEntity1.setId(0L);
         imageEntity1.setName("name");
         imageEntity1.setUrl("url");
         imageEntity1.setDeleted(false);
-        imageEntity1.setRoom(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build());
+
+        RoomEntity roomEntity2 = new RoomEntity();
+        roomEntity2.setAvailable(false);
+        roomEntity2.setDeleted(false);
+        imageEntity1.setRoom(roomEntity2);
+
         final List<ImageEntity> images = List.of(imageEntity1);
         when(mockHomeHotelMapper.mapToEntity(any(HomeHotelRequest.class), eq(images))).thenReturn(homeHotelEntity);
 
-        // Configure HomeHotelRepository.save(...).
         final HomeHotelEntity entity = new HomeHotelEntity();
         entity.setId(0L);
         entity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity3 = new RoomEntity();
+        roomEntity3.setAvailable(false);
+        roomEntity3.setDeleted(false);
+        entity.setRooms(Set.of(roomEntity3));
+
         when(mockHomeHotelRepository.save(entity)).thenThrow(OptimisticLockingFailureException.class);
 
-        // Run the test
         assertThatThrownBy(() -> homeHotelServiceUnderTest.create(homeHotelRequest))
                 .isInstanceOf(OptimisticLockingFailureException.class);
     }
 
+
     @Test
     void testHomeHotelResponseFindById() {
-        // Setup
         final HomeHotelResponseFindById expectedResult = new HomeHotelResponseFindById();
         expectedResult.setId(0L);
         expectedResult.setName("name");
@@ -281,54 +289,56 @@ class HomeHotelServiceTest {
         expectedResult.setAddress("address");
         expectedResult.setContact("contact");
 
-        // Configure HomeHotelRepository.findOne(...).
         final HomeHotelEntity homeHotelEntity1 = new HomeHotelEntity();
         homeHotelEntity1.setId(0L);
         homeHotelEntity1.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity1.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity = new RoomEntity();
+        roomEntity.setAvailable(false);
+        roomEntity.setDeleted(false);
+        homeHotelEntity1.setRooms(Set.of(roomEntity));
+
         final Optional<HomeHotelEntity> homeHotelEntity = Optional.of(homeHotelEntity1);
         when(mockHomeHotelRepository.findOne(any(Specification.class))).thenReturn(homeHotelEntity);
 
-        // Configure HomeHotelMapper.mapToHomeHotelResponseFindById(...).
         final HomeHotelResponseFindById homeHotelResponseFindById = new HomeHotelResponseFindById();
         homeHotelResponseFindById.setId(0L);
         homeHotelResponseFindById.setName("name");
         homeHotelResponseFindById.setDescription("description");
         homeHotelResponseFindById.setAddress("address");
         homeHotelResponseFindById.setContact("contact");
+
         final HomeHotelEntity entity = new HomeHotelEntity();
         entity.setId(0L);
         entity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity2 = new RoomEntity();
+        roomEntity2.setAvailable(false);
+        roomEntity2.setDeleted(false);
+        entity.setRooms(Set.of(roomEntity2));
+
         when(mockHomeHotelMapper.mapToHomeHotelResponseFindById(entity, LangType.AZ))
                 .thenReturn(homeHotelResponseFindById);
 
-        // Run the test
         final HomeHotelResponseFindById result = homeHotelServiceUnderTest.homeHotelResponseFindById(0L, LangType.AZ);
 
-        // Verify the results
         assertThat(result).isEqualTo(expectedResult);
 
-        // Confirm IncreaseViewCount.updateViewCount(...).
         final HomeHotelEntity entity1 = new HomeHotelEntity();
         entity1.setId(0L);
         entity1.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity1.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity1.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity1.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity3 = new RoomEntity();
+        roomEntity3.setAvailable(false);
+        roomEntity3.setDeleted(false);
+        entity1.setRooms(Set.of(roomEntity3));
+
         verify(mockViewCount).updateViewCount(entity1);
     }
 
@@ -355,49 +365,49 @@ class HomeHotelServiceTest {
 
     @Test
     void testGetHomeHotels() {
-        // Setup
         final HomeHotelCriteriaRequest criteria = new HomeHotelCriteriaRequest();
         criteria.setName("name");
         criteria.setType(HomeHotelType.HOME);
         criteria.setKey(LangType.AZ);
 
-        // Configure HomeHotelRepository.findAll(...).
         final HomeHotelEntity homeHotelEntity = new HomeHotelEntity();
         homeHotelEntity.setId(0L);
         homeHotelEntity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity = new RoomEntity();
+        roomEntity.setAvailable(false);
+        roomEntity.setDeleted(false);
+        homeHotelEntity.setRooms(Set.of(roomEntity));
+
         final Page<HomeHotelEntity> homeHotelEntities = new PageImpl<>(List.of(homeHotelEntity));
         when(mockHomeHotelRepository.findAll(any(Specification.class), any(Pageable.class)))
                 .thenReturn(homeHotelEntities);
 
-        // Configure HomeHotelMapper.mapToResponse(...).
         final HomeHotelResponse homeHotelResponse = new HomeHotelResponse();
         homeHotelResponse.setId(0L);
         homeHotelResponse.setName("name");
         homeHotelResponse.setAddress("address");
         homeHotelResponse.setPrice(0.0);
         homeHotelResponse.setViewed(0L);
+
         final HomeHotelEntity entity = new HomeHotelEntity();
         entity.setId(0L);
         entity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity2 = new RoomEntity();
+        roomEntity2.setAvailable(false);
+        roomEntity2.setDeleted(false);
+        entity.setRooms(Set.of(roomEntity2));
+
         when(mockHomeHotelMapper.mapToResponse(entity, LangType.AZ)).thenReturn(homeHotelResponse);
 
-        // Run the test
         final Page<HomeHotelResponse> result = homeHotelServiceUnderTest.getHomeHotels(PageRequest.of(0, 1), criteria);
-
-        // Verify the results
     }
+
 
     @Test
     void testGetHomeHotels_HomeHotelRepositoryReturnsNoItems() {
@@ -418,7 +428,6 @@ class HomeHotelServiceTest {
 
     @Test
     void testUpdateHomeHotel() {
-        // Setup
         final HomeHotelRequest homeHotelRequest = HomeHotelRequest.builder()
                 .imageIds(List.of(0L))
                 .build();
@@ -429,76 +438,82 @@ class HomeHotelServiceTest {
         expectedResult.setPrice(0.0);
         expectedResult.setViewed(0L);
 
-        // Configure HomeHotelRepository.findById(...).
         final HomeHotelEntity homeHotelEntity1 = new HomeHotelEntity();
         homeHotelEntity1.setId(0L);
         homeHotelEntity1.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity1.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity1 = new RoomEntity();
+        roomEntity1.setAvailable(false);
+        roomEntity1.setDeleted(false);
+        homeHotelEntity1.setRooms(Set.of(roomEntity1));
+
         final Optional<HomeHotelEntity> homeHotelEntity = Optional.of(homeHotelEntity1);
         when(mockHomeHotelRepository.findById(0L)).thenReturn(homeHotelEntity);
 
-        // Configure HomeHotelRepository.save(...).
         final HomeHotelEntity homeHotelEntity2 = new HomeHotelEntity();
         homeHotelEntity2.setId(0L);
         homeHotelEntity2.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity2.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity2.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity2.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity2 = new RoomEntity();
+        roomEntity2.setAvailable(false);
+        roomEntity2.setDeleted(false);
+        homeHotelEntity2.setRooms(Set.of(roomEntity2));
+
         final HomeHotelEntity entity = new HomeHotelEntity();
         entity.setId(0L);
         entity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity3 = new RoomEntity();
+        roomEntity3.setAvailable(false);
+        roomEntity3.setDeleted(false);
+        entity.setRooms(Set.of(roomEntity3));
+
         when(mockHomeHotelRepository.save(entity)).thenReturn(homeHotelEntity2);
 
-        // Configure HomeHotelMapper.mapToResponse(...).
         final HomeHotelResponse homeHotelResponse = new HomeHotelResponse();
         homeHotelResponse.setId(0L);
         homeHotelResponse.setName("name");
         homeHotelResponse.setAddress("address");
         homeHotelResponse.setPrice(0.0);
         homeHotelResponse.setViewed(0L);
+
         final HomeHotelEntity entity1 = new HomeHotelEntity();
         entity1.setId(0L);
         entity1.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity1.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity1.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity1.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity4 = new RoomEntity();
+        roomEntity4.setAvailable(false);
+        roomEntity4.setDeleted(false);
+        entity1.setRooms(Set.of(roomEntity4));
+
         when(mockHomeHotelMapper.mapToResponse(entity1, LangType.AZ)).thenReturn(homeHotelResponse);
 
-        // Run the test
         final HomeHotelResponse result = homeHotelServiceUnderTest.updateHomeHotel(0L, homeHotelRequest);
 
-        // Verify the results
         assertThat(result).isEqualTo(expectedResult);
 
-        // Confirm HomeHotelMapper.mapForUpdate(...).
         final HomeHotelEntity homeHotelEntity3 = new HomeHotelEntity();
         homeHotelEntity3.setId(0L);
         homeHotelEntity3.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity3.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity3.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity3.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+
+        RoomEntity roomEntity5 = new RoomEntity();
+        roomEntity5.setAvailable(false);
+        roomEntity5.setDeleted(false);
+        homeHotelEntity3.setRooms(Set.of(roomEntity5));
+
         verify(mockHomeHotelMapper).mapForUpdate(eq(homeHotelEntity3), any(HomeHotelRequest.class));
     }
+
 
     @Test
     void testUpdateHomeHotel_HomeHotelRepositoryFindByIdReturnsAbsent() {
@@ -515,136 +530,118 @@ class HomeHotelServiceTest {
 
     @Test
     void testUpdateHomeHotel_HomeHotelRepositorySaveThrowsOptimisticLockingFailureException() {
-        // Setup
-        final HomeHotelRequest homeHotelRequest = HomeHotelRequest.builder()
-                .imageIds(List.of(0L))
-                .build();
+        final HomeHotelRequest homeHotelRequest = new HomeHotelRequest();
+        homeHotelRequest.setImageIds(List.of(0L));
 
-        // Configure HomeHotelRepository.findById(...).
         final HomeHotelEntity homeHotelEntity1 = new HomeHotelEntity();
         homeHotelEntity1.setId(0L);
         homeHotelEntity1.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity1.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+        homeHotelEntity1.setRooms(Set.of(new RoomEntity() {{
+            setAvailable(false);
+            setDeleted(false);
+        }}));
         final Optional<HomeHotelEntity> homeHotelEntity = Optional.of(homeHotelEntity1);
         when(mockHomeHotelRepository.findById(0L)).thenReturn(homeHotelEntity);
 
-        // Configure HomeHotelRepository.save(...).
         final HomeHotelEntity entity = new HomeHotelEntity();
         entity.setId(0L);
         entity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+        entity.setRooms(Set.of(new RoomEntity() {{
+            setAvailable(false);
+            setDeleted(false);
+        }}));
         when(mockHomeHotelRepository.save(entity)).thenThrow(OptimisticLockingFailureException.class);
 
-        // Run the test
         assertThatThrownBy(() -> homeHotelServiceUnderTest.updateHomeHotel(0L, homeHotelRequest))
                 .isInstanceOf(OptimisticLockingFailureException.class);
 
-        // Confirm HomeHotelMapper.mapForUpdate(...).
         final HomeHotelEntity homeHotelEntity2 = new HomeHotelEntity();
         homeHotelEntity2.setId(0L);
         homeHotelEntity2.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity2.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity2.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity2.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+        homeHotelEntity2.setRooms(Set.of(new RoomEntity() {{
+            setAvailable(false);
+            setDeleted(false);
+        }}));
         verify(mockHomeHotelMapper).mapForUpdate(eq(homeHotelEntity2), any(HomeHotelRequest.class));
     }
 
+
+
     @Test
     void testSoftDelete() {
-        // Setup
-        // Run the test
         homeHotelServiceUnderTest.softDelete(0L);
 
-        // Verify the results
         verify(mockHomeHotelRepository).softDelete(0L);
     }
 
     @Test
     void testRateHomeHotel() {
-        // Setup
-        // Configure HomeHotelRepository.findById(...).
         final HomeHotelEntity homeHotelEntity1 = new HomeHotelEntity();
         homeHotelEntity1.setId(0L);
         homeHotelEntity1.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity1.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+        homeHotelEntity1.setRooms(Set.of(new RoomEntity() {{
+            setAvailable(false);
+            setDeleted(false);
+        }}));
         final Optional<HomeHotelEntity> homeHotelEntity = Optional.of(homeHotelEntity1);
         when(mockHomeHotelRepository.findById(0L)).thenReturn(homeHotelEntity);
 
-        // Run the test
         homeHotelServiceUnderTest.rateHomeHotel(0L, 0);
 
-        // Verify the results
-        // Confirm RatingHelper.addRating(...).
         final HomeHotelEntity entity = new HomeHotelEntity();
         entity.setId(0L);
         entity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+        entity.setRooms(Set.of(new RoomEntity() {{
+            setAvailable(false);
+            setDeleted(false);
+        }}));
         verify(mockRatingHelper).addRating(entity, 0);
     }
 
+
     @Test
     void testRateHomeHotel_HomeHotelRepositoryReturnsAbsent() {
-        // Setup
         when(mockHomeHotelRepository.findById(0L)).thenReturn(Optional.empty());
 
-        // Run the test
         assertThatThrownBy(() -> homeHotelServiceUnderTest.rateHomeHotel(0L, 0))
                 .isInstanceOf(HomeHotelNotFoundException.class);
     }
 
     @Test
     void testUpdateLikeCount() {
-        // Setup
-        // Configure HomeHotelRepository.findById(...).
         final HomeHotelEntity homeHotelEntity1 = new HomeHotelEntity();
         homeHotelEntity1.setId(0L);
         homeHotelEntity1.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         homeHotelEntity1.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        homeHotelEntity1.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+        homeHotelEntity1.setRooms(Set.of(new RoomEntity() {{
+            setAvailable(false);
+            setDeleted(false);
+        }}));
         final Optional<HomeHotelEntity> homeHotelEntity = Optional.of(homeHotelEntity1);
         when(mockHomeHotelRepository.findById(0L)).thenReturn(homeHotelEntity);
 
-        // Run the test
         homeHotelServiceUnderTest.updateLikeCount(0L, false);
 
-        // Verify the results
-        // Confirm UpdateLike.updateLikeCount(...).
         final HomeHotelEntity entity = new HomeHotelEntity();
         entity.setId(0L);
         entity.setName(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setDescription(Map.ofEntries(Map.entry(LangType.AZ, "value")));
         entity.setAddress(Map.ofEntries(Map.entry(LangType.AZ, "value")));
-        entity.setRooms(Set.of(RoomEntity.builder()
-                .available(false)
-                .deleted(false)
-                .build()));
+        entity.setRooms(Set.of(new RoomEntity() {{
+            setAvailable(false);
+            setDeleted(false);
+        }}));
         verify(mockUpdateLike).updateLikeCount(entity, false);
     }
 
